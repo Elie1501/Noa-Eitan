@@ -3,47 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#421322">
 
-    <title>Invitation de mariage</title>
+    <title>Noa Arous &amp; Eitan Benarroch — Notre mariage</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --burgundy: #651f36;
+            --burgundy-dark: #421322;
+            --burgundy-light: #832b49;
+            --lilac: #b8a3c7;
+            --lilac-light: #f4eef7;
+            --ivory: #faf7f1;
+            --gold: #b59a67;
+            --gold-light: #d6be90;
+            --gold-subtle: rgba(181, 154, 103, 0.25);
+            --text: #44333b;
+            --muted: #897b80;
+            --white: #ffffff;
+            --radius: 12px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html,
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 30px;
+            width: 100%;
+            min-height: 100%;
+        }
+
         body {
             width: 100%;
             min-height: 100%;
-            font-family: 'Cormorant Garamond', serif;
+            background: var(--ivory);
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            overflow: hidden; /* Débloqué après l'ouverture */
         }
 
-        body {
-            overflow: hidden;
+        button, input, select, textarea {
+            font: inherit;
         }
 
-        /* PAGE APRÈS L'OUVERTURE */
-
-        .page-content {
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-            background: #f8f3f5;
-            color: #652c43;
-            text-align: center;
+        a {
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* COUVERTURE */
+        /* =========================================
+           ANIMATIONS AU DÉFILEMENT (REVEAL)
+        ========================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
 
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           ÉCRAN D'OUVERTURE (DOUBLE VOLET)
+        ========================================= */
         .opening-screen {
             position: fixed;
             inset: 0;
@@ -53,11 +88,10 @@
             z-index: 9999;
             overflow: hidden;
             cursor: pointer;
-            background: #30070f;
+            background: #25060d;
             perspective: 1400px;
+            font-family: 'Cormorant Garamond', serif;
         }
-
-        /* IMAGE EN DEUX PARTIES */
 
         .opening-photo {
             position: absolute;
@@ -84,8 +118,6 @@
             transform-origin: right center;
         }
 
-        /* VOILE DISCRET */
-
         .cover-shade {
             position: absolute;
             inset: 0;
@@ -93,14 +125,12 @@
             pointer-events: none;
             background: linear-gradient(
                     to bottom,
-                    rgba(35, 0, 8, 0.30) 0%,
+                    rgba(35, 0, 8, 0.35) 0%,
                     transparent 25%,
-                    transparent 72%,
-                    rgba(35, 0, 8, 0.38) 100%
+                    transparent 70%,
+                    rgba(35, 0, 8, 0.55) 100%
             );
         }
-
-        /* TEXTE DE LA COUVERTURE */
 
         .cover-content {
             position: absolute;
@@ -112,18 +142,16 @@
             justify-content: space-between;
             padding: clamp(34px, 7vh, 75px) 20px;
             text-align: center;
-            color: #e8c88e;
+            color: #ebd09c;
             pointer-events: none;
+            transition: opacity 0.4s ease;
         }
 
-        .cover-top,
-        .cover-bottom {
+        .cover-top, .cover-bottom {
             width: 100%;
             max-width: 600px;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
         }
-
-        /* TEXTE DU HAUT */
 
         .cover-kicker {
             font-size: clamp(10px, 1.5vw, 13px);
@@ -134,10 +162,10 @@
         }
 
         .cover-title {
-            font-size: clamp(27px, 5vw, 49px);
-            line-height: 1.05;
+            font-size: clamp(28px, 5vw, 48px);
+            line-height: 1.1;
             font-weight: 400;
-            letter-spacing: 0.035em;
+            letter-spacing: 0.04em;
         }
 
         .cover-subtitle {
@@ -152,26 +180,27 @@
             height: 1px;
             margin: 22px auto 0;
             background: #d8b475;
-            opacity: 0.9;
         }
 
-        /* TEXTE DU BAS */
-
         .cover-date {
-            font-size: clamp(24px, 4vw, 38px);
+            font-size: clamp(24px, 4vw, 36px);
             font-weight: 400;
             letter-spacing: 0.06em;
         }
 
         .cover-hint {
-            margin-top: 24px;
-            font-size: 10px;
+            margin-top: 20px;
+            font-size: 11px;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            opacity: 0.85;
+            opacity: 0.9;
+            animation: pulseHint 2.4s ease-in-out infinite;
         }
 
-        /* ANIMATION D'OUVERTURE */
+        @keyframes pulseHint {
+            0%, 100% { opacity: 0.55; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1); }
+        }
 
         .opening-screen.opening .opening-photo.left {
             transform: rotateY(-105deg);
@@ -184,87 +213,868 @@
         .opening-screen.opening .cover-content,
         .opening-screen.opening .cover-shade {
             opacity: 0;
-            transition: opacity 0.35s ease;
         }
 
-        /* MOBILE : TEXTE DU HAUT PLUS BAS,
-           TEXTE DU BAS PLUS HAUT */
+        /* =========================================
+           TOPBAR
+        ========================================= */
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 7%;
+            background: var(--burgundy-dark);
+            color: var(--ivory);
+            border-bottom: 1px solid var(--gold-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
 
-        @media (max-width: 767px) {
-            .opening-photo {
-                background-size: 200% 100%;
+        .topbar-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            letter-spacing: 3px;
+            color: var(--lilac-light);
+        }
+
+        .topbar a {
+            color: var(--ivory);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.3s ease;
+        }
+
+        .topbar a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .topbar a:hover {
+            color: var(--gold);
+        }
+
+        .topbar a:hover::after {
+            width: 100%;
+        }
+
+        /* =========================================
+           HERO (FOND DAMASSÉ UNIQUE)
+        ========================================= */
+        .hero-damask {
+            position: relative;
+            overflow: hidden;
+            background-color: var(--burgundy);
+            background-image:
+                    linear-gradient(rgba(66, 19, 34, .18), rgba(66, 19, 34, .18)),
+                    url(fond2.14.03.jpg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 86vh;
+            min-height: 86svh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 70px 24px;
+            text-align: center;
+        }
+
+        .hero-damask::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(45, 10, 20, .32);
+            pointer-events: none;
+        }
+
+        .hero-frame {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 860px;
+            padding: clamp(34px, 6vw, 75px) 25px;
+            background: rgba(250, 247, 241, .97);
+            border: 1px solid var(--gold);
+            outline: 1px solid rgba(181, 154, 103, .55);
+            outline-offset: -10px;
+            box-shadow: 0 25px 70px rgba(25, 0, 8, .35);
+            border-radius: 4px;
+        }
+
+        .hero-logo {
+            display: block;
+            width: clamp(85px, 13vw, 125px);
+            max-height: 125px;
+            object-fit: contain;
+            margin: 0 auto 22px;
+            mix-blend-mode: multiply;
+            transition: transform 0.4s ease;
+        }
+
+        .hero-logo:hover {
+            transform: scale(1.04);
+        }
+
+        .eyebrow {
+            color: var(--burgundy);
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            margin-top: 18px;
+            color: var(--burgundy);
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(66px, 12vw, 115px);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .hero-ampersand {
+            display: block;
+            margin: -6px 0;
+            color: var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38px;
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            max-width: 540px;
+            margin: 24px auto 0;
+            color: var(--text);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(20px, 3.2vw, 27px);
+            line-height: 1.5;
+        }
+
+        .hero-date {
+            margin-top: 20px;
+            color: var(--burgundy);
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .gold-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px auto;
+            color: var(--gold);
+        }
+
+        .gold-divider::before,
+        .gold-divider::after {
+            content: "";
+            width: 50px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .hero-button {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 15px 30px;
+            background: var(--burgundy);
+            color: #fff;
+            letter-spacing: 2px;
+            font-size: 10px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            transition: all 0.35s ease;
+            box-shadow: 0 4px 18px rgba(101, 31, 54, 0.25);
+        }
+
+        .hero-button:hover {
+            background: var(--burgundy-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(66, 19, 34, 0.35);
+        }
+
+        /* =========================================
+           COMPTE À REBOURS
+        ========================================= */
+        .countdown-section {
+            padding: 75px 20px;
+            background: var(--burgundy-dark);
+            color: var(--ivory);
+            text-align: center;
+            border-top: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
+        }
+
+        .countdown-section .eyebrow {
+            color: var(--lilac);
+        }
+
+        .countdown-section h2 {
+            margin-top: 10px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(36px, 5vw, 52px);
+            font-weight: 400;
+        }
+
+        .countdown-intro {
+            margin-top: 6px;
+            color: rgba(250, 247, 241, .75);
+            font-size: 13px;
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 620px;
+            margin: 35px auto 0;
+        }
+
+        .countdown-unit {
+            padding: 22px 10px;
+            border: 1px solid var(--gold-subtle);
+            background: rgba(255, 255, 255, .03);
+            border-radius: 6px;
+            backdrop-filter: blur(5px);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .countdown-unit:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .countdown-number {
+            display: block;
+            color: var(--gold-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(30px, 5.5vw, 50px);
+            line-height: 1.05;
+        }
+
+        .countdown-label {
+            display: block;
+            margin-top: 8px;
+            color: var(--ivory);
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+
+        .countdown-finished {
+            margin-top: 25px;
+            color: var(--lilac-light);
+            font-family: 'Great Vibes', cursive;
+            font-size: 38px;
+        }
+
+        /* =========================================
+           ÉVÉNEMENTS
+        ========================================= */
+        .section-heading {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+
+        .section-heading h2 {
+            margin-top: 10px;
+            color: var(--burgundy);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(38px, 6vw, 56px);
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        .section-heading p {
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .events-section {
+            padding: 95px 7%;
+            background: var(--ivory);
+        }
+
+        .events-panel {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 32px;
+        }
+
+        .event-card {
+            background: var(--white);
+            border: 1px solid var(--gold-subtle);
+            border-radius: var(--radius);
+            padding: 38px 28px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(66, 19, 34, .04);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(66, 19, 34, .09);
+            border-color: var(--gold);
+        }
+
+        .event-card:hover::before {
+            opacity: 1;
+        }
+
+        .event-number {
+            color: var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .event-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 58px;
+            height: 58px;
+            margin: 18px auto;
+            border: 1px solid var(--gold-subtle);
+            border-radius: 50%;
+            color: var(--burgundy);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover .event-icon {
+            border-color: var(--gold);
+            transform: scale(1.08) rotate(5deg);
+        }
+
+        .event-card h3 {
+            color: var(--burgundy);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 34px;
+            font-weight: 500;
+        }
+
+        .event-date {
+            margin-top: 10px;
+            color: var(--burgundy-light);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .event-description {
+            margin: 16px 0;
+            color: var(--muted);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            line-height: 1.4;
+        }
+
+        .event-divider {
+            height: 1px;
+            margin: 22px 0;
+            background: linear-gradient(to right, transparent, var(--gold-subtle), transparent);
+        }
+
+        .event-location strong {
+            display: block;
+            color: var(--burgundy);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .event-location span {
+            display: block;
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =========================================
+           CARRÉ SOUVENIR (UNE PENSÉE POUR NOS DISPARUS)
+        ========================================= */
+        .memorial-container {
+            max-width: 520px;
+            margin: 45px auto 0;
+            padding: 0 15px;
+        }
+
+        .memorial-card {
+            background: rgba(244, 238, 247, 0.45); /* Pastel transparent lilas/ivoire */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(181, 154, 103, 0.35);
+            border-radius: 12px;
+            padding: 26px 24px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(101, 31, 54, 0.04);
+            transition: all 0.35s ease;
+        }
+
+        .memorial-card:hover {
+            border-color: rgba(181, 154, 103, 0.65);
+            background: rgba(244, 238, 247, 0.65);
+            transform: translateY(-2px);
+        }
+
+        .memorial-icon {
+            font-size: 20px;
+            display: inline-block;
+            margin-bottom: 8px;
+            opacity: 0.85;
+            filter: drop-shadow(0 2px 4px rgba(181, 154, 103, 0.3));
+        }
+
+        .memorial-title {
+            color: var(--burgundy);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .memorial-text {
+            margin-top: 6px;
+            color: var(--muted);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           NOUVEAU FORMULAIRE RSVP RAFFINÉ & ANIMÉ
+        ========================================= */
+        .rsvp-section {
+            padding: 95px 20px 110px;
+            background: linear-gradient(to bottom, var(--ivory), #f5edf1);
+        }
+
+        .rsvp-wrapper {
+            max-width: 820px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            padding: clamp(32px, 6vw, 65px) clamp(22px, 5vw, 55px);
+            box-shadow: 0 20px 50px rgba(66, 19, 34, 0.08);
+            border: 1px solid var(--gold-subtle);
+            position: relative;
+        }
+
+        .rsvp-step {
+            margin-bottom: 35px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(181, 154, 103, 0.2);
+        }
+
+        .rsvp-step:last-of-type {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--burgundy);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .step-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--lilac-light);
+            color: var(--burgundy);
+            font-size: 13px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .field-group {
+            position: relative;
+        }
+
+        .field-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .field-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .field-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #dfd3d8;
+            border-radius: 8px;
+            background: #fdfcfb;
+            color: var(--text);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .field-input:focus {
+            background: #fff;
+            border-color: var(--burgundy);
+            box-shadow: 0 0 0 3px rgba(101, 31, 54, 0.1);
+        }
+
+        textarea.field-input {
+            resize: vertical;
+            min-height: 95px;
+        }
+
+        .presence-cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .presence-option {
+            position: relative;
+            cursor: pointer;
+            border: 1px solid #e2d9dd;
+            border-radius: 10px;
+            padding: 18px 14px;
+            text-align: center;
+            background: #faf7f9;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            user-select: none;
+        }
+
+        .presence-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .presence-option .option-icon {
+            font-size: 20px;
+            margin-bottom: 6px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .presence-option .option-title {
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--text);
+            display: block;
+        }
+
+        .presence-option:hover {
+            border-color: var(--gold);
+            background: #fff;
+            transform: translateY(-2px);
+        }
+
+        .presence-option.selected {
+            background: #fff;
+            border-color: var(--burgundy);
+            box-shadow: 0 6px 20px rgba(101, 31, 54, 0.12);
+        }
+
+        .presence-option.selected .option-title {
+            color: var(--burgundy);
+            font-weight: 600;
+        }
+
+        .presence-option.selected .option-icon {
+            transform: scale(1.2);
+        }
+
+        .guest-counter-wrapper {
+            margin-top: 14px;
+            padding: 14px 18px;
+            background: #fbf8fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(-8px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .guest-counter-wrapper.open {
+            max-height: 90px;
+            opacity: 1;
+            transform: translateY(0);
+            border: 1px solid #ebdbe2;
+        }
+
+        .guest-counter-label {
+            font-size: 12px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .counter-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .counter-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--gold);
+            background: #fff;
+            color: var(--burgundy);
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .counter-btn:hover {
+            background: var(--burgundy);
+            color: #fff;
+            border-color: var(--burgundy);
+        }
+
+        .counter-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 600;
+            min-width: 25px;
+            text-align: center;
+            color: var(--burgundy);
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 18px 30px;
+            background: var(--burgundy);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            box-shadow: 0 6px 22px rgba(101, 31, 54, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: var(--burgundy-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(66, 19, 34, 0.35);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .form-message {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f7eef3;
+            border-left: 4px solid var(--gold);
+            color: var(--burgundy);
+            font-size: 13px;
+            line-height: 1.6;
+            animation: fadeInMsg 0.5s ease forwards;
+        }
+
+        @keyframes fadeInMsg {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-message.visible {
+            display: block;
+        }
+
+        .form-note {
+            margin-top: 15px;
+            color: var(--muted);
+            text-align: center;
+            font-size: 11px;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+        .footer {
+            padding: 60px 20px 65px;
+            background: var(--burgundy-dark);
+            border-top: 1px solid var(--gold);
+            color: var(--ivory);
+            text-align: center;
+        }
+
+        .footer-logo {
+            display: block;
+            width: clamp(85px, 13vw, 125px);
+            max-height: 125px;
+            object-fit: contain;
+            margin: 0 auto 16px;
+            mix-blend-mode: screen;
+        }
+
+        .footer-names {
+            color: var(--lilac-light);
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(42px, 8vw, 62px);
+            line-height: 1.3;
+        }
+
+        .footer p {
+            margin-top: 10px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .footer .footer-date {
+            margin-top: 22px;
+            color: var(--gold);
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+        @media (max-width: 850px) {
+            .events-grid {
+                grid-template-columns: minmax(0, 600px);
+                justify-content: center;
             }
 
-            .cover-content {
-                padding: 9vh 16px 12vh;
+            .events-section {
+                padding: 65px 5%;
             }
 
-            .cover-top {
-                transform: translateY(12px);
-            }
-
-            .cover-bottom {
-                transform: translateY(-34px);
-            }
-
-            .cover-kicker {
-                letter-spacing: 0.23em;
-                margin-bottom: 13px;
-            }
-
-            .cover-title {
-                font-size: clamp(27px, 7vw, 38px);
-            }
-
-            .cover-subtitle {
-                font-size: 16px;
-            }
-
-            .cover-divider {
-                margin-top: 16px;
-            }
-
-            .cover-hint {
-                margin-top: 18px;
-                font-size: 9px;
-                letter-spacing: 0.16em;
+            .hero-damask {
+                background-attachment: scroll;
             }
         }
 
-        /* PETITS ÉCRANS EN HAUTEUR */
-
-        @media (max-height: 650px) {
-            .cover-content {
-                padding-top: 22px;
-                padding-bottom: 22px;
+        @media (max-width: 600px) {
+            .input-grid {
+                grid-template-columns: 1fr;
             }
 
-            .cover-top {
-                transform: translateY(8px);
+            .presence-cards {
+                grid-template-columns: 1fr;
             }
 
-            .cover-bottom {
-                transform: translateY(-12px);
+            .rsvp-wrapper {
+                padding: 28px 18px;
             }
 
-            .cover-kicker {
-                margin-bottom: 8px;
+            .hero {
+                min-height: 75svh;
+                padding: 35px 16px;
             }
 
-            .cover-divider {
-                margin-top: 12px;
+            .hero-frame {
+                padding: 35px 18px;
             }
 
-            .cover-hint {
-                margin-top: 12px;
+            .hero h1 {
+                font-size: clamp(62px, 15vw, 82px);
+            }
+
+            .countdown {
+                gap: 6px;
+            }
+
+            .countdown-unit {
+                padding: 14px 4px;
+            }
+
+            .countdown-number {
+                font-size: clamp(24px, 7vw, 34px);
+            }
+
+            .countdown-label {
+                font-size: 8px;
+                letter-spacing: .5px;
             }
         }
-
-        /* ACCESSIBILITÉ */
 
         @media (prefers-reduced-motion: reduce) {
-            .opening-photo {
-                transition-duration: 0.3s;
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
             }
         }
     </style>
@@ -272,8 +1082,7 @@
 
 <body>
 
-<!-- COUVERTURE -->
-
+<!-- COUVERTURE D'OUVERTURE INTERACTIVE -->
 <div class="opening-screen" id="openingScreen">
     <div class="opening-photo left"></div>
     <div class="opening-photo right"></div>
@@ -281,65 +1090,445 @@
     <div class="cover-shade"></div>
 
     <div class="cover-content">
-
-        <!-- TEXTE EN HAUT -->
-
         <div class="cover-top">
             <p class="cover-kicker">C'est un grand jour</p>
-
-            <h1 class="cover-title">
-                Vous êtes invités
-            </h1>
-
-            <p class="cover-subtitle">
-                au mariage de Noa &amp; Eitan
-            </p>
-
+            <h1 class="cover-title">Vous êtes invités</h1>
+            <p class="cover-subtitle">au mariage de Noa &amp; Eitan</p>
             <div class="cover-divider"></div>
         </div>
 
-        <!-- TEXTE EN BAS -->
-
         <div class="cover-bottom">
-            <p class="cover-date">
-                25 janvier 2027
-            </p>
-
+            <p class="cover-date">25 janvier 2027</p>
             <p class="cover-hint">
-                <br>
-                Touchez pour ouvrir l'invitation
+                ✧ Touchez pour ouvrir l'invitation ✧
             </p>
         </div>
-
     </div>
 </div>
 
-<!-- PAGE APRÈS L'OUVERTURE -->
+<!-- NAVIGATION -->
+<header class="topbar">
+    <div class="topbar-brand">N. &amp; E.</div>
+    <a href="#evenements">Nos événements</a>
+</header>
 
-<main class="page-content">
-    <div>
-        <h1>Notre invitation</h1>
-        <p>Bienvenue à notre mariage ❤️</p>
-    </div>
+<main>
+
+    <!-- CARTE D'INVITATION (HERO AVEC DAMASSÉ UNIQUE) -->
+    <section class="hero hero-damask">
+        <div class="hero-frame reveal">
+            <img
+                    src="logos.35.30-removebg-preview.png"
+                    alt="Monogramme de Noa et Eitan"
+                    class="hero-logo"
+                    onerror="this.style.display='none'"
+            >
+
+            <div class="eyebrow">
+                Une invitation à célébrer l'amour
+            </div>
+
+            <h1>Noa</h1>
+            <span class="hero-ampersand">&amp;</span>
+            <h1>Eitan</h1>
+
+            <div class="gold-divider">✧</div>
+
+            <p class="hero-subtitle">
+                Nous avons la joie de vous inviter à célébrer
+                avec nous le début de notre nouvelle vie.
+            </p>
+
+            <p class="hero-date">
+                25 &amp; 27 janvier 2027
+            </p>
+
+            <a href="#rsvp" class="hero-button">
+                Confirmer ma présence
+            </a>
+        </div>
+    </section>
+
+    <!-- COMPTE À REBOURS -->
+    <section class="countdown-section" aria-labelledby="countdown-title">
+        <div class="reveal">
+            <div class="eyebrow">Le grand jour approche</div>
+
+            <h2 id="countdown-title">Bientôt réunis</h2>
+
+            <p class="countdown-intro">
+                Le compte à rebours avant notre mariage civil
+            </p>
+
+            <div class="countdown" id="countdown">
+                <div class="countdown-unit">
+                    <span class="countdown-number" id="days">000</span>
+                    <span class="countdown-label">Jours</span>
+                </div>
+
+                <div class="countdown-unit">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Heures</span>
+                </div>
+
+                <div class="countdown-unit">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+
+                <div class="countdown-unit">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Secondes</span>
+                </div>
+            </div>
+
+            <p class="countdown-finished" id="countdownFinished" hidden>
+                Le grand jour est arrivé ♡
+            </p>
+        </div>
+    </section>
+
+    <!-- ÉVÉNEMENTS -->
+    <section class="events-section" id="evenements">
+        <div class="events-panel">
+
+            <div class="section-heading reveal">
+                <div class="eyebrow">Noa Arous &amp; Eitan Benarroch</div>
+                <h2>Les moments à partager</h2>
+                <p>Deux belles occasions de nous retrouver, entourés de ceux que nous aimons.</p>
+            </div>
+
+            <div class="events-grid">
+                <!-- MAIRIE -->
+                <article class="event-card reveal">
+                    <div class="event-number">01 — CÉRÉMONIE CIVILE</div>
+                    <div class="event-icon" aria-hidden="true">✧</div>
+                    <h3>La Mairie</h3>
+                    <p class="event-date">Lundi 25 janvier 2027</p>
+                    <p class="event-description">Le début officiel d'une belle histoire.</p>
+                    <div class="event-divider"></div>
+                    <div class="event-location">
+                        <strong>Mairie de Charenton-le-Pont</strong>
+                        <span>Charenton-le-Pont, France</span>
+                        <span>L'horaire sera communiqué prochainement.</span>
+                    </div>
+                </article>
+
+                <!-- HOUPPA -->
+                <article class="event-card reveal">
+                    <div class="event-number">02 — CÉLÉBRATION</div>
+                    <div class="event-icon" aria-hidden="true">♡</div>
+                    <h3>Houppa &amp; Soirée</h3>
+                    <p class="event-date">Mercredi 27 janvier 2027</p>
+                    <p class="event-description">Une cérémonie pleine d'émotion, suivie d'une soirée inoubliable.</p>
+                    <div class="event-divider"></div>
+                    <div class="event-location">
+                        <strong>La Houppa</strong>
+                        <span>Le lieu sera communiqué prochainement.</span>
+                        <span>Les horaires seront précisés ultérieurement.</span>
+                    </div>
+                </article>
+            </div>
+
+            <!-- CARRÉ DISCRET & PASTEL : UNE PENSÉE POUR NOS DISPARUS -->
+            <div class="memorial-container reveal">
+                <div class="memorial-card">
+                    <span class="memorial-icon" aria-hidden="true">🕯️</span>
+                    <h4 class="memorial-title">Une pensée pour nos disparus</h4>
+                    <p class="memorial-text">
+                        Présents dans nos cœurs et dans nos prières en ce jour si précieux.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FORMULAIRE RSVP -->
+    <section class="rsvp-section" id="rsvp">
+        <div class="rsvp-wrapper reveal">
+
+            <div class="section-heading" style="margin-bottom: 35px;">
+                <div class="eyebrow">Votre présence nous honore</div>
+                <h2>Confirmer votre présence</h2>
+                <p>Merci de nous répondre avant le 15 décembre 2026 pour nous aider à préparer cet événement.</p>
+            </div>
+
+            <form id="rsvpForm">
+
+                <!-- ÉTAPE 1 : COORDONNÉES -->
+                <div class="rsvp-step">
+                    <h3 class="step-title">
+                        <span class="step-badge">1</span> Vos coordonnées
+                    </h3>
+                    <div class="input-grid">
+                        <div class="field-group">
+                            <label class="field-label" for="nom">Nom &amp; Prénom *</label>
+                            <input class="field-input" id="nom" name="nom" type="text" placeholder="Ex: Jean Dupont" required autocomplete="name">
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="email">Adresse e-mail *</label>
+                            <input class="field-input" id="email" name="email" type="email" placeholder="Ex: jean.dupont@email.fr" required autocomplete="email">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ÉTAPE 2 : LA MAIRIE -->
+                <div class="rsvp-step">
+                    <h3 class="step-title">
+                        <span class="step-badge">2</span> Mairie civile — 25 janvier
+                    </h3>
+
+                    <div class="presence-cards">
+                        <label class="presence-option" data-target="mairieCounter">
+                            <input type="radio" name="mairiePresence" value="oui" required>
+                            <span class="option-icon">✨</span>
+                            <span class="option-title">Présent(e) avec joie</span>
+                        </label>
+                        <label class="presence-option" data-target="mairieCounter">
+                            <input type="radio" name="mairiePresence" value="non" required>
+                            <span class="option-icon">💌</span>
+                            <span class="option-title">Empêché(e) avec regret</span>
+                        </label>
+                    </div>
+
+                    <div class="guest-counter-wrapper" id="mairieCounter">
+                        <span class="guest-counter-label">Nombre de personnes pour la Mairie :</span>
+                        <div class="counter-controls">
+                            <button type="button" class="counter-btn" onclick="updateGuestCount('mairieGuests', -1)">−</button>
+                            <span class="counter-value" id="mairieGuestsDisplay">1</span>
+                            <button type="button" class="counter-btn" onclick="updateGuestCount('mairieGuests', 1)">+</button>
+                            <input type="hidden" name="mairieGuests" id="mairieGuests" value="1">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ÉTAPE 3 : HOUPPA & SOIRÉE -->
+                <div class="rsvp-step">
+                    <h3 class="step-title">
+                        <span class="step-badge">3</span> Houppa &amp; Soirée — 27 janvier
+                    </h3>
+
+                    <div class="presence-cards">
+                        <label class="presence-option" data-target="houppaCounter">
+                            <input type="radio" name="houppaPresence" value="oui" required>
+                            <span class="option-icon">🥂</span>
+                            <span class="option-title">Présent(e) avec joie</span>
+                        </label>
+                        <label class="presence-option" data-target="houppaCounter">
+                            <input type="radio" name="houppaPresence" value="non" required>
+                            <span class="option-icon">💌</span>
+                            <span class="option-title">Empêché(e) avec regret</span>
+                        </label>
+                    </div>
+
+                    <div class="guest-counter-wrapper" id="houppaCounter">
+                        <span class="guest-counter-label">Nombre de personnes pour la Houppa &amp; Soirée :</span>
+                        <div class="counter-controls">
+                            <button type="button" class="counter-btn" onclick="updateGuestCount('houppaGuests', -1)">−</button>
+                            <span class="counter-value" id="houppaGuestsDisplay">1</span>
+                            <button type="button" class="counter-btn" onclick="updateGuestCount('houppaGuests', 1)">+</button>
+                            <input type="hidden" name="houppaGuests" id="houppaGuests" value="1">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ÉTAPE 4 : MESSAGE -->
+                <div class="rsvp-step">
+                    <h3 class="step-title">
+                        <span class="step-badge">4</span> Un mot pour les mariés
+                    </h3>
+                    <div class="field-group full-width">
+                        <label class="field-label" for="message">Vos félicitations ou précisions éventuelles</label>
+                        <textarea class="field-input" id="message" name="message" placeholder="Un mot doux, un régime particulier..."></textarea>
+                    </div>
+                </div>
+
+                <button class="submit-btn" type="submit">
+                    <span>Confirmer ma réponse</span>
+                    <span>→</span>
+                </button>
+
+                <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
+                <p class="form-note">* Champs indispensables pour la réservation</p>
+            </form>
+
+        </div>
+    </section>
+
 </main>
 
+<!-- PIED DE PAGE -->
+<footer class="footer">
+    <img
+            src="logos.35.30-removebg-preview.png"
+            alt="Monogramme de Noa et Eitan"
+            class="footer-logo"
+            onerror="this.style.display='none'"
+    >
+    <div class="footer-names">Noa &amp; Eitan</div>
+    <div class="gold-divider">✧</div>
+    <p>Avec tout notre amour</p>
+    <p class="footer-date">Janvier 2027</p>
+</footer>
+
 <script>
+    "use strict";
+
+    /* --- ANIMATION D'OUVERTURE --- */
     const openingScreen = document.getElementById("openingScreen");
     let isOpening = false;
 
-    openingScreen.addEventListener("click", () => {
-        if (isOpening) return;
+    if (openingScreen) {
+        openingScreen.addEventListener("click", () => {
+            if (isOpening) return;
+            isOpening = true;
+            openingScreen.classList.add("opening");
 
-        isOpening = true;
-        openingScreen.classList.add("opening");
+            setTimeout(() => {
+                openingScreen.remove();
+                document.body.style.overflow = "auto";
+                initScrollObserver();
+            }, 3600);
+        });
+    }
 
-        setTimeout(() => {
-            openingScreen.remove();
-            document.body.style.overflow = "auto";
-        }, 3600);
+    /* --- SCROLL REVEAL (EFFETS AU SCROLL) --- */
+    function initScrollObserver() {
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(el => observer.observe(el));
+    }
+
+    if (!openingScreen) initScrollObserver();
+
+    /* --- GESTION DES CARTES DU FORMULAIRE --- */
+    document.querySelectorAll('.presence-option').forEach(card => {
+        card.addEventListener('click', () => {
+            const input = card.querySelector('input[type="radio"]');
+            input.checked = true;
+
+            const parent = card.closest('.presence-cards');
+            parent.querySelectorAll('.presence-option').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+
+            const targetId = card.getAttribute('data-target');
+            const targetWrapper = document.getElementById(targetId);
+            if (targetWrapper) {
+                if (input.value === 'oui') {
+                    targetWrapper.classList.add('open');
+                } else {
+                    targetWrapper.classList.remove('open');
+                }
+            }
+        });
     });
+
+    /* --- CONTRÔLEUR DU NOMBRE D'INVITÉS (+/-) --- */
+    function updateGuestCount(inputId, change) {
+        const input = document.getElementById(inputId);
+        const display = document.getElementById(inputId + 'Display');
+        let current = parseInt(input.value, 10) || 1;
+
+        current = Math.max(1, Math.min(8, current + change));
+        input.value = current;
+        display.textContent = current;
+    }
+
+    /* --- COMPTE À REBOURS --- */
+    const parisFormatter = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Paris",
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23"
+    });
+
+    function getParisParts(date) {
+        return Object.fromEntries(
+            parisFormatter.formatToParts(date)
+                .filter(part => part.type !== "literal")
+                .map(part => [part.type, Number(part.value)])
+        );
+    }
+
+    function getParisTimestamp(year, month, day) {
+        const target = Date.UTC(year, month - 1, day);
+        let guess = target;
+        for (let i = 0; i < 3; i++) {
+            const parts = getParisParts(new Date(guess));
+            const represented = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
+            guess += target - represented;
+        }
+        return guess;
+    }
+
+    function getParisNowTimestamp() {
+        const parts = getParisParts(new Date());
+        return Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
+    }
+
+    const weddingTarget = getParisTimestamp(2027, 1, 25);
+
+    function updateCountdown() {
+        const now = getParisNowTimestamp();
+        if (now >= weddingTarget) {
+            document.getElementById("days").textContent = "000";
+            document.getElementById("hours").textContent = "00";
+            document.getElementById("minutes").textContent = "00";
+            document.getElementById("seconds").textContent = "00";
+            document.getElementById("countdownFinished").hidden = false;
+            return;
+        }
+
+        let diff = weddingTarget - now;
+        const days = Math.floor(diff / 86400000); diff %= 86400000;
+        const hours = Math.floor(diff / 3600000); diff %= 3600000;
+        const minutes = Math.floor(diff / 60000); diff %= 60000;
+        const seconds = Math.floor(diff / 1000);
+
+        document.getElementById("days").textContent = String(days).padStart(3, "0");
+        document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+        document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    window.setInterval(updateCountdown, 1000);
+
+    /* --- SOUMISSION DU FORMULAIRE --- */
+    const rsvpForm = document.getElementById("rsvpForm");
+    const formMessage = document.getElementById("formMessage");
+
+    if (rsvpForm) {
+        rsvpForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            if (!rsvpForm.reportValidity()) return;
+
+            const data = new FormData(rsvpForm);
+            const nom = String(data.get("nom") || "").trim();
+            const mairiePres = data.get("mairiePresence");
+            const houppaPres = data.get("houppaPresence");
+
+            const mairieText = mairiePres === "oui" ? `Présent(e) (${data.get("mairieGuests")} pers.)` : "Absent(e)";
+            const houppaText = houppaPres === "oui" ? `Présent(e) (${data.get("houppaGuests")} pers.)` : "Absent(e)";
+
+            formMessage.innerHTML = `<strong>Merci ${nom} !</strong> Votre réponse a bien été enregistrée :<br>
+                • <strong>Mairie :</strong> ${mairieText}<br>
+                • <strong>Houppa & Soirée :</strong> ${houppaText}<br><br>
+                <em>(Note : Ceci est une prévisualisation locale avant intégration de votre script d'envoi ou API)</em>`;
+
+            formMessage.classList.add("visible");
+            formMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        });
+    }
 </script>
 
 </body>
 </html>
-
