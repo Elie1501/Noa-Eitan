@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#421322">
+    <meta name="theme-color" content="#65466f">
 
     <title>Noa Arous &amp; Eitan Benarroch — Notre mariage</title>
 
@@ -16,12 +16,18 @@
             --burgundy: #651f36;
             --burgundy-dark: #421322;
             --burgundy-light: #832b49;
-            --lilac: #b8a3c7;
-            --lilac-light: #f4eef7;
+
+            --lilac: #b59acb;
+            --lilac-light: #f3eafa;
+            --lilac-medium: #e4d4f0;
+            --lilac-dark: #79518d;
+            --lilac-glow: rgba(181, 154, 203, 0.22);
+
             --ivory: #faf7f1;
             --gold: #b59a67;
             --gold-light: #d6be90;
             --gold-subtle: rgba(181, 154, 103, 0.25);
+
             --text: #44333b;
             --muted: #897b80;
             --white: #ffffff;
@@ -36,7 +42,7 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 30px;
+            scroll-padding-top: 90px;
             width: 100%;
             min-height: 100%;
         }
@@ -49,7 +55,7 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 300;
             line-height: 1.7;
-            overflow: hidden; /* Débloqué après l'ouverture */
+            overflow: hidden;
         }
 
         button, input, select, textarea {
@@ -61,14 +67,24 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
         /* =========================================
-           ANIMATIONS AU DÉFILEMENT (REVEAL)
+           ANIMATIONS AU DÉFILEMENT
         ========================================= */
+
         .reveal {
             opacity: 0;
             transform: translateY(28px);
-            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
+            transition:
+                    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.active {
@@ -77,8 +93,9 @@
         }
 
         /* =========================================
-           ÉCRAN D'OUVERTURE (DOUBLE VOLET)
+           OUVERTURE DE L'INVITATION
         ========================================= */
+
         .opening-screen {
             position: fixed;
             inset: 0;
@@ -123,13 +140,19 @@
             inset: 0;
             z-index: 2;
             pointer-events: none;
-            background: linear-gradient(
-                    to bottom,
-                    rgba(35, 0, 8, 0.35) 0%,
-                    transparent 25%,
-                    transparent 70%,
-                    rgba(35, 0, 8, 0.55) 100%
-            );
+            background:
+                    linear-gradient(
+                            135deg,
+                            rgba(35, 0, 8, 0.32),
+                            rgba(83, 45, 105, 0.18)
+                    ),
+                    linear-gradient(
+                            to bottom,
+                            rgba(35, 0, 8, 0.35) 0%,
+                            transparent 25%,
+                            transparent 70%,
+                            rgba(35, 0, 8, 0.55) 100%
+                    );
         }
 
         .cover-content {
@@ -142,12 +165,13 @@
             justify-content: space-between;
             padding: clamp(34px, 7vh, 75px) 20px;
             text-align: center;
-            color: #ebd09c;
+            color: #f0d9f4;
             pointer-events: none;
             transition: opacity 0.4s ease;
         }
 
-        .cover-top, .cover-bottom {
+        .cover-top,
+        .cover-bottom {
             width: 100%;
             max-width: 600px;
             text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
@@ -179,7 +203,7 @@
             width: 65px;
             height: 1px;
             margin: 22px auto 0;
-            background: #d8b475;
+            background: #d9bce9;
         }
 
         .cover-date {
@@ -198,8 +222,14 @@
         }
 
         @keyframes pulseHint {
-            0%, 100% { opacity: 0.55; transform: scale(0.98); }
-            50% { opacity: 1; transform: scale(1); }
+            0%, 100% {
+                opacity: 0.55;
+                transform: scale(0.98);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .opening-screen.opening .opening-photo.left {
@@ -216,16 +246,23 @@
         }
 
         /* =========================================
-           TOPBAR
+           NAVIGATION
         ========================================= */
+
         .topbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
             padding: 18px 7%;
-            background: var(--burgundy-dark);
+            background: linear-gradient(
+                    110deg,
+                    #421322 0%,
+                    #51203f 60%,
+                    #65466f 100%
+            );
             color: var(--ivory);
-            border-bottom: 1px solid var(--gold-subtle);
+            border-bottom: 1px solid rgba(218, 193, 231, 0.65);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -236,7 +273,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 24px;
             letter-spacing: 3px;
-            color: var(--lilac-light);
+            color: #e8d8f4;
         }
 
         .topbar a {
@@ -256,12 +293,12 @@
             bottom: 0;
             width: 0;
             height: 1px;
-            background: var(--gold);
+            background: #d9bce9;
             transition: width 0.3s ease;
         }
 
         .topbar a:hover {
-            color: var(--gold);
+            color: #d9bce9;
         }
 
         .topbar a:hover::after {
@@ -269,15 +306,20 @@
         }
 
         /* =========================================
-           HERO (FOND DAMASSÉ UNIQUE)
+           CARTE PRINCIPALE
         ========================================= */
+
         .hero-damask {
             position: relative;
             overflow: hidden;
             background-color: var(--burgundy);
             background-image:
-                    linear-gradient(rgba(66, 19, 34, .18), rgba(66, 19, 34, .18)),
-                    url(fond2.14.03.jpg);
+                    linear-gradient(
+                            125deg,
+                            rgba(66, 19, 34, 0.25),
+                            rgba(105, 65, 126, 0.22)
+                    ),
+                    url("fond2.14.03.jpg");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -294,7 +336,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: rgba(45, 10, 20, .32);
+            background: rgba(45, 10, 20, 0.24);
             pointer-events: none;
         }
 
@@ -304,11 +346,17 @@
             width: 100%;
             max-width: 860px;
             padding: clamp(34px, 6vw, 75px) 25px;
-            background: rgba(250, 247, 241, .97);
-            border: 1px solid var(--gold);
-            outline: 1px solid rgba(181, 154, 103, .55);
+            background: linear-gradient(
+                    145deg,
+                    rgba(255, 253, 250, 0.98),
+                    rgba(247, 239, 250, 0.97)
+            );
+            border: 1px solid #c5a9d7;
+            outline: 1px solid rgba(181, 154, 203, 0.55);
             outline-offset: -10px;
-            box-shadow: 0 25px 70px rgba(25, 0, 8, .35);
+            box-shadow:
+                    0 25px 70px rgba(25, 0, 8, 0.30),
+                    0 0 35px rgba(181, 154, 203, 0.12);
             border-radius: 4px;
         }
 
@@ -327,7 +375,7 @@
         }
 
         .eyebrow {
-            color: var(--burgundy);
+            color: #89649f;
             font-size: 11px;
             letter-spacing: 4px;
             text-transform: uppercase;
@@ -341,12 +389,13 @@
             font-size: clamp(66px, 12vw, 115px);
             font-weight: 400;
             line-height: 1.1;
+            text-shadow: 0 3px 18px rgba(181, 154, 203, 0.16);
         }
 
         .hero-ampersand {
             display: block;
             margin: -6px 0;
-            color: var(--gold);
+            color: var(--lilac-dark);
             font-family: 'Cormorant Garamond', serif;
             font-size: 38px;
             font-style: italic;
@@ -376,7 +425,7 @@
             justify-content: center;
             gap: 15px;
             margin: 25px auto;
-            color: var(--gold);
+            color: var(--lilac-dark);
         }
 
         .gold-divider::before,
@@ -384,43 +433,53 @@
             content: "";
             width: 50px;
             height: 1px;
-            background: var(--gold);
+            background: linear-gradient(
+                    to right,
+                    var(--lilac),
+                    var(--gold)
+            );
         }
 
         .hero-button {
             display: inline-block;
             margin-top: 28px;
             padding: 15px 30px;
-            background: var(--burgundy);
+            background: linear-gradient(110deg, #651f36, #79518d);
             color: #fff;
             letter-spacing: 2px;
             font-size: 10px;
             text-transform: uppercase;
-            border-radius: 2px;
+            border-radius: 4px;
             transition: all 0.35s ease;
-            box-shadow: 0 4px 18px rgba(101, 31, 54, 0.25);
+            box-shadow: 0 5px 20px rgba(101, 31, 54, 0.2);
         }
 
         .hero-button:hover {
-            background: var(--burgundy-dark);
+            background: linear-gradient(110deg, #421322, #65466f);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(66, 19, 34, 0.35);
+            box-shadow: 0 8px 24px rgba(66, 19, 34, 0.30);
         }
 
         /* =========================================
            COMPTE À REBOURS
         ========================================= */
+
         .countdown-section {
             padding: 75px 20px;
-            background: var(--burgundy-dark);
+            background: linear-gradient(
+                    125deg,
+                    #421322 0%,
+                    #54223f 55%,
+                    #65466f 100%
+            );
             color: var(--ivory);
             text-align: center;
-            border-top: 1px solid var(--gold);
-            border-bottom: 1px solid var(--gold);
+            border-top: 1px solid #c6a9dc;
+            border-bottom: 1px solid #c6a9dc;
         }
 
         .countdown-section .eyebrow {
-            color: var(--lilac);
+            color: #d9bce9;
         }
 
         .countdown-section h2 {
@@ -432,7 +491,7 @@
 
         .countdown-intro {
             margin-top: 6px;
-            color: rgba(250, 247, 241, .75);
+            color: rgba(250, 247, 241, 0.8);
             font-size: 13px;
         }
 
@@ -447,21 +506,25 @@
 
         .countdown-unit {
             padding: 22px 10px;
-            border: 1px solid var(--gold-subtle);
-            background: rgba(255, 255, 255, .03);
-            border-radius: 6px;
+            border: 1px solid rgba(226, 201, 243, 0.28);
+            background: rgba(243, 234, 250, 0.07);
+            border-radius: 8px;
             backdrop-filter: blur(5px);
-            transition: border-color 0.3s ease, transform 0.3s ease;
+            transition:
+                    border-color 0.3s ease,
+                    background 0.3s ease,
+                    transform 0.3s ease;
         }
 
         .countdown-unit:hover {
-            border-color: var(--gold);
+            border-color: #d9bce9;
+            background: rgba(243, 234, 250, 0.12);
             transform: translateY(-3px);
         }
 
         .countdown-number {
             display: block;
-            color: var(--gold-light);
+            color: #e2c9f3;
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(30px, 5.5vw, 50px);
             line-height: 1.05;
@@ -474,19 +537,20 @@
             font-size: 10px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            opacity: 0.85;
+            opacity: 0.9;
         }
 
         .countdown-finished {
             margin-top: 25px;
-            color: var(--lilac-light);
+            color: #e8d8f4;
             font-family: 'Great Vibes', cursive;
             font-size: 38px;
         }
 
         /* =========================================
-           ÉVÉNEMENTS
+           TITRES DE SECTION
         ========================================= */
+
         .section-heading {
             max-width: 700px;
             margin: 0 auto 50px;
@@ -495,7 +559,7 @@
 
         .section-heading h2 {
             margin-top: 10px;
-            color: var(--burgundy);
+            color: #5b2949;
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(38px, 6vw, 56px);
             font-weight: 500;
@@ -508,9 +572,24 @@
             font-size: 13px;
         }
 
+        /* =========================================
+           ÉVÉNEMENTS
+        ========================================= */
+
         .events-section {
             padding: 95px 7%;
-            background: var(--ivory);
+            background:
+                    radial-gradient(
+                            ellipse at 0% 20%,
+                            rgba(228, 212, 240, 0.38),
+                            transparent 42%
+                    ),
+                    radial-gradient(
+                            ellipse at 100% 85%,
+                            rgba(228, 212, 240, 0.30),
+                            transparent 40%
+                    ),
+                    var(--ivory);
         }
 
         .events-panel {
@@ -526,11 +605,11 @@
 
         .event-card {
             background: var(--white);
-            border: 1px solid var(--gold-subtle);
+            border: 1px solid rgba(181, 154, 203, 0.35);
             border-radius: var(--radius);
             padding: 38px 28px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(66, 19, 34, .04);
+            box-shadow: 0 10px 30px rgba(91, 41, 73, 0.06);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
@@ -543,15 +622,22 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--lilac),
+                    var(--gold),
+                    var(--lilac),
+                    transparent
+            );
             opacity: 0;
             transition: opacity 0.4s ease;
         }
 
         .event-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 16px 40px rgba(66, 19, 34, .09);
-            border-color: var(--gold);
+            box-shadow: 0 18px 40px rgba(91, 41, 73, 0.12);
+            border-color: var(--lilac);
         }
 
         .event-card:hover::before {
@@ -559,7 +645,7 @@
         }
 
         .event-number {
-            color: var(--gold);
+            color: #9b7bb0;
             font-family: 'Cormorant Garamond', serif;
             font-size: 13px;
             letter-spacing: 2px;
@@ -573,16 +659,18 @@
             width: 58px;
             height: 58px;
             margin: 18px auto;
-            border: 1px solid var(--gold-subtle);
+            border: 1px solid #dfcde9;
             border-radius: 50%;
-            color: var(--burgundy);
+            background: #f3eafa;
+            color: #89649f;
             font-family: 'Cormorant Garamond', serif;
             font-size: 26px;
             transition: all 0.3s ease;
         }
 
         .event-card:hover .event-icon {
-            border-color: var(--gold);
+            border-color: var(--lilac);
+            background: #e8d8f4;
             transform: scale(1.08) rotate(5deg);
         }
 
@@ -595,7 +683,7 @@
 
         .event-date {
             margin-top: 10px;
-            color: var(--burgundy-light);
+            color: #89649f;
             font-size: 11px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -613,7 +701,13 @@
         .event-divider {
             height: 1px;
             margin: 22px 0;
-            background: linear-gradient(to right, transparent, var(--gold-subtle), transparent);
+            background: linear-gradient(
+                    to right,
+                    transparent,
+                    rgba(181, 154, 203, 0.55),
+                    rgba(181, 154, 103, 0.4),
+                    transparent
+            );
         }
 
         .event-location strong {
@@ -632,8 +726,9 @@
         }
 
         /* =========================================
-           CARRÉ SOUVENIR (UNE PENSÉE POUR NOS DISPARUS)
+           HOMMAGE AUX DISPARUS
         ========================================= */
+
         .memorial-container {
             max-width: 520px;
             margin: 45px auto 0;
@@ -641,20 +736,20 @@
         }
 
         .memorial-card {
-            background: rgba(244, 238, 247, 0.45); /* Pastel transparent lilas/ivoire */
+            background: rgba(243, 234, 250, 0.75);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(181, 154, 103, 0.35);
+            border: 1px solid rgba(181, 154, 203, 0.55);
             border-radius: 12px;
             padding: 26px 24px;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(101, 31, 54, 0.04);
+            box-shadow: 0 8px 25px rgba(101, 31, 54, 0.05);
             transition: all 0.35s ease;
         }
 
         .memorial-card:hover {
-            border-color: rgba(181, 154, 103, 0.65);
-            background: rgba(244, 238, 247, 0.65);
+            border-color: var(--lilac);
+            background: rgba(243, 234, 250, 0.95);
             transform: translateY(-2px);
         }
 
@@ -663,7 +758,9 @@
             display: inline-block;
             margin-bottom: 8px;
             opacity: 0.85;
-            filter: drop-shadow(0 2px 4px rgba(181, 154, 103, 0.3));
+            filter: drop-shadow(
+                    0 2px 5px rgba(140, 107, 165, 0.28)
+            );
         }
 
         .memorial-title {
@@ -684,11 +781,17 @@
         }
 
         /* =========================================
-           NOUVEAU FORMULAIRE RSVP RAFFINÉ & ANIMÉ
+           FORMULAIRE RSVP
         ========================================= */
+
         .rsvp-section {
             padding: 95px 20px 110px;
-            background: linear-gradient(to bottom, var(--ivory), #f5edf1);
+            background: linear-gradient(
+                    180deg,
+                    #f3eafa 0%,
+                    #faf7f8 45%,
+                    #f6eff9 100%
+            );
         }
 
         .rsvp-wrapper {
@@ -697,15 +800,17 @@
             background: var(--white);
             border-radius: 16px;
             padding: clamp(32px, 6vw, 65px) clamp(22px, 5vw, 55px);
-            box-shadow: 0 20px 50px rgba(66, 19, 34, 0.08);
-            border: 1px solid var(--gold-subtle);
+            box-shadow:
+                    0 20px 50px rgba(66, 19, 34, 0.07),
+                    0 0 35px rgba(181, 154, 203, 0.12);
+            border: 1px solid rgba(181, 154, 203, 0.42);
             position: relative;
         }
 
         .rsvp-step {
             margin-bottom: 35px;
             padding-bottom: 30px;
-            border-bottom: 1px solid rgba(181, 154, 103, 0.2);
+            border-bottom: 1px solid rgba(181, 154, 203, 0.28);
         }
 
         .rsvp-step:last-of-type {
@@ -726,14 +831,20 @@
         }
 
         .step-badge {
+            flex-shrink: 0;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            background: var(--lilac-light);
-            color: var(--burgundy);
+            background: linear-gradient(
+                    145deg,
+                    #e8d8f4,
+                    #f6effa
+            );
+            border: 1px solid rgba(181, 154, 203, 0.3);
+            color: #79518d;
             font-size: 13px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
@@ -747,6 +858,7 @@
 
         .field-group {
             position: relative;
+            min-width: 0;
         }
 
         .field-group.full-width {
@@ -766,9 +878,9 @@
         .field-input {
             width: 100%;
             padding: 14px 18px;
-            border: 1px solid #dfd3d8;
+            border: 1px solid #dfd3e5;
             border-radius: 8px;
-            background: #fdfcfb;
+            background: #fdfbfe;
             color: var(--text);
             font-size: 14px;
             outline: none;
@@ -777,14 +889,20 @@
 
         .field-input:focus {
             background: #fff;
-            border-color: var(--burgundy);
-            box-shadow: 0 0 0 3px rgba(101, 31, 54, 0.1);
+            border-color: #a786bf;
+            box-shadow: 0 0 0 3px rgba(181, 154, 203, 0.20);
+        }
+
+        .field-input::placeholder {
+            color: #a79aa9;
         }
 
         textarea.field-input {
             resize: vertical;
             min-height: 95px;
         }
+
+        /* Choix de présence */
 
         .presence-cards {
             display: grid;
@@ -796,19 +914,26 @@
         .presence-option {
             position: relative;
             cursor: pointer;
-            border: 1px solid #e2d9dd;
+            border: 1px solid #e3d6eb;
             border-radius: 10px;
             padding: 18px 14px;
             text-align: center;
-            background: #faf7f9;
+            background: #fbf8fd;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             user-select: none;
         }
 
         .presence-option input {
             position: absolute;
+            width: 1px;
+            height: 1px;
             opacity: 0;
             pointer-events: none;
+        }
+
+        .presence-option:focus-within {
+            outline: 2px solid #a786bf;
+            outline-offset: 3px;
         }
 
         .presence-option .option-icon {
@@ -826,19 +951,23 @@
         }
 
         .presence-option:hover {
-            border-color: var(--gold);
-            background: #fff;
+            border-color: var(--lilac);
+            background: #f6effa;
             transform: translateY(-2px);
         }
 
         .presence-option.selected {
-            background: #fff;
-            border-color: var(--burgundy);
-            box-shadow: 0 6px 20px rgba(101, 31, 54, 0.12);
+            background: linear-gradient(
+                    145deg,
+                    #f6effa,
+                    #fff
+            );
+            border-color: #a786bf;
+            box-shadow: 0 6px 20px rgba(140, 107, 165, 0.16);
         }
 
         .presence-option.selected .option-title {
-            color: var(--burgundy);
+            color: #79518d;
             font-weight: 600;
         }
 
@@ -846,14 +975,17 @@
             transform: scale(1.2);
         }
 
+        /* Compteur d'invités */
+
         .guest-counter-wrapper {
             margin-top: 14px;
             padding: 14px 18px;
-            background: #fbf8fa;
+            background: #f8f2fb;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 12px;
             max-height: 0;
             opacity: 0;
             overflow: hidden;
@@ -862,10 +994,10 @@
         }
 
         .guest-counter-wrapper.open {
-            max-height: 90px;
+            max-height: 110px;
             opacity: 1;
             transform: translateY(0);
-            border: 1px solid #ebdbe2;
+            border: 1px solid #dfcde9;
         }
 
         .guest-counter-label {
@@ -878,15 +1010,16 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-shrink: 0;
         }
 
         .counter-btn {
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            border: 1px solid var(--gold);
+            border: 1px solid var(--lilac);
             background: #fff;
-            color: var(--burgundy);
+            color: #79518d;
             cursor: pointer;
             font-size: 16px;
             display: flex;
@@ -896,9 +1029,16 @@
         }
 
         .counter-btn:hover {
-            background: var(--burgundy);
+            background: #79518d;
             color: #fff;
-            border-color: var(--burgundy);
+            border-color: #79518d;
+        }
+
+        .counter-btn:focus-visible,
+        .submit-btn:focus-visible,
+        .hero-button:focus-visible {
+            outline: 3px solid #c5a9d7;
+            outline-offset: 4px;
         }
 
         .counter-value {
@@ -907,14 +1047,16 @@
             font-weight: 600;
             min-width: 25px;
             text-align: center;
-            color: var(--burgundy);
+            color: #79518d;
         }
+
+        /* Bouton de validation */
 
         .submit-btn {
             width: 100%;
             margin-top: 20px;
             padding: 18px 30px;
-            background: var(--burgundy);
+            background: linear-gradient(110deg, #651f36, #79518d);
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -924,7 +1066,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.35s ease;
-            box-shadow: 0 6px 22px rgba(101, 31, 54, 0.25);
+            box-shadow: 0 6px 22px rgba(101, 31, 54, 0.20);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -932,9 +1074,9 @@
         }
 
         .submit-btn:hover {
-            background: var(--burgundy-dark);
+            background: linear-gradient(110deg, #421322, #65466f);
             transform: translateY(-2px);
-            box-shadow: 0 10px 28px rgba(66, 19, 34, 0.35);
+            box-shadow: 0 10px 28px rgba(66, 19, 34, 0.30);
         }
 
         .submit-btn:active {
@@ -946,21 +1088,28 @@
             margin-top: 25px;
             padding: 20px;
             border-radius: 8px;
-            background: #f7eef3;
-            border-left: 4px solid var(--gold);
+            background: #f3eafa;
+            border-left: 4px solid #a786bf;
             color: var(--burgundy);
             font-size: 13px;
-            line-height: 1.6;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
             animation: fadeInMsg 0.5s ease forwards;
-        }
-
-        @keyframes fadeInMsg {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .form-message.visible {
             display: block;
+        }
+
+        @keyframes fadeInMsg {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .form-note {
@@ -971,12 +1120,18 @@
         }
 
         /* =========================================
-           FOOTER
+           PIED DE PAGE
         ========================================= */
+
         .footer {
             padding: 60px 20px 65px;
-            background: var(--burgundy-dark);
-            border-top: 1px solid var(--gold);
+            background: linear-gradient(
+                    125deg,
+                    #421322 0%,
+                    #54223f 55%,
+                    #65466f 100%
+            );
+            border-top: 1px solid #c6a9dc;
             color: var(--ivory);
             text-align: center;
         }
@@ -991,7 +1146,7 @@
         }
 
         .footer-names {
-            color: var(--lilac-light);
+            color: #e8d8f4;
             font-family: 'Great Vibes', cursive;
             font-size: clamp(42px, 8vw, 62px);
             line-height: 1.3;
@@ -1006,12 +1161,13 @@
 
         .footer .footer-date {
             margin-top: 22px;
-            color: var(--gold);
+            color: #d9bce9;
         }
 
         /* =========================================
            RESPONSIVE
         ========================================= */
+
         @media (max-width: 850px) {
             .events-grid {
                 grid-template-columns: minmax(0, 600px);
@@ -1028,29 +1184,40 @@
         }
 
         @media (max-width: 600px) {
-            .input-grid {
-                grid-template-columns: 1fr;
+            html {
+                scroll-padding-top: 70px;
             }
 
-            .presence-cards {
-                grid-template-columns: 1fr;
+            .topbar {
+                padding: 15px 5%;
             }
 
-            .rsvp-wrapper {
-                padding: 28px 18px;
+            .topbar-brand {
+                font-size: 21px;
             }
 
-            .hero {
+            .topbar a {
+                font-size: 9px;
+                letter-spacing: 1px;
+                text-align: right;
+            }
+
+            .hero-damask {
                 min-height: 75svh;
                 padding: 35px 16px;
             }
 
             .hero-frame {
                 padding: 35px 18px;
+                background: rgba(250, 247, 251, 0.98);
             }
 
             .hero h1 {
                 font-size: clamp(62px, 15vw, 82px);
+            }
+
+            .countdown-section {
+                padding: 60px 14px;
             }
 
             .countdown {
@@ -1067,14 +1234,70 @@
 
             .countdown-label {
                 font-size: 8px;
-                letter-spacing: .5px;
+                letter-spacing: 0.5px;
+            }
+
+            .events-section {
+                padding: 60px 18px;
+            }
+
+            .event-card {
+                padding: 30px 20px;
+            }
+
+            .rsvp-section {
+                padding: 60px 14px 75px;
+            }
+
+            .rsvp-wrapper {
+                padding: 28px 18px;
+            }
+
+            .step-title {
+                font-size: 24px;
+            }
+
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .presence-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .guest-counter-wrapper {
+                align-items: flex-start;
+            }
+
+            .guest-counter-label {
+                max-width: 55%;
+            }
+
+            .counter-controls {
+                gap: 8px;
+            }
+
+            .memorial-container {
+                padding: 0;
             }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
                 transition-duration: 0.01ms !important;
                 animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
             }
         }
     </style>
@@ -1082,8 +1305,14 @@
 
 <body>
 
-<!-- COUVERTURE D'OUVERTURE INTERACTIVE -->
-<div class="opening-screen" id="openingScreen">
+<!-- COUVERTURE D'OUVERTURE -->
+<div
+        class="opening-screen"
+        id="openingScreen"
+        role="button"
+        tabindex="0"
+        aria-label="Ouvrir l'invitation de mariage"
+>
     <div class="opening-photo left"></div>
     <div class="opening-photo right"></div>
 
@@ -1114,9 +1343,10 @@
 
 <main>
 
-    <!-- CARTE D'INVITATION (HERO AVEC DAMASSÉ UNIQUE) -->
+    <!-- CARTE D'INVITATION -->
     <section class="hero hero-damask">
         <div class="hero-frame reveal">
+
             <img
                     src="logos.35.30-removebg-preview.png"
                     alt="Monogramme de Noa et Eitan"
@@ -1146,12 +1376,17 @@
             <a href="#rsvp" class="hero-button">
                 Confirmer ma présence
             </a>
+
         </div>
     </section>
 
     <!-- COMPTE À REBOURS -->
-    <section class="countdown-section" aria-labelledby="countdown-title">
+    <section
+            class="countdown-section"
+            aria-labelledby="countdown-title"
+    >
         <div class="reveal">
+
             <div class="eyebrow">Le grand jour approche</div>
 
             <h2 id="countdown-title">Bientôt réunis</h2>
@@ -1182,9 +1417,14 @@
                 </div>
             </div>
 
-            <p class="countdown-finished" id="countdownFinished" hidden>
+            <p
+                    class="countdown-finished"
+                    id="countdownFinished"
+                    hidden
+            >
                 Le grand jour est arrivé ♡
             </p>
+
         </div>
     </section>
 
@@ -1193,50 +1433,97 @@
         <div class="events-panel">
 
             <div class="section-heading reveal">
-                <div class="eyebrow">Noa Arous &amp; Eitan Benarroch</div>
+                <div class="eyebrow">
+                    Noa Arous &amp; Eitan Benarroch
+                </div>
+
                 <h2>Les moments à partager</h2>
-                <p>Deux belles occasions de nous retrouver, entourés de ceux que nous aimons.</p>
+
+                <p>
+                    Deux belles occasions de nous retrouver,
+                    entourés de ceux que nous aimons.
+                </p>
             </div>
 
             <div class="events-grid">
+
                 <!-- MAIRIE -->
                 <article class="event-card reveal">
-                    <div class="event-number">01 — CÉRÉMONIE CIVILE</div>
+                    <div class="event-number">
+                        01 — CÉRÉMONIE CIVILE
+                    </div>
+
                     <div class="event-icon" aria-hidden="true">✧</div>
+
                     <h3>La Mairie</h3>
-                    <p class="event-date">Lundi 25 janvier 2027</p>
-                    <p class="event-description">Le début officiel d'une belle histoire.</p>
+
+                    <p class="event-date">
+                        Lundi 25 janvier 2027
+                    </p>
+
+                    <p class="event-description">
+                        Le début officiel d'une belle histoire.
+                    </p>
+
                     <div class="event-divider"></div>
+
                     <div class="event-location">
                         <strong>Mairie de Charenton-le-Pont</strong>
                         <span>Charenton-le-Pont, France</span>
-                        <span>L'horaire sera communiqué prochainement.</span>
+                        <span>
+                            L'horaire sera communiqué prochainement.
+                        </span>
                     </div>
                 </article>
 
                 <!-- HOUPPA -->
                 <article class="event-card reveal">
-                    <div class="event-number">02 — CÉLÉBRATION</div>
+                    <div class="event-number">
+                        02 — CÉLÉBRATION
+                    </div>
+
                     <div class="event-icon" aria-hidden="true">♡</div>
+
                     <h3>Houppa &amp; Soirée</h3>
-                    <p class="event-date">Mercredi 27 janvier 2027</p>
-                    <p class="event-description">Une cérémonie pleine d'émotion, suivie d'une soirée inoubliable.</p>
+
+                    <p class="event-date">
+                        Mercredi 27 janvier 2027
+                    </p>
+
+                    <p class="event-description">
+                        Une cérémonie pleine d'émotion,
+                        suivie d'une soirée inoubliable.
+                    </p>
+
                     <div class="event-divider"></div>
+
                     <div class="event-location">
                         <strong>La Houppa</strong>
-                        <span>Le lieu sera communiqué prochainement.</span>
-                        <span>Les horaires seront précisés ultérieurement.</span>
+                        <span>
+                            Le lieu sera communiqué prochainement.
+                        </span>
+                        <span>
+                            Les horaires seront précisés ultérieurement.
+                        </span>
                     </div>
                 </article>
+
             </div>
 
-            <!-- CARRÉ DISCRET & PASTEL : UNE PENSÉE POUR NOS DISPARUS -->
+            <!-- HOMMAGE -->
             <div class="memorial-container reveal">
                 <div class="memorial-card">
-                    <span class="memorial-icon" aria-hidden="true">🕯️</span>
-                    <h4 class="memorial-title">Une pensée pour nos disparus</h4>
+                    <span class="memorial-icon" aria-hidden="true">
+                        🕯️
+                    </span>
+
+                    <h4 class="memorial-title">
+                        Une pensée pour nos disparus
+                    </h4>
+
                     <p class="memorial-text">
-                        Présents dans nos cœurs et dans nos prières en ce jour si précieux.
+                        Présents dans nos cœurs et dans nos prières
+                        en ce jour si précieux.
                     </p>
                 </div>
             </div>
@@ -1248,10 +1535,20 @@
     <section class="rsvp-section" id="rsvp">
         <div class="rsvp-wrapper reveal">
 
-            <div class="section-heading" style="margin-bottom: 35px;">
-                <div class="eyebrow">Votre présence nous honore</div>
+            <div
+                    class="section-heading"
+                    style="margin-bottom: 35px;"
+            >
+                <div class="eyebrow">
+                    Votre présence nous honore
+                </div>
+
                 <h2>Confirmer votre présence</h2>
-                <p>Merci de nous répondre avant le 15 décembre 2026 pour nous aider à préparer cet événement.</p>
+
+                <p>
+                    Merci de nous répondre avant le 15 décembre 2026
+                    pour nous aider à préparer cet événement.
+                </p>
             </div>
 
             <form id="rsvpForm">
@@ -1259,77 +1556,227 @@
                 <!-- ÉTAPE 1 : COORDONNÉES -->
                 <div class="rsvp-step">
                     <h3 class="step-title">
-                        <span class="step-badge">1</span> Vos coordonnées
+                        <span class="step-badge">1</span>
+                        Vos coordonnées
                     </h3>
+
                     <div class="input-grid">
+
                         <div class="field-group">
-                            <label class="field-label" for="nom">Nom &amp; Prénom *</label>
-                            <input class="field-input" id="nom" name="nom" type="text" placeholder="Ex: Jean Dupont" required autocomplete="name">
+                            <label class="field-label" for="nom">
+                                Nom &amp; Prénom *
+                            </label>
+
+                            <input
+                                    class="field-input"
+                                    id="nom"
+                                    name="nom"
+                                    type="text"
+                                    placeholder="Ex : Jean Dupont"
+                                    required
+                                    maxlength="120"
+                                    autocomplete="name"
+                            >
                         </div>
 
                         <div class="field-group">
-                            <label class="field-label" for="email">Adresse e-mail *</label>
-                            <input class="field-input" id="email" name="email" type="email" placeholder="Ex: jean.dupont@email.fr" required autocomplete="email">
+                            <label class="field-label" for="email">
+                                Adresse e-mail *
+                            </label>
+
+                            <input
+                                    class="field-input"
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    placeholder="Ex : jean.dupont@email.fr"
+                                    required
+                                    maxlength="254"
+                                    autocomplete="email"
+                            >
                         </div>
+
                     </div>
                 </div>
 
-                <!-- ÉTAPE 2 : LA MAIRIE -->
+                <!-- ÉTAPE 2 : MAIRIE -->
                 <div class="rsvp-step">
                     <h3 class="step-title">
-                        <span class="step-badge">2</span> Mairie civile — 25 janvier
+                        <span class="step-badge">2</span>
+                        Mairie civile — 25 janvier
                     </h3>
 
                     <div class="presence-cards">
-                        <label class="presence-option" data-target="mairieCounter">
-                            <input type="radio" name="mairiePresence" value="oui" required>
+
+                        <label
+                                class="presence-option"
+                                data-target="mairieCounter"
+                        >
+                            <input
+                                    type="radio"
+                                    name="mairiePresence"
+                                    value="oui"
+                                    required
+                            >
+
                             <span class="option-icon">✨</span>
-                            <span class="option-title">Présent(e) avec joie</span>
+
+                            <span class="option-title">
+                                Présent(e) avec joie
+                            </span>
                         </label>
-                        <label class="presence-option" data-target="mairieCounter">
-                            <input type="radio" name="mairiePresence" value="non" required>
+
+                        <label
+                                class="presence-option"
+                                data-target="mairieCounter"
+                        >
+                            <input
+                                    type="radio"
+                                    name="mairiePresence"
+                                    value="non"
+                                    required
+                            >
+
                             <span class="option-icon">💌</span>
-                            <span class="option-title">Empêché(e) avec regret</span>
+
+                            <span class="option-title">
+                                Empêché(e) avec regret
+                            </span>
                         </label>
+
                     </div>
 
-                    <div class="guest-counter-wrapper" id="mairieCounter">
-                        <span class="guest-counter-label">Nombre de personnes pour la Mairie :</span>
+                    <div
+                            class="guest-counter-wrapper"
+                            id="mairieCounter"
+                            aria-hidden="true"
+                    >
+                        <span class="guest-counter-label">
+                            Nombre de personnes pour la Mairie :
+                        </span>
+
                         <div class="counter-controls">
-                            <button type="button" class="counter-btn" onclick="updateGuestCount('mairieGuests', -1)">−</button>
-                            <span class="counter-value" id="mairieGuestsDisplay">1</span>
-                            <button type="button" class="counter-btn" onclick="updateGuestCount('mairieGuests', 1)">+</button>
-                            <input type="hidden" name="mairieGuests" id="mairieGuests" value="1">
+
+                            <button
+                                    type="button"
+                                    class="counter-btn"
+                                    data-counter="mairieGuests"
+                                    data-change="-1"
+                                    aria-label="Retirer une personne pour la mairie"
+                            >−</button>
+
+                            <span
+                                    class="counter-value"
+                                    id="mairieGuestsDisplay"
+                                    aria-live="polite"
+                            >1</span>
+
+                            <button
+                                    type="button"
+                                    class="counter-btn"
+                                    data-counter="mairieGuests"
+                                    data-change="1"
+                                    aria-label="Ajouter une personne pour la mairie"
+                            >+</button>
+
+                            <input
+                                    type="hidden"
+                                    name="mairieGuests"
+                                    id="mairieGuests"
+                                    value="1"
+                            >
+
                         </div>
                     </div>
                 </div>
 
-                <!-- ÉTAPE 3 : HOUPPA & SOIRÉE -->
+                <!-- ÉTAPE 3 : HOUPPA -->
                 <div class="rsvp-step">
                     <h3 class="step-title">
-                        <span class="step-badge">3</span> Houppa &amp; Soirée — 27 janvier
+                        <span class="step-badge">3</span>
+                        Houppa &amp; Soirée — 27 janvier
                     </h3>
 
                     <div class="presence-cards">
-                        <label class="presence-option" data-target="houppaCounter">
-                            <input type="radio" name="houppaPresence" value="oui" required>
+
+                        <label
+                                class="presence-option"
+                                data-target="houppaCounter"
+                        >
+                            <input
+                                    type="radio"
+                                    name="houppaPresence"
+                                    value="oui"
+                                    required
+                            >
+
                             <span class="option-icon">🥂</span>
-                            <span class="option-title">Présent(e) avec joie</span>
+
+                            <span class="option-title">
+                                Présent(e) avec joie
+                            </span>
                         </label>
-                        <label class="presence-option" data-target="houppaCounter">
-                            <input type="radio" name="houppaPresence" value="non" required>
+
+                        <label
+                                class="presence-option"
+                                data-target="houppaCounter"
+                        >
+                            <input
+                                    type="radio"
+                                    name="houppaPresence"
+                                    value="non"
+                                    required
+                            >
+
                             <span class="option-icon">💌</span>
-                            <span class="option-title">Empêché(e) avec regret</span>
+
+                            <span class="option-title">
+                                Empêché(e) avec regret
+                            </span>
                         </label>
+
                     </div>
 
-                    <div class="guest-counter-wrapper" id="houppaCounter">
-                        <span class="guest-counter-label">Nombre de personnes pour la Houppa &amp; Soirée :</span>
+                    <div
+                            class="guest-counter-wrapper"
+                            id="houppaCounter"
+                            aria-hidden="true"
+                    >
+                        <span class="guest-counter-label">
+                            Nombre de personnes pour la Houppa &amp; Soirée :
+                        </span>
+
                         <div class="counter-controls">
-                            <button type="button" class="counter-btn" onclick="updateGuestCount('houppaGuests', -1)">−</button>
-                            <span class="counter-value" id="houppaGuestsDisplay">1</span>
-                            <button type="button" class="counter-btn" onclick="updateGuestCount('houppaGuests', 1)">+</button>
-                            <input type="hidden" name="houppaGuests" id="houppaGuests" value="1">
+
+                            <button
+                                    type="button"
+                                    class="counter-btn"
+                                    data-counter="houppaGuests"
+                                    data-change="-1"
+                                    aria-label="Retirer une personne pour la Houppa"
+                            >−</button>
+
+                            <span
+                                    class="counter-value"
+                                    id="houppaGuestsDisplay"
+                                    aria-live="polite"
+                            >1</span>
+
+                            <button
+                                    type="button"
+                                    class="counter-btn"
+                                    data-counter="houppaGuests"
+                                    data-change="1"
+                                    aria-label="Ajouter une personne pour la Houppa"
+                            >+</button>
+
+                            <input
+                                    type="hidden"
+                                    name="houppaGuests"
+                                    id="houppaGuests"
+                                    value="1"
+                            >
+
                         </div>
                     </div>
                 </div>
@@ -1337,21 +1784,41 @@
                 <!-- ÉTAPE 4 : MESSAGE -->
                 <div class="rsvp-step">
                     <h3 class="step-title">
-                        <span class="step-badge">4</span> Un mot pour les mariés
+                        <span class="step-badge">4</span>
+                        Un mot pour les mariés
                     </h3>
+
                     <div class="field-group full-width">
-                        <label class="field-label" for="message">Vos félicitations ou précisions éventuelles</label>
-                        <textarea class="field-input" id="message" name="message" placeholder="Un mot doux, un régime particulier..."></textarea>
+                        <label class="field-label" for="message">
+                            Vos félicitations ou précisions éventuelles
+                        </label>
+
+                        <textarea
+                                class="field-input"
+                                id="message"
+                                name="message"
+                                maxlength="2000"
+                                placeholder="Un mot doux, un régime particulier..."
+                        ></textarea>
                     </div>
                 </div>
 
                 <button class="submit-btn" type="submit">
                     <span>Confirmer ma réponse</span>
-                    <span>→</span>
+                    <span aria-hidden="true">→</span>
                 </button>
 
-                <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
-                <p class="form-note">* Champs indispensables pour la réservation</p>
+                <div
+                        class="form-message"
+                        id="formMessage"
+                        role="status"
+                        aria-live="polite"
+                ></div>
+
+                <p class="form-note">
+                    * Champs indispensables pour la réservation
+                </p>
+
             </form>
 
         </div>
@@ -1361,171 +1828,295 @@
 
 <!-- PIED DE PAGE -->
 <footer class="footer">
+
     <img
             src="logos.35.30-removebg-preview.png"
             alt="Monogramme de Noa et Eitan"
             class="footer-logo"
             onerror="this.style.display='none'"
     >
+
     <div class="footer-names">Noa &amp; Eitan</div>
+
     <div class="gold-divider">✧</div>
+
     <p>Avec tout notre amour</p>
     <p class="footer-date">Janvier 2027</p>
+
 </footer>
 
 <script>
     "use strict";
 
-    /* --- ANIMATION D'OUVERTURE --- */
+    /* =========================================
+       OUVERTURE DE L'INVITATION
+    ========================================= */
+
     const openingScreen = document.getElementById("openingScreen");
     let isOpening = false;
 
+    function openInvitation() {
+        if (!openingScreen || isOpening) return;
+
+        isOpening = true;
+        openingScreen.classList.add("opening");
+
+        window.setTimeout(() => {
+            openingScreen.remove();
+            document.body.style.overflow = "auto";
+            initScrollObserver();
+        }, 3600);
+    }
+
     if (openingScreen) {
-        openingScreen.addEventListener("click", () => {
-            if (isOpening) return;
-            isOpening = true;
-            openingScreen.classList.add("opening");
+        openingScreen.addEventListener("click", openInvitation);
 
-            setTimeout(() => {
-                openingScreen.remove();
-                document.body.style.overflow = "auto";
-                initScrollObserver();
-            }, 3600);
-        });
-    }
-
-    /* --- SCROLL REVEAL (EFFETS AU SCROLL) --- */
-    function initScrollObserver() {
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.15 });
-
-        reveals.forEach(el => observer.observe(el));
-    }
-
-    if (!openingScreen) initScrollObserver();
-
-    /* --- GESTION DES CARTES DU FORMULAIRE --- */
-    document.querySelectorAll('.presence-option').forEach(card => {
-        card.addEventListener('click', () => {
-            const input = card.querySelector('input[type="radio"]');
-            input.checked = true;
-
-            const parent = card.closest('.presence-cards');
-            parent.querySelectorAll('.presence-option').forEach(c => c.classList.remove('selected'));
-            card.classList.add('selected');
-
-            const targetId = card.getAttribute('data-target');
-            const targetWrapper = document.getElementById(targetId);
-            if (targetWrapper) {
-                if (input.value === 'oui') {
-                    targetWrapper.classList.add('open');
-                } else {
-                    targetWrapper.classList.remove('open');
-                }
+        openingScreen.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openInvitation();
             }
         });
-    });
-
-    /* --- CONTRÔLEUR DU NOMBRE D'INVITÉS (+/-) --- */
-    function updateGuestCount(inputId, change) {
-        const input = document.getElementById(inputId);
-        const display = document.getElementById(inputId + 'Display');
-        let current = parseInt(input.value, 10) || 1;
-
-        current = Math.max(1, Math.min(8, current + change));
-        input.value = current;
-        display.textContent = current;
+    } else {
+        document.body.style.overflow = "auto";
     }
 
-    /* --- COMPTE À REBOURS --- */
-    const parisFormatter = new Intl.DateTimeFormat("en-GB", {
-        timeZone: "Europe/Paris",
-        year: "numeric", month: "2-digit", day: "2-digit",
-        hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23"
-    });
+    /* =========================================
+       ANIMATIONS AU DÉFILEMENT
+    ========================================= */
 
-    function getParisParts(date) {
-        return Object.fromEntries(
-            parisFormatter.formatToParts(date)
-                .filter(part => part.type !== "literal")
-                .map(part => [part.type, Number(part.value)])
-        );
-    }
+    function initScrollObserver() {
+        const reveals = document.querySelectorAll(".reveal");
 
-    function getParisTimestamp(year, month, day) {
-        const target = Date.UTC(year, month - 1, day);
-        let guess = target;
-        for (let i = 0; i < 3; i++) {
-            const parts = getParisParts(new Date(guess));
-            const represented = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
-            guess += target - represented;
-        }
-        return guess;
-    }
-
-    function getParisNowTimestamp() {
-        const parts = getParisParts(new Date());
-        return Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
-    }
-
-    const weddingTarget = getParisTimestamp(2027, 1, 25);
-
-    function updateCountdown() {
-        const now = getParisNowTimestamp();
-        if (now >= weddingTarget) {
-            document.getElementById("days").textContent = "000";
-            document.getElementById("hours").textContent = "00";
-            document.getElementById("minutes").textContent = "00";
-            document.getElementById("seconds").textContent = "00";
-            document.getElementById("countdownFinished").hidden = false;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            reveals.forEach((element) => {
+                element.classList.add("active");
+            });
             return;
         }
 
-        let diff = weddingTarget - now;
-        const days = Math.floor(diff / 86400000); diff %= 86400000;
-        const hours = Math.floor(diff / 3600000); diff %= 3600000;
-        const minutes = Math.floor(diff / 60000); diff %= 60000;
-        const seconds = Math.floor(diff / 1000);
+        if (!("IntersectionObserver" in window)) {
+            reveals.forEach((element) => {
+                element.classList.add("active");
+            });
+            return;
+        }
 
-        document.getElementById("days").textContent = String(days).padStart(3, "0");
-        document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-        document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-        document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12
+        });
+
+        reveals.forEach((element) => observer.observe(element));
+    }
+
+    if (!openingScreen) {
+        initScrollObserver();
+    }
+
+    /* =========================================
+       CHOIX DE PRÉSENCE
+    ========================================= */
+
+    document.querySelectorAll(".presence-option").forEach((card) => {
+        card.addEventListener("click", () => {
+            const input = card.querySelector('input[type="radio"]');
+
+            if (!input) return;
+
+            input.checked = true;
+
+            const parent = card.closest(".presence-cards");
+
+            if (parent) {
+                parent.querySelectorAll(".presence-option").forEach((item) => {
+                    item.classList.remove("selected");
+                });
+            }
+
+            card.classList.add("selected");
+
+            const targetId = card.dataset.target;
+            const targetWrapper = document.getElementById(targetId);
+
+            if (!targetWrapper) return;
+
+            const isPresent = input.value === "oui";
+
+            targetWrapper.classList.toggle("open", isPresent);
+            targetWrapper.setAttribute("aria-hidden", String(!isPresent));
+        });
+    });
+
+    /* =========================================
+       COMPTEUR D'INVITÉS
+    ========================================= */
+
+    function updateGuestCount(inputId, change) {
+        const input = document.getElementById(inputId);
+        const display = document.getElementById(inputId + "Display");
+
+        if (!input || !display) return;
+
+        const current = Number.parseInt(input.value, 10) || 1;
+        const next = Math.max(1, Math.min(8, current + change));
+
+        input.value = String(next);
+        display.textContent = String(next);
+    }
+
+    document.querySelectorAll("[data-counter]").forEach((button) => {
+        button.addEventListener("click", () => {
+            const inputId = button.dataset.counter;
+            const change = Number.parseInt(button.dataset.change, 10);
+
+            if (!inputId || !Number.isFinite(change)) return;
+
+            updateGuestCount(inputId, change);
+        });
+    });
+
+    /* =========================================
+       COMPTE À REBOURS
+       Heure de Paris : 25 janvier 2027 à minuit
+    ========================================= */
+
+    const weddingTarget = new Date(
+        "2027-01-25T00:00:00+01:00"
+    ).getTime();
+
+    const countdownElements = {
+        days: document.getElementById("days"),
+        hours: document.getElementById("hours"),
+        minutes: document.getElementById("minutes"),
+        seconds: document.getElementById("seconds"),
+        finished: document.getElementById("countdownFinished")
+    };
+
+    function updateCountdown() {
+        const now = Date.now();
+
+        if (now >= weddingTarget) {
+            countdownElements.days.textContent = "000";
+            countdownElements.hours.textContent = "00";
+            countdownElements.minutes.textContent = "00";
+            countdownElements.seconds.textContent = "00";
+            countdownElements.finished.hidden = false;
+            return;
+        }
+
+        const diff = weddingTarget - now;
+
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+
+        countdownElements.days.textContent =
+            String(days).padStart(3, "0");
+
+        countdownElements.hours.textContent =
+            String(hours).padStart(2, "0");
+
+        countdownElements.minutes.textContent =
+            String(minutes).padStart(2, "0");
+
+        countdownElements.seconds.textContent =
+            String(seconds).padStart(2, "0");
     }
 
     updateCountdown();
-    window.setInterval(updateCountdown, 1000);
 
-    /* --- SOUMISSION DU FORMULAIRE --- */
+    const countdownInterval = window.setInterval(() => {
+        updateCountdown();
+
+        if (Date.now() >= weddingTarget) {
+            window.clearInterval(countdownInterval);
+        }
+    }, 1000);
+
+    /* =========================================
+       FORMULAIRE RSVP — APERÇU LOCAL
+    ========================================= */
+
     const rsvpForm = document.getElementById("rsvpForm");
     const formMessage = document.getElementById("formMessage");
 
-    if (rsvpForm) {
-        rsvpForm.addEventListener("submit", function (e) {
-            e.preventDefault();
+    if (rsvpForm && formMessage) {
+        rsvpForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
             if (!rsvpForm.reportValidity()) return;
 
             const data = new FormData(rsvpForm);
+
             const nom = String(data.get("nom") || "").trim();
-            const mairiePres = data.get("mairiePresence");
-            const houppaPres = data.get("houppaPresence");
+            const email = String(data.get("email") || "").trim();
 
-            const mairieText = mairiePres === "oui" ? `Présent(e) (${data.get("mairieGuests")} pers.)` : "Absent(e)";
-            const houppaText = houppaPres === "oui" ? `Présent(e) (${data.get("houppaGuests")} pers.)` : "Absent(e)";
+            const mairiePresence = data.get("mairiePresence");
+            const houppaPresence = data.get("houppaPresence");
 
-            formMessage.innerHTML = `<strong>Merci ${nom} !</strong> Votre réponse a bien été enregistrée :<br>
-                • <strong>Mairie :</strong> ${mairieText}<br>
-                • <strong>Houppa & Soirée :</strong> ${houppaText}<br><br>
-                <em>(Note : Ceci est une prévisualisation locale avant intégration de votre script d'envoi ou API)</em>`;
+            const mairieGuests = data.get("mairieGuests");
+            const houppaGuests = data.get("houppaGuests");
+
+            const mairieText = mairiePresence === "oui"
+                ? `Présent(e) (${mairieGuests} pers.)`
+                : "Absent(e)";
+
+            const houppaText = houppaPresence === "oui"
+                ? `Présent(e) (${houppaGuests} pers.)`
+                : "Absent(e)";
+
+            /*
+             * Utilisation de textContent pour éviter d'interpréter
+             * les saisies de l'utilisateur comme du HTML.
+             */
+
+            formMessage.replaceChildren();
+
+            const title = document.createElement("strong");
+            title.textContent = `Merci ${nom} !`;
+
+            const intro = document.createElement("p");
+            intro.textContent =
+                "Voici le récapitulatif de votre réponse :";
+
+            const emailLine = document.createElement("p");
+            emailLine.textContent = `E-mail : ${email}`;
+
+            const mairieLine = document.createElement("p");
+            mairieLine.textContent = `Mairie : ${mairieText}`;
+
+            const houppaLine = document.createElement("p");
+            houppaLine.textContent = `Houppa & Soirée : ${houppaText}`;
+
+            const note = document.createElement("p");
+            note.textContent =
+                "Attention : cette réponse est uniquement affichée " +
+                "dans votre navigateur. Elle n'a pas encore été envoyée " +
+                "aux mariés.";
+
+            formMessage.append(
+                title,
+                intro,
+                emailLine,
+                mairieLine,
+                houppaLine,
+                note
+            );
 
             formMessage.classList.add("visible");
-            formMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+            formMessage.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
         });
     }
 </script>
