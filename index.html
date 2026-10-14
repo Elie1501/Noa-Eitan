@@ -383,7 +383,7 @@
         }
 
         /* =========================================
-           ÉVÉNEMENTS
+           ÉVÉNEMENTS & FORMULAIRE (Bordures strictement égales & 1 fleur de fond par carte)
         ========================================= */
         .events-section { padding: 95px 7%; background: var(--lilac-light); }
 
@@ -403,95 +403,111 @@
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             align-items: stretch;
-            gap: 30px;
+            gap: 35px;
             max-width: 1150px;
             margin: 0 auto;
         }
 
-        .event-card {
+        /* Cadre principal rigoureusement égal pour toutes les cartes et blocs */
+        .event-card, .rsvp-container {
             position: relative;
-            isolation: isolate;
-            overflow: hidden;
-            padding: 12px;
             background: var(--white);
-            border: 1px solid rgba(181,154,103,.75);
-            box-shadow: 0 15px 45px rgba(66,19,34,.08);
+            border: 1px solid var(--gold);
+            box-shadow: 0 15px 45px rgba(66, 19, 34, 0.08);
+            border-radius: 4px;
+            overflow: hidden;
         }
-        .event-card::before, .event-card::after {
+
+        /* Une seule fleur de taille moyenne en arrière-plan centré par carte */
+        .event-card::before, .rsvp-container::before {
             content: "";
             position: absolute;
-            z-index: 0;
-            pointer-events: none;
+            inset: 0;
+            margin: auto;
+            width: 220px;
+            height: 220px;
             background: url("fleurs-lilas.png") center / contain no-repeat;
-            opacity: .20;
-            animation: fleursFlottantes 8s ease-in-out infinite;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
         }
-        .event-card::before { width: 118px; height: 118px; top: -19px; right: -17px; }
-        .event-card::after { width: 88px; height: 88px; bottom: -15px; left: -13px; opacity: .14; animation-delay: -4s; }
+
+        .event-card {
+            padding: 16px;
+        }
+
+        .event-inner, .rsvp-container {
+            padding: 40px 30px;
+            border: 1px solid rgba(181, 154, 103, 0.35);
+            outline: 1px solid rgba(181, 154, 103, 0.15);
+            outline-offset: -6px;
+            height: 100%;
+        }
 
         .event-inner {
             position: relative;
             z-index: 1;
-            height: 100%;
-            padding: 35px 30px;
-            border: 1px solid rgba(181,154,103,.35);
         }
 
-        @keyframes fleursFlottantes {
-            0%, 100% { translate: 0 0; }
-            50% { translate: 0 -6px; }
-        }
-
-        .event-number { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 15px; letter-spacing: 3px; }
+        .event-number { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 15px; letter-spacing: 3px; text-align: center; }
         .event-icon {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 68px;
-            height: 68px;
-            margin: 20px auto;
+            width: 60px;
+            height: 60px;
+            margin: 18px auto;
             border: 1px solid var(--gold);
             border-radius: 50%;
             color: var(--burgundy);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
+            font-size: 26px;
+            background: var(--white);
+            position: relative;
+            z-index: 1;
         }
         .event-card h3 {
             text-align: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 36px;
+            font-size: 34px;
             font-weight: 500;
             line-height: 1.2;
             color: var(--burgundy);
+            position: relative;
+            z-index: 1;
         }
         .event-date {
-            margin-top: 15px;
+            margin-top: 12px;
             text-align: center;
             color: var(--burgundy);
             font-size: 10px;
             letter-spacing: 2px;
             text-transform: uppercase;
+            position: relative;
+            z-index: 1;
         }
         .event-description {
-            margin: 16px 0 25px;
+            margin: 14px 0 22px;
             text-align: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 19px;
+            font-size: 18px;
             color: var(--muted);
+            position: relative;
+            z-index: 1;
         }
-        .event-divider { height: 1px; margin: 25px 0; background: linear-gradient(to right, transparent, var(--gold), transparent); }
-        .event-location { margin-bottom: 15px; text-align: center; }
+        .event-divider { height: 1px; margin: 22px 0; background: linear-gradient(to right, transparent, var(--gold), transparent); position: relative; z-index: 1; }
+        .event-location { margin-bottom: 10px; text-align: center; position: relative; z-index: 1; }
         .event-location strong {
             display: block;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
             color: var(--burgundy);
         }
-        .event-location span { display: block; margin-top: 5px; font-size: 11px; color: var(--muted); }
+        .event-location span { display: block; margin-top: 4px; font-size: 11px; color: var(--muted); }
 
         /* =========================================
-           RSVP — Version Élégante & Pro
+           RSVP SECTION
         ========================================= */
         .rsvp-section {
             padding: 95px 20px;
@@ -500,18 +516,11 @@
         .rsvp-container {
             max-width: 640px;
             margin: 0 auto;
-            padding: clamp(35px, 6vw, 65px) clamp(25px, 6vw, 55px);
-            background: var(--white);
-            border: 1px solid var(--gold);
-            outline: 1px solid rgba(181, 154, 103, 0.3);
-            outline-offset: -12px;
-            box-shadow: 0 20px 50px rgba(66, 19, 34, 0.08);
-            border-radius: 4px;
         }
-        .rsvp-container .section-heading { margin-bottom: 40px; }
+        .rsvp-container .section-heading { margin-bottom: 35px; position: relative; z-index: 1; }
         .rsvp-container .section-heading h2 { font-size: clamp(36px, 5vw, 48px); font-family: 'Great Vibes', cursive; color: var(--burgundy); font-weight: 400; }
 
-        .rsvp-form { display: flex; flex-direction: column; gap: 35px; }
+        .rsvp-form { display: flex; flex-direction: column; gap: 30px; position: relative; z-index: 1; }
 
         .field-group {
             display: flex;
@@ -520,9 +529,6 @@
             text-align: left;
         }
 
-        .name-field-wrapper {
-            position: relative;
-        }
         .name-field {
             width: 100%;
             padding: 16px 20px;
@@ -708,8 +714,8 @@
             .countdown-section { padding: 60px 12px; }
             .events-section, .rsvp-section { padding: 60px 15px; }
             .section-heading { margin-bottom: 35px; }
-            .event-card { padding: 8px; }
-            .event-inner { padding: 28px 18px; }
+            .event-card { padding: 12px; }
+            .event-inner { padding: 30px 20px; }
             .event-card h3 { font-size: 32px; }
         }
 
@@ -1051,7 +1057,7 @@
         });
     });
 
-    /* Confirmation locale uniquement (textContent : pas d'injection HTML) */
+    /* Confirmation locale uniquement */
     rsvpForm.addEventListener("submit", (event) => {
         event.preventDefault();
         if (!rsvpForm.reportValidity()) return;
