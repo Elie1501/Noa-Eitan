@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#65466f">
+    <meta name="theme-color" content="#421322">
 
     <title>Noa Arous &amp; Eitan Benarroch — Notre mariage</title>
 
@@ -17,17 +18,17 @@
             --burgundy-dark: #421322;
             --burgundy-light: #832b49;
 
-            --lilac: #b59acb;
-            --lilac-light: #f3eafa;
-            --lilac-medium: #e4d4f0;
-            --lilac-dark: #79518d;
-            --lilac-glow: rgba(181, 154, 203, 0.22);
+            --lilac: #b8a3c7;
+            --lilac-light: #f4eef7;
+
+            /* Fond lilas des sections */
+            --lilac-background: #e9dff0;
+            --lilac-background-light: #f0e8f5;
 
             --ivory: #faf7f1;
             --gold: #b59a67;
             --gold-light: #d6be90;
             --gold-subtle: rgba(181, 154, 103, 0.25);
-
             --text: #44333b;
             --muted: #897b80;
             --white: #ffffff;
@@ -42,7 +43,7 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 90px;
+            scroll-padding-top: 30px;
             width: 100%;
             min-height: 100%;
         }
@@ -50,7 +51,7 @@
         body {
             width: 100%;
             min-height: 100%;
-            background: var(--ivory);
+            background: var(--lilac-background);
             color: var(--text);
             font-family: 'Montserrat', sans-serif;
             font-weight: 300;
@@ -67,14 +68,6 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        button {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        [hidden] {
-            display: none !important;
-        }
-
         /* =========================================
            ANIMATIONS AU DÉFILEMENT
         ========================================= */
@@ -85,6 +78,7 @@
             transition:
                     opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
                     transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
 
         .reveal.active {
@@ -93,7 +87,8 @@
         }
 
         /* =========================================
-           OUVERTURE DE L'INVITATION
+           COUVERTURE D'OUVERTURE
+           DESIGN CONSERVÉ À L'IDENTIQUE
         ========================================= */
 
         .opening-screen {
@@ -140,19 +135,13 @@
             inset: 0;
             z-index: 2;
             pointer-events: none;
-            background:
-                    linear-gradient(
-                            135deg,
-                            rgba(35, 0, 8, 0.32),
-                            rgba(83, 45, 105, 0.18)
-                    ),
-                    linear-gradient(
-                            to bottom,
-                            rgba(35, 0, 8, 0.35) 0%,
-                            transparent 25%,
-                            transparent 70%,
-                            rgba(35, 0, 8, 0.55) 100%
-                    );
+            background: linear-gradient(
+                    to bottom,
+                    rgba(35, 0, 8, 0.35) 0%,
+                    transparent 25%,
+                    transparent 70%,
+                    rgba(35, 0, 8, 0.55) 100%
+            );
         }
 
         .cover-content {
@@ -165,7 +154,7 @@
             justify-content: space-between;
             padding: clamp(34px, 7vh, 75px) 20px;
             text-align: center;
-            color: #f0d9f4;
+            color: #ebd09c;
             pointer-events: none;
             transition: opacity 0.4s ease;
         }
@@ -203,7 +192,7 @@
             width: 65px;
             height: 1px;
             margin: 22px auto 0;
-            background: #d9bce9;
+            background: #d8b475;
         }
 
         .cover-date {
@@ -226,6 +215,7 @@
                 opacity: 0.55;
                 transform: scale(0.98);
             }
+
             50% {
                 opacity: 1;
                 transform: scale(1);
@@ -253,16 +243,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
             padding: 18px 7%;
-            background: linear-gradient(
-                    110deg,
-                    #421322 0%,
-                    #51203f 60%,
-                    #65466f 100%
-            );
+            background: var(--burgundy-dark);
             color: var(--ivory);
-            border-bottom: 1px solid rgba(218, 193, 231, 0.65);
+            border-bottom: 1px solid var(--gold-subtle);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -273,7 +257,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 24px;
             letter-spacing: 3px;
-            color: #e8d8f4;
+            color: var(--lilac-light);
         }
 
         .topbar a {
@@ -293,12 +277,12 @@
             bottom: 0;
             width: 0;
             height: 1px;
-            background: #d9bce9;
+            background: var(--gold);
             transition: width 0.3s ease;
         }
 
         .topbar a:hover {
-            color: #d9bce9;
+            color: var(--gold);
         }
 
         .topbar a:hover::after {
@@ -306,7 +290,8 @@
         }
 
         /* =========================================
-           CARTE PRINCIPALE
+           CARTE D'INVITATION
+           FOND DAMASSÉ CONSERVÉ
         ========================================= */
 
         .hero-damask {
@@ -315,9 +300,8 @@
             background-color: var(--burgundy);
             background-image:
                     linear-gradient(
-                            125deg,
-                            rgba(66, 19, 34, 0.25),
-                            rgba(105, 65, 126, 0.22)
+                            rgba(66, 19, 34, .18),
+                            rgba(66, 19, 34, .18)
                     ),
                     url("fond2.14.03.jpg");
             background-size: cover;
@@ -336,7 +320,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: rgba(45, 10, 20, 0.24);
+            background: rgba(45, 10, 20, .32);
             pointer-events: none;
         }
 
@@ -346,17 +330,11 @@
             width: 100%;
             max-width: 860px;
             padding: clamp(34px, 6vw, 75px) 25px;
-            background: linear-gradient(
-                    145deg,
-                    rgba(255, 253, 250, 0.98),
-                    rgba(247, 239, 250, 0.97)
-            );
-            border: 1px solid #c5a9d7;
-            outline: 1px solid rgba(181, 154, 203, 0.55);
+            background: rgba(250, 247, 241, .97);
+            border: 1px solid var(--gold);
+            outline: 1px solid rgba(181, 154, 103, .55);
             outline-offset: -10px;
-            box-shadow:
-                    0 25px 70px rgba(25, 0, 8, 0.30),
-                    0 0 35px rgba(181, 154, 203, 0.12);
+            box-shadow: 0 25px 70px rgba(25, 0, 8, .35);
             border-radius: 4px;
         }
 
@@ -375,7 +353,7 @@
         }
 
         .eyebrow {
-            color: #89649f;
+            color: var(--burgundy);
             font-size: 11px;
             letter-spacing: 4px;
             text-transform: uppercase;
@@ -389,13 +367,12 @@
             font-size: clamp(66px, 12vw, 115px);
             font-weight: 400;
             line-height: 1.1;
-            text-shadow: 0 3px 18px rgba(181, 154, 203, 0.16);
         }
 
         .hero-ampersand {
             display: block;
             margin: -6px 0;
-            color: var(--lilac-dark);
+            color: var(--gold);
             font-family: 'Cormorant Garamond', serif;
             font-size: 38px;
             font-style: italic;
@@ -425,7 +402,7 @@
             justify-content: center;
             gap: 15px;
             margin: 25px auto;
-            color: var(--lilac-dark);
+            color: var(--gold);
         }
 
         .gold-divider::before,
@@ -433,53 +410,45 @@
             content: "";
             width: 50px;
             height: 1px;
-            background: linear-gradient(
-                    to right,
-                    var(--lilac),
-                    var(--gold)
-            );
+            background: var(--gold);
         }
 
         .hero-button {
             display: inline-block;
             margin-top: 28px;
             padding: 15px 30px;
-            background: linear-gradient(110deg, #651f36, #79518d);
+            background: var(--burgundy);
             color: #fff;
             letter-spacing: 2px;
             font-size: 10px;
             text-transform: uppercase;
-            border-radius: 4px;
+            border-radius: 2px;
             transition: all 0.35s ease;
-            box-shadow: 0 5px 20px rgba(101, 31, 54, 0.2);
+            box-shadow: 0 4px 18px rgba(101, 31, 54, 0.25);
         }
 
         .hero-button:hover {
-            background: linear-gradient(110deg, #421322, #65466f);
+            background: var(--burgundy-dark);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(66, 19, 34, 0.30);
+            box-shadow: 0 8px 24px rgba(66, 19, 34, 0.35);
         }
 
         /* =========================================
            COMPTE À REBOURS
+           FOND BORDEAUX CONSERVÉ
         ========================================= */
 
         .countdown-section {
             padding: 75px 20px;
-            background: linear-gradient(
-                    125deg,
-                    #421322 0%,
-                    #54223f 55%,
-                    #65466f 100%
-            );
+            background: var(--burgundy-dark);
             color: var(--ivory);
             text-align: center;
-            border-top: 1px solid #c6a9dc;
-            border-bottom: 1px solid #c6a9dc;
+            border-top: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
         }
 
         .countdown-section .eyebrow {
-            color: #d9bce9;
+            color: var(--lilac);
         }
 
         .countdown-section h2 {
@@ -491,7 +460,7 @@
 
         .countdown-intro {
             margin-top: 6px;
-            color: rgba(250, 247, 241, 0.8);
+            color: rgba(250, 247, 241, .75);
             font-size: 13px;
         }
 
@@ -506,25 +475,21 @@
 
         .countdown-unit {
             padding: 22px 10px;
-            border: 1px solid rgba(226, 201, 243, 0.28);
-            background: rgba(243, 234, 250, 0.07);
-            border-radius: 8px;
+            border: 1px solid var(--gold-subtle);
+            background: rgba(255, 255, 255, .03);
+            border-radius: 6px;
             backdrop-filter: blur(5px);
-            transition:
-                    border-color 0.3s ease,
-                    background 0.3s ease,
-                    transform 0.3s ease;
+            transition: border-color 0.3s ease, transform 0.3s ease;
         }
 
         .countdown-unit:hover {
-            border-color: #d9bce9;
-            background: rgba(243, 234, 250, 0.12);
+            border-color: var(--gold);
             transform: translateY(-3px);
         }
 
         .countdown-number {
             display: block;
-            color: #e2c9f3;
+            color: var(--gold-light);
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(30px, 5.5vw, 50px);
             line-height: 1.05;
@@ -537,18 +502,18 @@
             font-size: 10px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            opacity: 0.9;
+            opacity: 0.85;
         }
 
         .countdown-finished {
             margin-top: 25px;
-            color: #e8d8f4;
+            color: var(--lilac-light);
             font-family: 'Great Vibes', cursive;
             font-size: 38px;
         }
 
         /* =========================================
-           TITRES DE SECTION
+           TITRES DE SECTIONS
         ========================================= */
 
         .section-heading {
@@ -559,7 +524,7 @@
 
         .section-heading h2 {
             margin-top: 10px;
-            color: #5b2949;
+            color: var(--burgundy);
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(38px, 6vw, 56px);
             font-weight: 500;
@@ -574,22 +539,12 @@
 
         /* =========================================
            ÉVÉNEMENTS
+           FOND LILAS / CARTES CONSERVÉES
         ========================================= */
 
         .events-section {
             padding: 95px 7%;
-            background:
-                    radial-gradient(
-                            ellipse at 0% 20%,
-                            rgba(228, 212, 240, 0.38),
-                            transparent 42%
-                    ),
-                    radial-gradient(
-                            ellipse at 100% 85%,
-                            rgba(228, 212, 240, 0.30),
-                            transparent 40%
-                    ),
-                    var(--ivory);
+            background: var(--lilac-background);
         }
 
         .events-panel {
@@ -605,11 +560,11 @@
 
         .event-card {
             background: var(--white);
-            border: 1px solid rgba(181, 154, 203, 0.35);
+            border: 1px solid var(--gold-subtle);
             border-radius: var(--radius);
             padding: 38px 28px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(91, 41, 73, 0.06);
+            box-shadow: 0 10px 30px rgba(66, 19, 34, .04);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
@@ -625,9 +580,7 @@
             background: linear-gradient(
                     90deg,
                     transparent,
-                    var(--lilac),
                     var(--gold),
-                    var(--lilac),
                     transparent
             );
             opacity: 0;
@@ -636,8 +589,8 @@
 
         .event-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 18px 40px rgba(91, 41, 73, 0.12);
-            border-color: var(--lilac);
+            box-shadow: 0 16px 40px rgba(66, 19, 34, .09);
+            border-color: var(--gold);
         }
 
         .event-card:hover::before {
@@ -645,7 +598,7 @@
         }
 
         .event-number {
-            color: #9b7bb0;
+            color: var(--gold);
             font-family: 'Cormorant Garamond', serif;
             font-size: 13px;
             letter-spacing: 2px;
@@ -659,18 +612,16 @@
             width: 58px;
             height: 58px;
             margin: 18px auto;
-            border: 1px solid #dfcde9;
+            border: 1px solid var(--gold-subtle);
             border-radius: 50%;
-            background: #f3eafa;
-            color: #89649f;
+            color: var(--burgundy);
             font-family: 'Cormorant Garamond', serif;
             font-size: 26px;
             transition: all 0.3s ease;
         }
 
         .event-card:hover .event-icon {
-            border-color: var(--lilac);
-            background: #e8d8f4;
+            border-color: var(--gold);
             transform: scale(1.08) rotate(5deg);
         }
 
@@ -683,7 +634,7 @@
 
         .event-date {
             margin-top: 10px;
-            color: #89649f;
+            color: var(--burgundy-light);
             font-size: 11px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -704,8 +655,7 @@
             background: linear-gradient(
                     to right,
                     transparent,
-                    rgba(181, 154, 203, 0.55),
-                    rgba(181, 154, 103, 0.4),
+                    var(--gold-subtle),
                     transparent
             );
         }
@@ -726,7 +676,8 @@
         }
 
         /* =========================================
-           HOMMAGE AUX DISPARUS
+           SOUVENIR
+           FOND LILAS, CARTE PASTEL CONSERVÉE
         ========================================= */
 
         .memorial-container {
@@ -736,20 +687,20 @@
         }
 
         .memorial-card {
-            background: rgba(243, 234, 250, 0.75);
+            background: rgba(244, 238, 247, 0.45);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(181, 154, 203, 0.55);
+            border: 1px solid rgba(181, 154, 103, 0.35);
             border-radius: 12px;
             padding: 26px 24px;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(101, 31, 54, 0.05);
+            box-shadow: 0 8px 25px rgba(101, 31, 54, 0.04);
             transition: all 0.35s ease;
         }
 
         .memorial-card:hover {
-            border-color: var(--lilac);
-            background: rgba(243, 234, 250, 0.95);
+            border-color: rgba(181, 154, 103, 0.65);
+            background: rgba(244, 238, 247, 0.65);
             transform: translateY(-2px);
         }
 
@@ -758,9 +709,7 @@
             display: inline-block;
             margin-bottom: 8px;
             opacity: 0.85;
-            filter: drop-shadow(
-                    0 2px 5px rgba(140, 107, 165, 0.28)
-            );
+            filter: drop-shadow(0 2px 4px rgba(181, 154, 103, 0.3));
         }
 
         .memorial-title {
@@ -782,15 +731,15 @@
 
         /* =========================================
            FORMULAIRE RSVP
+           FOND LILAS, CARTE BLANCHE CONSERVÉE
         ========================================= */
 
         .rsvp-section {
             padding: 95px 20px 110px;
             background: linear-gradient(
-                    180deg,
-                    #f3eafa 0%,
-                    #faf7f8 45%,
-                    #f6eff9 100%
+                    to bottom,
+                    var(--lilac-background),
+                    var(--lilac-background-light)
             );
         }
 
@@ -800,17 +749,15 @@
             background: var(--white);
             border-radius: 16px;
             padding: clamp(32px, 6vw, 65px) clamp(22px, 5vw, 55px);
-            box-shadow:
-                    0 20px 50px rgba(66, 19, 34, 0.07),
-                    0 0 35px rgba(181, 154, 203, 0.12);
-            border: 1px solid rgba(181, 154, 203, 0.42);
+            box-shadow: 0 20px 50px rgba(66, 19, 34, 0.08);
+            border: 1px solid var(--gold-subtle);
             position: relative;
         }
 
         .rsvp-step {
             margin-bottom: 35px;
             padding-bottom: 30px;
-            border-bottom: 1px solid rgba(181, 154, 203, 0.28);
+            border-bottom: 1px solid rgba(181, 154, 103, 0.2);
         }
 
         .rsvp-step:last-of-type {
@@ -831,20 +778,15 @@
         }
 
         .step-badge {
-            flex-shrink: 0;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 30px;
-            height: 30px;
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            background: linear-gradient(
-                    145deg,
-                    #e8d8f4,
-                    #f6effa
-            );
-            border: 1px solid rgba(181, 154, 203, 0.3);
-            color: #79518d;
+            background: var(--lilac-light);
+            color: var(--burgundy);
             font-size: 13px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
@@ -858,7 +800,6 @@
 
         .field-group {
             position: relative;
-            min-width: 0;
         }
 
         .field-group.full-width {
@@ -878,9 +819,9 @@
         .field-input {
             width: 100%;
             padding: 14px 18px;
-            border: 1px solid #dfd3e5;
+            border: 1px solid #dfd3d8;
             border-radius: 8px;
-            background: #fdfbfe;
+            background: #fdfcfb;
             color: var(--text);
             font-size: 14px;
             outline: none;
@@ -889,20 +830,14 @@
 
         .field-input:focus {
             background: #fff;
-            border-color: #a786bf;
-            box-shadow: 0 0 0 3px rgba(181, 154, 203, 0.20);
-        }
-
-        .field-input::placeholder {
-            color: #a79aa9;
+            border-color: var(--burgundy);
+            box-shadow: 0 0 0 3px rgba(101, 31, 54, 0.1);
         }
 
         textarea.field-input {
             resize: vertical;
             min-height: 95px;
         }
-
-        /* Choix de présence */
 
         .presence-cards {
             display: grid;
@@ -914,26 +849,19 @@
         .presence-option {
             position: relative;
             cursor: pointer;
-            border: 1px solid #e3d6eb;
+            border: 1px solid #e2d9dd;
             border-radius: 10px;
             padding: 18px 14px;
             text-align: center;
-            background: #fbf8fd;
+            background: #faf7f9;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             user-select: none;
         }
 
         .presence-option input {
             position: absolute;
-            width: 1px;
-            height: 1px;
             opacity: 0;
             pointer-events: none;
-        }
-
-        .presence-option:focus-within {
-            outline: 2px solid #a786bf;
-            outline-offset: 3px;
         }
 
         .presence-option .option-icon {
@@ -951,23 +879,19 @@
         }
 
         .presence-option:hover {
-            border-color: var(--lilac);
-            background: #f6effa;
+            border-color: var(--gold);
+            background: #fff;
             transform: translateY(-2px);
         }
 
         .presence-option.selected {
-            background: linear-gradient(
-                    145deg,
-                    #f6effa,
-                    #fff
-            );
-            border-color: #a786bf;
-            box-shadow: 0 6px 20px rgba(140, 107, 165, 0.16);
+            background: #fff;
+            border-color: var(--burgundy);
+            box-shadow: 0 6px 20px rgba(101, 31, 54, 0.12);
         }
 
         .presence-option.selected .option-title {
-            color: #79518d;
+            color: var(--burgundy);
             font-weight: 600;
         }
 
@@ -975,12 +899,10 @@
             transform: scale(1.2);
         }
 
-        /* Compteur d'invités */
-
         .guest-counter-wrapper {
             margin-top: 14px;
             padding: 14px 18px;
-            background: #f8f2fb;
+            background: #fbf8fa;
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -997,7 +919,7 @@
             max-height: 110px;
             opacity: 1;
             transform: translateY(0);
-            border: 1px solid #dfcde9;
+            border: 1px solid #ebdbe2;
         }
 
         .guest-counter-label {
@@ -1017,9 +939,9 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            border: 1px solid var(--lilac);
+            border: 1px solid var(--gold);
             background: #fff;
-            color: #79518d;
+            color: var(--burgundy);
             cursor: pointer;
             font-size: 16px;
             display: flex;
@@ -1029,16 +951,9 @@
         }
 
         .counter-btn:hover {
-            background: #79518d;
+            background: var(--burgundy);
             color: #fff;
-            border-color: #79518d;
-        }
-
-        .counter-btn:focus-visible,
-        .submit-btn:focus-visible,
-        .hero-button:focus-visible {
-            outline: 3px solid #c5a9d7;
-            outline-offset: 4px;
+            border-color: var(--burgundy);
         }
 
         .counter-value {
@@ -1047,16 +962,14 @@
             font-weight: 600;
             min-width: 25px;
             text-align: center;
-            color: #79518d;
+            color: var(--burgundy);
         }
-
-        /* Bouton de validation */
 
         .submit-btn {
             width: 100%;
             margin-top: 20px;
             padding: 18px 30px;
-            background: linear-gradient(110deg, #651f36, #79518d);
+            background: var(--burgundy);
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -1066,7 +979,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.35s ease;
-            box-shadow: 0 6px 22px rgba(101, 31, 54, 0.20);
+            box-shadow: 0 6px 22px rgba(101, 31, 54, 0.25);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1074,9 +987,9 @@
         }
 
         .submit-btn:hover {
-            background: linear-gradient(110deg, #421322, #65466f);
+            background: var(--burgundy-dark);
             transform: translateY(-2px);
-            box-shadow: 0 10px 28px rgba(66, 19, 34, 0.30);
+            box-shadow: 0 10px 28px rgba(66, 19, 34, 0.35);
         }
 
         .submit-btn:active {
@@ -1088,17 +1001,12 @@
             margin-top: 25px;
             padding: 20px;
             border-radius: 8px;
-            background: #f3eafa;
-            border-left: 4px solid #a786bf;
+            background: #f7eef3;
+            border-left: 4px solid var(--gold);
             color: var(--burgundy);
             font-size: 13px;
-            line-height: 1.8;
-            overflow-wrap: anywhere;
+            line-height: 1.6;
             animation: fadeInMsg 0.5s ease forwards;
-        }
-
-        .form-message.visible {
-            display: block;
         }
 
         @keyframes fadeInMsg {
@@ -1106,10 +1014,15 @@
                 opacity: 0;
                 transform: translateY(8px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        .form-message.visible {
+            display: block;
         }
 
         .form-note {
@@ -1125,13 +1038,8 @@
 
         .footer {
             padding: 60px 20px 65px;
-            background: linear-gradient(
-                    125deg,
-                    #421322 0%,
-                    #54223f 55%,
-                    #65466f 100%
-            );
-            border-top: 1px solid #c6a9dc;
+            background: var(--burgundy-dark);
+            border-top: 1px solid var(--gold);
             color: var(--ivory);
             text-align: center;
         }
@@ -1146,7 +1054,7 @@
         }
 
         .footer-names {
-            color: #e8d8f4;
+            color: var(--lilac-light);
             font-family: 'Great Vibes', cursive;
             font-size: clamp(42px, 8vw, 62px);
             line-height: 1.3;
@@ -1161,7 +1069,7 @@
 
         .footer .footer-date {
             margin-top: 22px;
-            color: #d9bce9;
+            color: var(--gold);
         }
 
         /* =========================================
@@ -1184,40 +1092,29 @@
         }
 
         @media (max-width: 600px) {
-            html {
-                scroll-padding-top: 70px;
+            .input-grid {
+                grid-template-columns: 1fr;
             }
 
-            .topbar {
-                padding: 15px 5%;
+            .presence-cards {
+                grid-template-columns: 1fr;
             }
 
-            .topbar-brand {
-                font-size: 21px;
+            .rsvp-wrapper {
+                padding: 28px 18px;
             }
 
-            .topbar a {
-                font-size: 9px;
-                letter-spacing: 1px;
-                text-align: right;
-            }
-
-            .hero-damask {
+            .hero {
                 min-height: 75svh;
                 padding: 35px 16px;
             }
 
             .hero-frame {
                 padding: 35px 18px;
-                background: rgba(250, 247, 251, 0.98);
             }
 
             .hero h1 {
                 font-size: clamp(62px, 15vw, 82px);
-            }
-
-            .countdown-section {
-                padding: 60px 14px;
             }
 
             .countdown {
@@ -1234,70 +1131,43 @@
 
             .countdown-label {
                 font-size: 8px;
-                letter-spacing: 0.5px;
+                letter-spacing: .5px;
             }
 
-            .events-section {
-                padding: 60px 18px;
+            .guest-counter-wrapper {
+                align-items: flex-start;
+                flex-direction: column;
             }
 
-            .event-card {
-                padding: 30px 20px;
-            }
-
-            .rsvp-section {
-                padding: 60px 14px 75px;
-            }
-
-            .rsvp-wrapper {
-                padding: 28px 18px;
+            .guest-counter-wrapper.open {
+                max-height: 130px;
             }
 
             .step-title {
                 font-size: 24px;
             }
 
-            .input-grid {
-                grid-template-columns: 1fr;
+            .topbar {
+                padding: 16px 5%;
             }
 
-            .presence-cards {
-                grid-template-columns: 1fr;
+            .topbar-brand {
+                font-size: 21px;
             }
 
-            .guest-counter-wrapper {
-                align-items: flex-start;
-            }
-
-            .guest-counter-label {
-                max-width: 55%;
-            }
-
-            .counter-controls {
-                gap: 8px;
-            }
-
-            .memorial-container {
-                padding: 0;
+            .topbar a {
+                font-size: 9px;
+                letter-spacing: 1px;
             }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
             *,
             *::before,
             *::after {
                 transition-duration: 0.01ms !important;
                 animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-            }
-
-            .reveal {
-                opacity: 1;
-                transform: none;
+                scroll-behavior: auto !important;
             }
         }
     </style>
@@ -1305,14 +1175,8 @@
 
 <body>
 
-<!-- COUVERTURE D'OUVERTURE -->
-<div
-        class="opening-screen"
-        id="openingScreen"
-        role="button"
-        tabindex="0"
-        aria-label="Ouvrir l'invitation de mariage"
->
+<!-- COUVERTURE D'OUVERTURE INTERACTIVE : INCHANGÉE -->
+<div class="opening-screen" id="openingScreen">
     <div class="opening-photo left"></div>
     <div class="opening-photo right"></div>
 
@@ -1346,7 +1210,6 @@
     <!-- CARTE D'INVITATION -->
     <section class="hero hero-damask">
         <div class="hero-frame reveal">
-
             <img
                     src="logos.35.30-removebg-preview.png"
                     alt="Monogramme de Noa et Eitan"
@@ -1376,17 +1239,12 @@
             <a href="#rsvp" class="hero-button">
                 Confirmer ma présence
             </a>
-
         </div>
     </section>
 
     <!-- COMPTE À REBOURS -->
-    <section
-            class="countdown-section"
-            aria-labelledby="countdown-title"
-    >
+    <section class="countdown-section" aria-labelledby="countdown-title">
         <div class="reveal">
-
             <div class="eyebrow">Le grand jour approche</div>
 
             <h2 id="countdown-title">Bientôt réunis</h2>
@@ -1417,28 +1275,19 @@
                 </div>
             </div>
 
-            <p
-                    class="countdown-finished"
-                    id="countdownFinished"
-                    hidden
-            >
+            <p class="countdown-finished" id="countdownFinished" hidden>
                 Le grand jour est arrivé ♡
             </p>
-
         </div>
     </section>
 
-    <!-- ÉVÉNEMENTS -->
+    <!-- ÉVÉNEMENTS : FOND LILAS -->
     <section class="events-section" id="evenements">
         <div class="events-panel">
 
             <div class="section-heading reveal">
-                <div class="eyebrow">
-                    Noa Arous &amp; Eitan Benarroch
-                </div>
-
+                <div class="eyebrow">Noa Arous &amp; Eitan Benarroch</div>
                 <h2>Les moments à partager</h2>
-
                 <p>
                     Deux belles occasions de nous retrouver,
                     entourés de ceux que nous aimons.
@@ -1449,78 +1298,48 @@
 
                 <!-- MAIRIE -->
                 <article class="event-card reveal">
-                    <div class="event-number">
-                        01 — CÉRÉMONIE CIVILE
-                    </div>
-
+                    <div class="event-number">01 — CÉRÉMONIE CIVILE</div>
                     <div class="event-icon" aria-hidden="true">✧</div>
-
                     <h3>La Mairie</h3>
-
-                    <p class="event-date">
-                        Lundi 25 janvier 2027
-                    </p>
-
+                    <p class="event-date">Lundi 25 janvier 2027</p>
                     <p class="event-description">
                         Le début officiel d'une belle histoire.
                     </p>
-
                     <div class="event-divider"></div>
-
                     <div class="event-location">
                         <strong>Mairie de Charenton-le-Pont</strong>
                         <span>Charenton-le-Pont, France</span>
-                        <span>
-                            L'horaire sera communiqué prochainement.
-                        </span>
+                        <span>L'horaire sera communiqué prochainement.</span>
                     </div>
                 </article>
 
                 <!-- HOUPPA -->
                 <article class="event-card reveal">
-                    <div class="event-number">
-                        02 — CÉLÉBRATION
-                    </div>
-
+                    <div class="event-number">02 — CÉLÉBRATION</div>
                     <div class="event-icon" aria-hidden="true">♡</div>
-
                     <h3>Houppa &amp; Soirée</h3>
-
-                    <p class="event-date">
-                        Mercredi 27 janvier 2027
-                    </p>
-
+                    <p class="event-date">Mercredi 27 janvier 2027</p>
                     <p class="event-description">
                         Une cérémonie pleine d'émotion,
                         suivie d'une soirée inoubliable.
                     </p>
-
                     <div class="event-divider"></div>
-
                     <div class="event-location">
                         <strong>La Houppa</strong>
-                        <span>
-                            Le lieu sera communiqué prochainement.
-                        </span>
-                        <span>
-                            Les horaires seront précisés ultérieurement.
-                        </span>
+                        <span>Le lieu sera communiqué prochainement.</span>
+                        <span>Les horaires seront précisés ultérieurement.</span>
                     </div>
                 </article>
 
             </div>
 
-            <!-- HOMMAGE -->
+            <!-- SOUVENIR -->
             <div class="memorial-container reveal">
                 <div class="memorial-card">
-                    <span class="memorial-icon" aria-hidden="true">
-                        🕯️
-                    </span>
-
+                    <span class="memorial-icon" aria-hidden="true">🕯️</span>
                     <h4 class="memorial-title">
                         Une pensée pour nos disparus
                     </h4>
-
                     <p class="memorial-text">
                         Présents dans nos cœurs et dans nos prières
                         en ce jour si précieux.
@@ -1531,20 +1350,13 @@
         </div>
     </section>
 
-    <!-- FORMULAIRE RSVP -->
+    <!-- FORMULAIRE RSVP : FOND LILAS, CARTE BLANCHE -->
     <section class="rsvp-section" id="rsvp">
         <div class="rsvp-wrapper reveal">
 
-            <div
-                    class="section-heading"
-                    style="margin-bottom: 35px;"
-            >
-                <div class="eyebrow">
-                    Votre présence nous honore
-                </div>
-
+            <div class="section-heading" style="margin-bottom: 35px;">
+                <div class="eyebrow">Votre présence nous honore</div>
                 <h2>Confirmer votre présence</h2>
-
                 <p>
                     Merci de nous répondre avant le 15 décembre 2026
                     pour nous aider à préparer cet événement.
@@ -1561,20 +1373,17 @@
                     </h3>
 
                     <div class="input-grid">
-
                         <div class="field-group">
                             <label class="field-label" for="nom">
                                 Nom &amp; Prénom *
                             </label>
-
                             <input
                                     class="field-input"
                                     id="nom"
                                     name="nom"
                                     type="text"
-                                    placeholder="Ex : Jean Dupont"
+                                    placeholder="Ex: Jean Dupont"
                                     required
-                                    maxlength="120"
                                     autocomplete="name"
                             >
                         </div>
@@ -1583,19 +1392,16 @@
                             <label class="field-label" for="email">
                                 Adresse e-mail *
                             </label>
-
                             <input
                                     class="field-input"
                                     id="email"
                                     name="email"
                                     type="email"
-                                    placeholder="Ex : jean.dupont@email.fr"
+                                    placeholder="Ex: jean.dupont@email.fr"
                                     required
-                                    maxlength="254"
                                     autocomplete="email"
                             >
                         </div>
-
                     </div>
                 </div>
 
@@ -1607,76 +1413,49 @@
                     </h3>
 
                     <div class="presence-cards">
-
-                        <label
-                                class="presence-option"
-                                data-target="mairieCounter"
-                        >
+                        <label class="presence-option" data-target="mairieCounter">
                             <input
                                     type="radio"
                                     name="mairiePresence"
                                     value="oui"
                                     required
                             >
-
                             <span class="option-icon">✨</span>
-
-                            <span class="option-title">
-                                Présent(e) avec joie
-                            </span>
+                            <span class="option-title">Présent(e) avec joie</span>
                         </label>
 
-                        <label
-                                class="presence-option"
-                                data-target="mairieCounter"
-                        >
+                        <label class="presence-option" data-target="mairieCounter">
                             <input
                                     type="radio"
                                     name="mairiePresence"
                                     value="non"
                                     required
                             >
-
                             <span class="option-icon">💌</span>
-
-                            <span class="option-title">
-                                Empêché(e) avec regret
-                            </span>
+                            <span class="option-title">Empêché(e) avec regret</span>
                         </label>
-
                     </div>
 
-                    <div
-                            class="guest-counter-wrapper"
-                            id="mairieCounter"
-                            aria-hidden="true"
-                    >
+                    <div class="guest-counter-wrapper" id="mairieCounter">
                         <span class="guest-counter-label">
                             Nombre de personnes pour la Mairie :
                         </span>
 
                         <div class="counter-controls">
-
                             <button
                                     type="button"
                                     class="counter-btn"
-                                    data-counter="mairieGuests"
-                                    data-change="-1"
                                     aria-label="Retirer une personne pour la mairie"
+                                    onclick="updateGuestCount('mairieGuests', -1)"
                             >−</button>
 
-                            <span
-                                    class="counter-value"
-                                    id="mairieGuestsDisplay"
-                                    aria-live="polite"
-                            >1</span>
+                            <span class="counter-value" id="mairieGuestsDisplay">1</span>
 
                             <button
                                     type="button"
                                     class="counter-btn"
-                                    data-counter="mairieGuests"
-                                    data-change="1"
                                     aria-label="Ajouter une personne pour la mairie"
+                                    onclick="updateGuestCount('mairieGuests', 1)"
                             >+</button>
 
                             <input
@@ -1685,7 +1464,6 @@
                                     id="mairieGuests"
                                     value="1"
                             >
-
                         </div>
                     </div>
                 </div>
@@ -1698,76 +1476,49 @@
                     </h3>
 
                     <div class="presence-cards">
-
-                        <label
-                                class="presence-option"
-                                data-target="houppaCounter"
-                        >
+                        <label class="presence-option" data-target="houppaCounter">
                             <input
                                     type="radio"
                                     name="houppaPresence"
                                     value="oui"
                                     required
                             >
-
                             <span class="option-icon">🥂</span>
-
-                            <span class="option-title">
-                                Présent(e) avec joie
-                            </span>
+                            <span class="option-title">Présent(e) avec joie</span>
                         </label>
 
-                        <label
-                                class="presence-option"
-                                data-target="houppaCounter"
-                        >
+                        <label class="presence-option" data-target="houppaCounter">
                             <input
                                     type="radio"
                                     name="houppaPresence"
                                     value="non"
                                     required
                             >
-
                             <span class="option-icon">💌</span>
-
-                            <span class="option-title">
-                                Empêché(e) avec regret
-                            </span>
+                            <span class="option-title">Empêché(e) avec regret</span>
                         </label>
-
                     </div>
 
-                    <div
-                            class="guest-counter-wrapper"
-                            id="houppaCounter"
-                            aria-hidden="true"
-                    >
+                    <div class="guest-counter-wrapper" id="houppaCounter">
                         <span class="guest-counter-label">
                             Nombre de personnes pour la Houppa &amp; Soirée :
                         </span>
 
                         <div class="counter-controls">
-
                             <button
                                     type="button"
                                     class="counter-btn"
-                                    data-counter="houppaGuests"
-                                    data-change="-1"
-                                    aria-label="Retirer une personne pour la Houppa"
+                                    aria-label="Retirer une personne pour la houppa"
+                                    onclick="updateGuestCount('houppaGuests', -1)"
                             >−</button>
 
-                            <span
-                                    class="counter-value"
-                                    id="houppaGuestsDisplay"
-                                    aria-live="polite"
-                            >1</span>
+                            <span class="counter-value" id="houppaGuestsDisplay">1</span>
 
                             <button
                                     type="button"
                                     class="counter-btn"
-                                    data-counter="houppaGuests"
-                                    data-change="1"
-                                    aria-label="Ajouter une personne pour la Houppa"
+                                    aria-label="Ajouter une personne pour la houppa"
+                                    onclick="updateGuestCount('houppaGuests', 1)"
                             >+</button>
 
                             <input
@@ -1776,7 +1527,6 @@
                                     id="houppaGuests"
                                     value="1"
                             >
-
                         </div>
                     </div>
                 </div>
@@ -1797,7 +1547,6 @@
                                 class="field-input"
                                 id="message"
                                 name="message"
-                                maxlength="2000"
                                 placeholder="Un mot doux, un régime particulier..."
                         ></textarea>
                     </div>
@@ -1805,7 +1554,7 @@
 
                 <button class="submit-btn" type="submit">
                     <span>Confirmer ma réponse</span>
-                    <span aria-hidden="true">→</span>
+                    <span>→</span>
                 </button>
 
                 <div
@@ -1820,7 +1569,6 @@
                 </p>
 
             </form>
-
         </div>
     </section>
 
@@ -1828,7 +1576,6 @@
 
 <!-- PIED DE PAGE -->
 <footer class="footer">
-
     <img
             src="logos.35.30-removebg-preview.png"
             alt="Monogramme de Noa et Eitan"
@@ -1837,48 +1584,34 @@
     >
 
     <div class="footer-names">Noa &amp; Eitan</div>
-
     <div class="gold-divider">✧</div>
-
     <p>Avec tout notre amour</p>
     <p class="footer-date">Janvier 2027</p>
-
 </footer>
 
 <script>
     "use strict";
 
     /* =========================================
-       OUVERTURE DE L'INVITATION
+       ANIMATION D'OUVERTURE
     ========================================= */
 
     const openingScreen = document.getElementById("openingScreen");
     let isOpening = false;
 
-    function openInvitation() {
-        if (!openingScreen || isOpening) return;
-
-        isOpening = true;
-        openingScreen.classList.add("opening");
-
-        window.setTimeout(() => {
-            openingScreen.remove();
-            document.body.style.overflow = "auto";
-            initScrollObserver();
-        }, 3600);
-    }
-
     if (openingScreen) {
-        openingScreen.addEventListener("click", openInvitation);
+        openingScreen.addEventListener("click", () => {
+            if (isOpening) return;
 
-        openingScreen.addEventListener("keydown", (event) => {
-            if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                openInvitation();
-            }
+            isOpening = true;
+            openingScreen.classList.add("opening");
+
+            window.setTimeout(() => {
+                openingScreen.remove();
+                document.body.style.overflow = "auto";
+                initScrollObserver();
+            }, 3600);
         });
-    } else {
-        document.body.style.overflow = "auto";
     }
 
     /* =========================================
@@ -1888,43 +1621,35 @@
     function initScrollObserver() {
         const reveals = document.querySelectorAll(".reveal");
 
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            reveals.forEach((element) => {
-                element.classList.add("active");
-            });
-            return;
-        }
-
         if (!("IntersectionObserver" in window)) {
-            reveals.forEach((element) => {
-                element.classList.add("active");
-            });
+            reveals.forEach(element => element.classList.add("active"));
             return;
         }
 
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach((entry) => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("active");
-                    obs.unobserve(entry.target);
+                    observer.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.12
+            threshold: 0.15
         });
 
-        reveals.forEach((element) => observer.observe(element));
+        reveals.forEach(element => observer.observe(element));
     }
 
     if (!openingScreen) {
+        document.body.style.overflow = "auto";
         initScrollObserver();
     }
 
     /* =========================================
-       CHOIX DE PRÉSENCE
+       SÉLECTION DES RÉPONSES RSVP
     ========================================= */
 
-    document.querySelectorAll(".presence-option").forEach((card) => {
+    document.querySelectorAll(".presence-option").forEach(card => {
         card.addEventListener("click", () => {
             const input = card.querySelector('input[type="radio"]');
 
@@ -1934,23 +1659,22 @@
 
             const parent = card.closest(".presence-cards");
 
-            if (parent) {
-                parent.querySelectorAll(".presence-option").forEach((item) => {
-                    item.classList.remove("selected");
-                });
-            }
+            parent.querySelectorAll(".presence-option").forEach(option => {
+                option.classList.remove("selected");
+            });
 
             card.classList.add("selected");
 
-            const targetId = card.dataset.target;
+            const targetId = card.getAttribute("data-target");
             const targetWrapper = document.getElementById(targetId);
 
-            if (!targetWrapper) return;
-
-            const isPresent = input.value === "oui";
-
-            targetWrapper.classList.toggle("open", isPresent);
-            targetWrapper.setAttribute("aria-hidden", String(!isPresent));
+            if (targetWrapper) {
+                if (input.value === "oui") {
+                    targetWrapper.classList.add("open");
+                } else {
+                    targetWrapper.classList.remove("open");
+                }
+            }
         });
     });
 
@@ -1964,92 +1688,133 @@
 
         if (!input || !display) return;
 
-        const current = Number.parseInt(input.value, 10) || 1;
-        const next = Math.max(1, Math.min(8, current + change));
+        let current = parseInt(input.value, 10) || 1;
 
-        input.value = String(next);
-        display.textContent = String(next);
+        current = Math.max(1, Math.min(8, current + change));
+
+        input.value = current;
+        display.textContent = current;
     }
 
-    document.querySelectorAll("[data-counter]").forEach((button) => {
-        button.addEventListener("click", () => {
-            const inputId = button.dataset.counter;
-            const change = Number.parseInt(button.dataset.change, 10);
-
-            if (!inputId || !Number.isFinite(change)) return;
-
-            updateGuestCount(inputId, change);
-        });
-    });
-
     /* =========================================
-       COMPTE À REBOURS
-       Heure de Paris : 25 janvier 2027 à minuit
+       COMPTE À REBOURS — HEURE DE PARIS
     ========================================= */
 
-    const weddingTarget = new Date(
-        "2027-01-25T00:00:00+01:00"
-    ).getTime();
+    const parisFormatter = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Paris",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hourCycle: "h23"
+    });
 
-    const countdownElements = {
-        days: document.getElementById("days"),
-        hours: document.getElementById("hours"),
-        minutes: document.getElementById("minutes"),
-        seconds: document.getElementById("seconds"),
-        finished: document.getElementById("countdownFinished")
-    };
+    function getParisParts(date) {
+        return Object.fromEntries(
+            parisFormatter.formatToParts(date)
+                .filter(part => part.type !== "literal")
+                .map(part => [part.type, Number(part.value)])
+        );
+    }
+
+    function getParisTimestamp(year, month, day) {
+        const target = Date.UTC(year, month - 1, day);
+        let guess = target;
+
+        for (let i = 0; i < 3; i++) {
+            const parts = getParisParts(new Date(guess));
+
+            const represented = Date.UTC(
+                parts.year,
+                parts.month - 1,
+                parts.day,
+                parts.hour,
+                parts.minute,
+                parts.second
+            );
+
+            guess += target - represented;
+        }
+
+        return guess;
+    }
+
+    function getParisNowTimestamp() {
+        const parts = getParisParts(new Date());
+
+        return Date.UTC(
+            parts.year,
+            parts.month - 1,
+            parts.day,
+            parts.hour,
+            parts.minute,
+            parts.second
+        );
+    }
+
+    const weddingTarget = getParisTimestamp(2027, 1, 25);
 
     function updateCountdown() {
-        const now = Date.now();
+        const daysElement = document.getElementById("days");
+        const hoursElement = document.getElementById("hours");
+        const minutesElement = document.getElementById("minutes");
+        const secondsElement = document.getElementById("seconds");
+        const finishedElement = document.getElementById("countdownFinished");
 
-        if (now >= weddingTarget) {
-            countdownElements.days.textContent = "000";
-            countdownElements.hours.textContent = "00";
-            countdownElements.minutes.textContent = "00";
-            countdownElements.seconds.textContent = "00";
-            countdownElements.finished.hidden = false;
+        if (
+            !daysElement ||
+            !hoursElement ||
+            !minutesElement ||
+            !secondsElement ||
+            !finishedElement
+        ) {
             return;
         }
 
-        const diff = weddingTarget - now;
+        const now = getParisNowTimestamp();
+
+        if (now >= weddingTarget) {
+            daysElement.textContent = "000";
+            hoursElement.textContent = "00";
+            minutesElement.textContent = "00";
+            secondsElement.textContent = "00";
+            finishedElement.hidden = false;
+            return;
+        }
+
+        let diff = weddingTarget - now;
 
         const days = Math.floor(diff / 86400000);
-        const hours = Math.floor((diff % 86400000) / 3600000);
-        const minutes = Math.floor((diff % 3600000) / 60000);
-        const seconds = Math.floor((diff % 60000) / 1000);
+        diff %= 86400000;
 
-        countdownElements.days.textContent =
-            String(days).padStart(3, "0");
+        const hours = Math.floor(diff / 3600000);
+        diff %= 3600000;
 
-        countdownElements.hours.textContent =
-            String(hours).padStart(2, "0");
+        const minutes = Math.floor(diff / 60000);
+        diff %= 60000;
 
-        countdownElements.minutes.textContent =
-            String(minutes).padStart(2, "0");
+        const seconds = Math.floor(diff / 1000);
 
-        countdownElements.seconds.textContent =
-            String(seconds).padStart(2, "0");
+        daysElement.textContent = String(days).padStart(3, "0");
+        hoursElement.textContent = String(hours).padStart(2, "0");
+        minutesElement.textContent = String(minutes).padStart(2, "0");
+        secondsElement.textContent = String(seconds).padStart(2, "0");
     }
 
     updateCountdown();
-
-    const countdownInterval = window.setInterval(() => {
-        updateCountdown();
-
-        if (Date.now() >= weddingTarget) {
-            window.clearInterval(countdownInterval);
-        }
-    }, 1000);
+    window.setInterval(updateCountdown, 1000);
 
     /* =========================================
-       FORMULAIRE RSVP — APERÇU LOCAL
+       SOUMISSION DU FORMULAIRE RSVP
     ========================================= */
 
     const rsvpForm = document.getElementById("rsvpForm");
     const formMessage = document.getElementById("formMessage");
 
     if (rsvpForm && formMessage) {
-        rsvpForm.addEventListener("submit", (event) => {
+        rsvpForm.addEventListener("submit", function (event) {
             event.preventDefault();
 
             if (!rsvpForm.reportValidity()) return;
@@ -2057,59 +1822,60 @@
             const data = new FormData(rsvpForm);
 
             const nom = String(data.get("nom") || "").trim();
-            const email = String(data.get("email") || "").trim();
-
             const mairiePresence = data.get("mairiePresence");
             const houppaPresence = data.get("houppaPresence");
 
-            const mairieGuests = data.get("mairieGuests");
-            const houppaGuests = data.get("houppaGuests");
-
             const mairieText = mairiePresence === "oui"
-                ? `Présent(e) (${mairieGuests} pers.)`
+                ? `Présent(e) (${data.get("mairieGuests")} pers.)`
                 : "Absent(e)";
 
             const houppaText = houppaPresence === "oui"
-                ? `Présent(e) (${houppaGuests} pers.)`
+                ? `Présent(e) (${data.get("houppaGuests")} pers.)`
                 : "Absent(e)";
 
             /*
-             * Utilisation de textContent pour éviter d'interpréter
-             * les saisies de l'utilisateur comme du HTML.
+             * Utilisation de textContent pour le nom
+             * afin d'éviter d'interpréter le texte saisi
+             * par un invité comme du HTML.
              */
 
             formMessage.replaceChildren();
 
-            const title = document.createElement("strong");
-            title.textContent = `Merci ${nom} !`;
+            const thankYou = document.createElement("strong");
+            thankYou.textContent = `Merci ${nom} !`;
 
-            const intro = document.createElement("p");
-            intro.textContent =
-                "Voici le récapitulatif de votre réponse :";
-
-            const emailLine = document.createElement("p");
-            emailLine.textContent = `E-mail : ${email}`;
-
-            const mairieLine = document.createElement("p");
-            mairieLine.textContent = `Mairie : ${mairieText}`;
-
-            const houppaLine = document.createElement("p");
-            houppaLine.textContent = `Houppa & Soirée : ${houppaText}`;
-
-            const note = document.createElement("p");
-            note.textContent =
-                "Attention : cette réponse est uniquement affichée " +
-                "dans votre navigateur. Elle n'a pas encore été envoyée " +
-                "aux mariés.";
-
-            formMessage.append(
-                title,
-                intro,
-                emailLine,
-                mairieLine,
-                houppaLine,
-                note
+            formMessage.appendChild(thankYou);
+            formMessage.appendChild(
+                document.createTextNode(
+                    " Votre réponse a été préparée :"
+                )
             );
+
+            function addLine(label, value) {
+                formMessage.appendChild(document.createElement("br"));
+
+                const strong = document.createElement("strong");
+                strong.textContent = label;
+
+                formMessage.appendChild(document.createTextNode("• "));
+                formMessage.appendChild(strong);
+                formMessage.appendChild(
+                    document.createTextNode(" " + value)
+                );
+            }
+
+            addLine("Mairie :", mairieText);
+            addLine("Houppa & Soirée :", houppaText);
+
+            formMessage.appendChild(document.createElement("br"));
+            formMessage.appendChild(document.createElement("br"));
+
+            const note = document.createElement("em");
+            note.textContent =
+                "Attention : cette réponse est uniquement affichée sur cette page. " +
+                "Aucune donnée n'est envoyée ni enregistrée sur un serveur.";
+
+            formMessage.appendChild(note);
 
             formMessage.classList.add("visible");
 
@@ -2123,3 +1889,4 @@
 
 </body>
 </html>
+```
