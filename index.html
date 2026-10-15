@@ -22,6 +22,8 @@
             --gold: #b59a67;
             --gold-light: #d6be90;
             --gold-subtle: rgba(181, 154, 103, 0.25);
+            --beige: #cdb990;
+            --card-burgundy: #3f0f1e;
             --text: #44333b;
             --muted: #897b80;
             --white: #fffdfb;
@@ -61,7 +63,7 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* =========================================
-           COUVERTURE D'OUVERTURE
+           COUVERTURE D'OUVERTURE (AGRANDIE)
         ========================================= */
         .opening-screen {
             position: fixed;
@@ -110,7 +112,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: clamp(34px, 7vh, 75px) 20px;
+            padding: clamp(38px, 7.5vh, 80px) 24px;
             text-align: center;
             color: #ebd09c;
             pointer-events: none;
@@ -119,25 +121,25 @@
 
         .cover-top, .cover-bottom {
             width: 100%;
-            max-width: 600px;
+            max-width: 680px;
             text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
         }
 
         .cover-kicker {
-            font-size: clamp(10px, 1.5vw, 13px);
+            font-size: clamp(13px, 2vw, 17px);
             font-weight: 500;
-            letter-spacing: 0.32em;
+            letter-spacing: 0.35em;
             text-transform: uppercase;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
-        .cover-title { font-size: clamp(28px, 5vw, 48px); line-height: 1.1; font-weight: 400; letter-spacing: 0.04em; }
-        .cover-subtitle { margin-top: 13px; font-size: clamp(14px, 2.2vw, 20px); font-weight: 300; letter-spacing: 0.10em; }
-        .cover-divider { width: 65px; height: 1px; margin: 22px auto 0; background: #d8b475; }
-        .cover-date { font-size: clamp(24px, 4vw, 36px); font-weight: 400; letter-spacing: 0.06em; }
+        .cover-title { font-size: clamp(38px, 6.8vw, 66px); line-height: 1.1; font-weight: 400; letter-spacing: 0.04em; }
+        .cover-subtitle { margin-top: 15px; font-size: clamp(19px, 3.2vw, 28px); font-weight: 300; letter-spacing: 0.10em; }
+        .cover-divider { width: 75px; height: 1px; margin: 26px auto 0; background: #d8b475; }
+        .cover-date { font-size: clamp(32px, 5.5vw, 48px); font-weight: 400; letter-spacing: 0.06em; }
         .cover-hint {
-            margin-top: 20px;
-            font-size: 11px;
-            letter-spacing: 0.22em;
+            margin-top: 22px;
+            font-size: 15px;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
             opacity: 0.9;
             animation: pulseHint 2.4s ease-in-out infinite;
@@ -171,13 +173,13 @@
         }
         .topbar-brand {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
+            font-size: 26px;
             letter-spacing: 3px;
             color: var(--lilac-light);
         }
         .topbar a {
             color: var(--ivory);
-            font-size: 10px;
+            font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
             position: relative;
@@ -226,45 +228,75 @@
             pointer-events: none;
         }
 
+        /* Carte bordeaux : fond uni, cadre et ornements or */
         .hero-frame {
             position: relative;
             z-index: 1;
             width: 100%;
             max-width: 860px;
-            padding: clamp(34px, 6vw, 75px) 25px;
-            background: rgba(250, 247, 241, .97);
+            padding: clamp(46px, 7vw, 85px) clamp(22px, 5vw, 60px);
+            background:
+                    radial-gradient(ellipse at 50% 35%, rgba(120, 38, 64, .35), transparent 65%),
+                    linear-gradient(165deg, #4b1426 0%, var(--card-burgundy) 100%);
             border: 1px solid var(--gold);
-            outline: 1px solid rgba(181, 154, 103, .55);
-            outline-offset: -10px;
-            box-shadow: 0 25px 70px rgba(25, 0, 8, .35);
-            border-radius: 4px;
+            outline: 1px solid rgba(181, 154, 103, .5);
+            outline-offset: -11px;
+            box-shadow: 0 25px 70px rgba(15, 0, 5, .55);
+            border-radius: 3px;
+            overflow: hidden;
         }
+
+        /* Ornements de coin (bordure.png) : haut-droite et bas-gauche */
+        .hero-frame::before,
+        .hero-frame::after,
+        .event-card::before,
+        .event-card::after {
+            content: "";
+            position: absolute;
+            width: clamp(78px, 15vw, 135px);
+            aspect-ratio: 221 / 210;
+            background: url("ornement.png") center / contain no-repeat;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .hero-frame::before { top: 14px; right: 14px; transform: scaleY(-1); }
+        .hero-frame::after  { bottom: 14px; left: 14px; transform: scaleX(-1); }
+
+        /* Le contenu passe au-dessus des ornements */
+        .hero-frame > * { position: relative; z-index: 1; }
 
         .hero-logo,
         .footer-logo {
             display: block;
-            width: clamp(85px, 13vw, 125px);
-            max-height: 125px;
+            width: clamp(95px, 15vw, 140px);
+            max-height: 140px;
             object-fit: contain;
             margin: 0 auto 22px;
         }
-        .hero-logo { mix-blend-mode: multiply; transition: transform 0.4s ease; }
-        .hero-logo:hover { transform: scale(1.04); }
+        .hero-logo {
+            width: clamp(120px, 24vw, 185px);
+            max-height: 262px;
+            margin-bottom: 30px;
+            transition: transform 0.4s ease;
+        }
+        .hero-logo:hover { transform: scale(1.03); }
         .footer-logo { margin-bottom: 16px; mix-blend-mode: screen; }
 
         .eyebrow {
             color: var(--burgundy);
-            font-size: 11px;
+            font-size: 13px;
             letter-spacing: 4px;
             text-transform: uppercase;
             font-weight: 500;
         }
 
+        .hero .eyebrow { color: var(--gold-light); }
+
         .hero h1 {
             margin-top: 18px;
-            color: var(--burgundy);
+            color: var(--ivory);
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(66px, 12vw, 115px);
+            font-size: clamp(72px, 13vw, 125px);
             font-weight: 400;
             line-height: 1.1;
         }
@@ -273,21 +305,21 @@
             margin: -6px 0;
             color: var(--gold);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 38px;
+            font-size: 42px;
             font-style: italic;
         }
         .hero-subtitle {
-            max-width: 540px;
+            max-width: 580px;
             margin: 24px auto 0;
-            color: var(--text);
+            color: rgba(250, 247, 241, .9);
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(20px, 3.2vw, 27px);
+            font-size: clamp(22px, 3.5vw, 30px);
             line-height: 1.5;
         }
         .hero-date {
             margin-top: 20px;
-            color: var(--burgundy);
-            font-size: 12px;
+            color: var(--gold-light);
+            font-size: 14px;
             letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 500;
@@ -311,20 +343,21 @@
         .hero-button {
             display: inline-block;
             margin-top: 28px;
-            padding: 15px 30px;
-            background: var(--burgundy);
-            color: #fff;
+            padding: 16px 34px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold-light);
             letter-spacing: 2px;
-            font-size: 10px;
+            font-size: 11px;
             text-transform: uppercase;
             border-radius: 2px;
             transition: all 0.35s ease;
-            box-shadow: 0 4px 18px rgba(101, 31, 54, 0.25);
         }
         .hero-button:hover {
-            background: var(--burgundy-dark);
+            background: var(--gold);
+            color: var(--card-burgundy);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(66, 19, 34, 0.35);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
         }
 
         /* =========================================
@@ -341,9 +374,9 @@
             margin-top: 12px;
             font-family: 'Cormorant Garamond', serif;
             font-weight: 400;
-            font-size: clamp(35px, 5vw, 52px);
+            font-size: clamp(38px, 5.5vw, 56px);
         }
-        .countdown-intro { margin-top: 8px; color: rgba(250,247,241,.75); font-size: 12px; }
+        .countdown-intro { margin-top: 8px; color: rgba(250,247,241,.75); font-size: 13px; }
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -362,7 +395,7 @@
             display: block;
             color: var(--gold);
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(22px, 5vw, 52px);
+            font-size: clamp(24px, 5.5vw, 56px);
             line-height: 1.1;
             white-space: nowrap;
         }
@@ -370,7 +403,7 @@
             display: block;
             margin-top: 9px;
             color: var(--ivory);
-            font-size: clamp(6px, 1.5vw, 9px);
+            font-size: clamp(7px, 1.6vw, 10px);
             letter-spacing: clamp(.2px, .4vw, 2px);
             text-transform: uppercase;
             white-space: nowrap;
@@ -379,25 +412,25 @@
             margin-top: 20px;
             color: var(--lilac);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
+            font-size: 26px;
         }
 
         /* =========================================
-           ÉVÉNEMENTS & FORMULAIRE (Bordures strictement égales & 1 fleur de fond par carte)
+           ÉVÉNEMENTS & FORMULAIRE
         ========================================= */
         .events-section { padding: 95px 7%; background: var(--lilac-light); }
 
-        .section-heading { max-width: 680px; margin: 0 auto 55px; text-align: center; }
+        .section-heading { max-width: 720px; margin: 0 auto 55px; text-align: center; }
         .section-heading .eyebrow { color: var(--burgundy); }
         .section-heading h2 {
             margin-top: 12px;
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(38px, 5vw, 58px);
+            font-size: clamp(40px, 5.5vw, 62px);
             line-height: 1.15;
             font-weight: 500;
             color: var(--burgundy);
         }
-        .section-heading p { margin-top: 14px; font-size: 12px; color: var(--muted); }
+        .section-heading p { margin-top: 14px; font-size: 13px; color: var(--muted); }
 
         .events-grid {
             display: grid;
@@ -408,7 +441,6 @@
             margin: 0 auto;
         }
 
-        /* Cadre principal rigoureusement égal pour toutes les cartes et blocs */
         .event-card, .rsvp-container {
             position: relative;
             background: var(--white);
@@ -418,8 +450,21 @@
             overflow: hidden;
         }
 
-        /* Une seule fleur de taille moyenne en arrière-plan centré par carte */
-        .event-card::before, .rsvp-container::before {
+        /* Cartes d'événement : blanc pur, cadre beige */
+        .event-card {
+            background: #fff;
+            border: 1px solid var(--beige);
+            border-radius: 3px;
+            box-shadow: 0 18px 50px rgba(66, 19, 34, 0.12);
+        }
+
+        /* Ornements beige (bordure.png adoucie) : haut-gauche et bas-droite */
+        .event-card::before,
+        .event-card::after { width: clamp(70px, 10.5vw, 108px); filter: saturate(.8) brightness(1.1) contrast(.95); opacity: .9; }
+        .event-card::before { top: 12px; left: 12px; transform: rotate(180deg); }
+        .event-card::after  { bottom: 12px; right: 12px; }
+
+        .rsvp-container::before {
             content: "";
             position: absolute;
             inset: 0;
@@ -443,36 +488,35 @@
             outline-offset: -6px;
             height: 100%;
         }
+        .event-inner {
+            border-color: rgba(205, 185, 144, 0.7);
+            outline-color: rgba(205, 185, 144, 0.3);
+            padding: 48px clamp(34px, 6vw, 60px);
+        }
 
         .event-inner {
             position: relative;
             z-index: 1;
         }
 
-        .event-number { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 15px; letter-spacing: 3px; text-align: center; }
-        .event-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            margin: 18px auto;
-            border: 1px solid var(--gold);
-            border-radius: 50%;
-            color: var(--burgundy);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
-            background: var(--white);
+        .event-number { color: #b09a70; font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: 3px; text-align: center; }
+        .event-logo {
+            display: block;
+            width: clamp(78px, 14vw, 105px);
+            height: auto;
+            margin: 20px auto 22px;
             position: relative;
             z-index: 1;
         }
         .event-card h3 {
             text-align: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 34px;
+            font-size: clamp(28px, 4vw, 36px);
             font-weight: 500;
-            line-height: 1.2;
-            color: var(--burgundy);
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            line-height: 1.25;
+            color: var(--card-burgundy);
             position: relative;
             z-index: 1;
         }
@@ -480,7 +524,7 @@
             margin-top: 12px;
             text-align: center;
             color: var(--burgundy);
-            font-size: 10px;
+            font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
             position: relative;
@@ -490,21 +534,21 @@
             margin: 14px 0 22px;
             text-align: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
+            font-size: 20px;
             color: var(--muted);
             position: relative;
             z-index: 1;
         }
-        .event-divider { height: 1px; margin: 22px 0; background: linear-gradient(to right, transparent, var(--gold), transparent); position: relative; z-index: 1; }
+        .event-divider { height: 1px; margin: 22px 0; background: linear-gradient(to right, transparent, var(--beige), transparent); position: relative; z-index: 1; }
         .event-location { margin-bottom: 10px; text-align: center; position: relative; z-index: 1; }
         .event-location strong {
             display: block;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 600;
             color: var(--burgundy);
         }
-        .event-location span { display: block; margin-top: 4px; font-size: 11px; color: var(--muted); }
+        .event-location span { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); }
 
         /* =========================================
            RSVP SECTION
@@ -514,11 +558,11 @@
             background: radial-gradient(circle at 50% 0%, rgba(184,163,199,0.3), var(--ivory) 70%);
         }
         .rsvp-container {
-            max-width: 640px;
+            max-width: 660px;
             margin: 0 auto;
         }
         .rsvp-container .section-heading { margin-bottom: 35px; position: relative; z-index: 1; }
-        .rsvp-container .section-heading h2 { font-size: clamp(36px, 5vw, 48px); font-family: 'Great Vibes', cursive; color: var(--burgundy); font-weight: 400; }
+        .rsvp-container .section-heading h2 { font-size: clamp(40px, 5.5vw, 52px); font-family: 'Great Vibes', cursive; color: var(--burgundy); font-weight: 400; }
 
         .rsvp-form { display: flex; flex-direction: column; gap: 30px; position: relative; z-index: 1; }
 
@@ -531,12 +575,12 @@
 
         .name-field {
             width: 100%;
-            padding: 16px 20px;
+            padding: 18px 22px;
             border: 1px solid rgba(181, 154, 103, 0.5);
             background: var(--lilac-light);
             color: var(--burgundy);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
+            font-size: 24px;
             border-radius: 3px;
             outline: none;
             transition: all 0.3s ease;
@@ -545,14 +589,14 @@
         .name-field:focus { border-color: var(--burgundy); background: var(--white); box-shadow: 0 0 0 3px rgba(101, 31, 54, 0.08); }
 
         .rsvp-row {
-            padding: 24px;
+            padding: 26px;
             background: rgba(232, 222, 237, 0.35);
             border: 1px solid rgba(181, 154, 103, 0.3);
             border-radius: 3px;
         }
         .rsvp-row h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 500;
             color: var(--burgundy);
             display: flex;
@@ -563,7 +607,7 @@
         }
         .rsvp-row h3 small {
             font-family: 'Montserrat', sans-serif;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -575,10 +619,10 @@
         .pill input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
         .pill span {
             display: block;
-            padding: 12px 10px;
+            padding: 13px 10px;
             border: 1px solid rgba(181, 154, 103, 0.6);
             background: var(--white);
-            font-size: 10px;
+            font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--text);
@@ -599,7 +643,7 @@
             border-top: 1px dashed rgba(181, 154, 103, 0.4);
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: 18px;
+            font-size: 20px;
             color: var(--muted);
         }
         .guests.open { display: flex; animation: fadeInGuests 0.4s ease forwards; }
@@ -608,34 +652,34 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .guests button {
-            width: 32px; height: 32px;
+            width: 34px; height: 34px;
             border: 1px solid var(--gold);
             border-radius: 50%;
             background: var(--white);
             color: var(--burgundy);
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             transition: all 0.2s;
         }
         .guests button:hover { background: var(--burgundy); border-color: var(--burgundy); color: #fff; }
         .guests output {
-            min-width: 24px;
+            min-width: 26px;
             text-align: center;
             font-style: normal;
             font-weight: 600;
-            font-size: 20px;
+            font-size: 22px;
             color: var(--burgundy);
         }
 
         .message-field {
             width: 100%;
-            min-height: 90px;
-            padding: 14px 18px;
+            min-height: 100px;
+            padding: 16px 20px;
             border: 1px solid rgba(181, 154, 103, 0.5);
             background: var(--lilac-light);
             color: var(--text);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
+            font-size: 20px;
             font-style: italic;
             border-radius: 3px;
             resize: vertical;
@@ -647,13 +691,13 @@
 
         .submit-button {
             width: 100%;
-            padding: 18px;
+            padding: 19px;
             border: none;
             background: var(--burgundy);
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 3px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 500;
             border-radius: 3px;
             cursor: pointer;
@@ -664,12 +708,12 @@
 
         .form-message {
             display: none;
-            padding: 20px;
+            padding: 22px;
             border: 1px solid var(--gold);
             background: var(--lilac-light);
             color: var(--burgundy);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
+            font-size: 22px;
             border-radius: 3px;
             text-align: center;
             line-height: 1.5;
@@ -686,11 +730,11 @@
         }
         .footer-names {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(42px, 8vw, 62px);
+            font-size: clamp(46px, 8.5vw, 68px);
             line-height: 1.3;
             color: var(--lilac-light);
         }
-        .footer p { margin-top: 10px; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; }
+        .footer p { margin-top: 10px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; }
         .footer .footer-date { margin-top: 22px; color: var(--gold); }
 
         /* RESPONSIVE */
@@ -702,28 +746,31 @@
 
         @media (max-width: 600px) {
             .hero-damask { min-height: 75svh; padding: 35px 16px; }
-            .hero-frame { padding: 35px 18px; }
-            .hero h1 { font-size: clamp(62px, 15vw, 82px); }
+            .hero-frame { padding: 45px 18px 78px; }
+            .hero h1 { font-size: clamp(66px, 15vw, 88px); }
             .topbar { padding: 16px 5%; }
-            .topbar-brand { font-size: 21px; }
-            .topbar a { font-size: 9px; letter-spacing: 1px; }
+            .topbar-brand { font-size: 23px; }
+            .topbar a { font-size: 10px; letter-spacing: 1px; }
             .countdown { gap: 6px; max-width: 100%; padding: 0 2px; }
             .countdown-unit { padding: 14px 2px; }
-            .countdown-number { font-size: clamp(22px, 7vw, 32px); }
-            .countdown-label { font-size: 7px; letter-spacing: .3px; margin-top: 7px; }
+            .countdown-number { font-size: clamp(24px, 7vw, 35px); }
+            .countdown-label { font-size: 8px; letter-spacing: .3px; margin-top: 7px; }
             .countdown-section { padding: 60px 12px; }
             .events-section, .rsvp-section { padding: 60px 15px; }
             .section-heading { margin-bottom: 35px; }
             .event-card { padding: 12px; }
-            .event-inner { padding: 30px 20px; }
-            .event-card h3 { font-size: 32px; }
+            .event-inner { padding: 40px 22px 34px; }
+            .event-card h3 { font-size: 27px; letter-spacing: .12em; }
+            .hero-frame::before, .hero-frame::after { width: 72px; top: 10px; right: 10px; }
+            .hero-frame::after { top: auto; right: auto; bottom: 10px; left: 10px; }
+            .event-card::before, .event-card::after { width: 66px; }
         }
 
         @media (max-width: 360px) {
             .countdown { gap: 4px; }
             .countdown-unit { padding: 12px 1px; }
-            .countdown-number { font-size: 21px; }
-            .countdown-label { font-size: 6px; letter-spacing: 0; }
+            .countdown-number { font-size: 23px; }
+            .countdown-label { font-size: 7px; letter-spacing: 0; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -771,10 +818,10 @@
     <!-- CARTE D'INVITATION -->
     <section class="hero hero-damask">
         <div class="hero-frame reveal">
-            <img src="logos.35.30-removebg-preview.png"
+            <img src="monogramme.png"
                  alt="Monogramme de Noa et Eitan"
                  class="hero-logo"
-                 onerror="this.style.display='none'">
+                 width="540" height="764">
 
             <div class="eyebrow">Une invitation à célébrer l'amour</div>
 
@@ -835,7 +882,7 @@
             <article class="event-card">
                 <div class="event-inner">
                     <div class="event-number">01 — CÉRÉMONIE CIVILE</div>
-                    <div class="event-icon" aria-hidden="true">✧</div>
+                    <img src="monogramme.png" alt="" class="event-logo" width="540" height="764" aria-hidden="true">
                     <h3>La Mairie</h3>
                     <div class="event-date">Lundi 25 janvier 2027</div>
                     <p class="event-description">Le début officiel d'une belle histoire.</p>
@@ -851,7 +898,7 @@
             <article class="event-card">
                 <div class="event-inner">
                     <div class="event-number">02 — CÉLÉBRATION</div>
-                    <div class="event-icon" aria-hidden="true">♡</div>
+                    <img src="monogramme.png" alt="" class="event-logo" width="540" height="764" aria-hidden="true">
                     <h3>Houppa &amp; Soirée</h3>
                     <div class="event-date">Mercredi 27 janvier 2027</div>
                     <p class="event-description">Une cérémonie pleine d'émotion, suivie d'une soirée inoubliable.</p>
