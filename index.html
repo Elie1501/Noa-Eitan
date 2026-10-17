@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2b0912">
+    <title>Noa Arous &amp; Eitan Benarroch — Notre mariage</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           CHARTE — Bordeaux #4A0F1F · Lilas #C9A7D9 · Or #D4AF37 · Ivoire #F6F1E9
+           Titres : Playfair Display · Textes : Montserrat
+        ========================================= */
+        :root {
+            --bordeaux: #4a0f1f;
+            --bordeaux-deep: #2b0912;
+            --lilas: #c9a7d9;
+            --or: #d4af37;
+            --or-doux: #e9d08a;
+            --ivoire: #f6f1e9;
+            --table: #e4dace;
+            --texte: #5c3f49;
+            --discret: #7d6a71;
+            --serif: 'Playfair Display', Georgia, serif;
+            --sans: 'Montserrat', system-ui, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100%;
+            background: var(--bordeaux-deep);
+            color: var(--texte);
+            font-family: var(--sans);
+            font-weight: 300;
+            line-height: 1.7;
+            overflow: hidden; /* débloqué après l'ouverture */
+        }
+
+        img { display: block; max-width: 100%; }
+        button, input, select, textarea { font: inherit; }
+        a { text-decoration: none; -webkit-tap-highlight-color: transparent; }
+
+        :focus-visible { outline: 2px solid var(--or); outline-offset: 3px; }
+
+        /* Apparition douce des cartes (une seule fois, au défilement) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity .9s cubic-bezier(.16, 1, .3, 1), transform .9s cubic-bezier(.16, 1, .3, 1);
+        }
+        .reveal.active { opacity: 1; transform: none; }
+
+        /* =========================================
+           COUVERTURE D'OUVERTURE
+        ========================================= */
+        .opening-screen {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            z-index: 9999;
+            overflow: hidden;
+            cursor: pointer;
+            background: #25060d;
+            perspective: 1400px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .opening-photo {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background-image: url("logo3.jpg");
+            background-repeat: no-repeat;
+            background-size: 200% 100%;
+            transition: transform 3.5s cubic-bezier(.77, 0, .18, 1);
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+        .opening-photo.left { left: 0; background-position: left center; transform-origin: left center; }
+        .opening-photo.right { right: 0; background-position: right center; transform-origin: right center; }
+
+        .cover-shade {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            background: linear-gradient(to bottom,
+            rgba(35, 0, 8, 0.35) 0%, transparent 25%,
+            transparent 70%, rgba(35, 0, 8, 0.55) 100%);
+        }
+
+        .cover-content {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: clamp(38px, 7.5vh, 80px) 24px;
+            text-align: center;
+            color: #ebd09c;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .cover-top, .cover-bottom {
+            width: 100%;
+            max-width: 680px;
+            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+        }
+
+        .cover-kicker {
+            font-size: clamp(13px, 2vw, 17px);
+            font-weight: 500;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .cover-title { font-size: clamp(22px, 4vw, 32px); line-height: 1.2; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; }
+        .cover-subtitle { margin-top: 10px; font-size: clamp(17px, 2.8vw, 24px); font-weight: 300; font-style: italic; letter-spacing: 0.08em; }
+        .cover-names {
+            margin-top: 14px;
+            font-size: clamp(48px, 13.5vw, 112px);
+            line-height: 1.02;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            color: #f3dca2;
+            text-shadow: 0 3px 22px rgba(0, 0, 0, 0.7), 0 0 38px rgba(216, 180, 117, 0.25);
+        }
+        .cover-names em { font-size: .62em; font-style: italic; font-weight: 400; color: #d8b475; padding: 0 .08em; }
+        .cover-divider { width: 75px; height: 1px; margin: 26px auto 0; background: #d8b475; }
+        .cover-date { font-size: clamp(32px, 5.5vw, 48px); font-weight: 400; letter-spacing: 0.06em; }
+        .cover-hint {
+            margin-top: 22px;
+            font-size: 15px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            opacity: 0.9;
+            animation: pulseHint 2.4s ease-in-out infinite;
+        }
+
+        @keyframes pulseHint {
+            0%, 100% { opacity: 0.55; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .opening-screen.opening .opening-photo.left { transform: rotateY(-105deg); }
+        .opening-screen.opening .opening-photo.right { transform: rotateY(105deg); }
+        .opening-screen.opening .cover-content,
+        .opening-screen.opening .cover-shade { opacity: 0; }
+
+        /* =========================================
+           NAVIGATION
+        ========================================= */
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 16px 7%;
+            background: rgba(43, 9, 18, .94);
+            color: var(--ivoire);
+            border-bottom: 1px solid rgba(212, 175, 55, .35);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .topbar-brand {
+            font-family: var(--serif);
+            font-size: 22px;
+            letter-spacing: .18em;
+            color: var(--or-doux);
+        }
+        .topbar nav { display: flex; gap: clamp(16px, 4vw, 34px); }
+        .topbar a {
+            color: var(--ivoire);
+            font-size: 11px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color .3s ease;
+        }
+        .topbar a::after {
+            content: "";
+            position: absolute;
+            left: 0; bottom: 0;
+            width: 0; height: 1px;
+            background: var(--or);
+            transition: width .3s ease;
+        }
+        .topbar a:hover { color: var(--or-doux); }
+        .topbar a:hover::after { width: 100%; }
+
+        /* =========================================
+           LA CARTE : socle commun
+        ========================================= */
+        .carte {
+            position: relative;
+            isolation: isolate;
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+            padding: clamp(78px, 14vw, 104px) clamp(30px, 8vw, 62px);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 30px 70px -20px rgba(20, 3, 9, .55), 0 6px 18px rgba(20, 3, 9, .18);
+        }
+
+        /* Ornements d'angle issus de la planche */
+        .coin {
+            position: absolute;
+            z-index: 2;
+            width: clamp(92px, 27%, 150px);
+            height: auto;
+            pointer-events: none;
+            user-select: none;
+        }
+        .coin--tl { top: 10px; left: 10px; }
+        .coin--tr { top: 10px; right: 10px; }
+        .coin--bl { bottom: 10px; left: 10px; }
+        .coin--br { bottom: 10px; right: 10px; }
+
+        /* Séparateurs de la planche */
+        .sep { height: auto; margin: clamp(22px, 4vw, 30px) auto; }
+        .sep--star { width: min(250px, 70%); }
+        .sep--dots { width: min(250px, 70%); }
+        .sep--wave { width: min(230px, 66%); }
+
+        .monogramme { width: clamp(104px, 28vw, 138px); height: auto; margin-bottom: clamp(22px, 4vw, 30px); }
+        .monogramme--grand { width: clamp(132px, 36vw, 178px); }
+
+        .surtitre {
+            font-family: var(--sans);
+            font-weight: 400;
+            font-size: clamp(11px, 2.9vw, 12.5px);
+            line-height: 2;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+        }
+        .titre-evenement {
+            margin-top: 12px;
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(34px, 9.5vw, 50px);
+            line-height: 1.15;
+            letter-spacing: .22em;
+            text-indent: .22em; /* recentre malgré l'espacement final */
+            text-transform: uppercase;
+        }
+        .date-evenement {
+            font-family: var(--serif);
+            font-size: clamp(14px, 3.8vw, 17px);
+            letter-spacing: .26em;
+            text-transform: uppercase;
+            line-height: 1.8;
+        }
+        .heure {
+            margin-top: 6px;
+            font-size: 12.5px;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+        }
+        .lieu {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: clamp(15px, 4vw, 17px);
+            line-height: 1.7;
+        }
+        .lieu strong {
+            display: block;
+            font-style: normal;
+            font-weight: 500;
+            font-size: clamp(13px, 3.4vw, 14.5px);
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+        .mot {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: clamp(15px, 4vw, 17px);
+            line-height: 1.75;
+            max-width: 340px;
+        }
+
+        /* =========================================
+           CARTE BORDEAUX — velours + damassé ton sur ton
+        ========================================= */
+        .carte--bordeaux {
+            color: #eadcc0;
+            background-color: var(--bordeaux);
+            background-image:
+                    url("textures/velours.png"),
+                    linear-gradient(180deg, rgba(43, 9, 18, .05) 0%, rgba(43, 9, 18, .38) 100%),
+                    url("textures/damas-tonal.jpg");
+            background-size: 320px 320px, 100% 100%, cover;
+            background-position: 0 0, 0 0, center;
+        }
+        .carte--bordeaux .coin {
+            filter: brightness(1.28) contrast(1.05) drop-shadow(0 0 7px rgba(212, 175, 55, .28));
+        }
+        .carte--bordeaux .monogramme { filter: drop-shadow(0 4px 14px rgba(0, 0, 0, .35)); }
+        .carte--bordeaux .surtitre { color: #e8d6ae; }
+
+        .noms {
+            margin-top: 8px;
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(46px, 13.5vw, 74px);
+            line-height: 1.12;
+            color: var(--or-doux);
+            background: linear-gradient(172deg, #f6e6b0 0%, #d4af37 48%, #f0d98c 78%, #b98f25 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .noms em { font-style: italic; font-size: .72em; padding: 0 .12em; }
+
+        .programme { display: grid; gap: clamp(18px, 4vw, 26px); }
+        .programme p { line-height: 1.5; }
+        .programme .date-evenement { color: var(--or-doux); }
+        .programme .nature {
+            display: block;
+            margin-bottom: 3px;
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 15px;
+            letter-spacing: .04em;
+            text-transform: none;
+            color: #d9c7ad;
+        }
+
+        .bouton-or {
+            display: inline-block;
+            margin-top: clamp(26px, 5vw, 34px);
+            padding: 15px 34px;
+            border: 1px solid var(--or);
+            color: var(--or-doux);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: .26em;
+            text-transform: uppercase;
+            transition: background-color .35s ease, color .35s ease;
+        }
+        .bouton-or:hover { background: var(--or); color: var(--bordeaux-deep); }
+
+        /* =========================================
+           CARTE BLANC CASSÉ — papier texturé
+        ========================================= */
+        .carte--ivoire {
+            color: var(--bordeaux);
+            background-color: var(--ivoire);
+            background-image:
+                    url("textures/papier.png"),
+                    radial-gradient(120% 85% at 50% 0%, #fcfaf5 0%, #f6f1e9 52%, #ece3d5 100%);
+            background-size: 420px 420px, 100% 100%;
+        }
+        .carte--ivoire::before {            /* filet or intérieur, comme sur la maquette */
+            content: "";
+            position: absolute;
+            inset: 16px;
+            border: 1px solid rgba(212, 175, 55, .85);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .carte--ivoire .surtitre { color: var(--bordeaux); }
+        .carte--ivoire .lieu, .carte--ivoire .mot { color: var(--texte); }
+        .carte--ivoire .heure { color: var(--texte); font-weight: 400; }
+
+        /* Fleurs de lilas en filigrane (fichier fleurs-lilas) */
+        .filigrane::after {
+            content: "";
+            position: absolute;
+            left: 50%; bottom: 7%;
+            width: 74%;
+            aspect-ratio: 1;
+            transform: translateX(-50%);
+            background: url("ornements/lilas.png") center / contain no-repeat;
+            opacity: .1;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bouquet { display: flex; justify-content: center; align-items: flex-end; gap: 4px; margin: clamp(22px, 4vw, 30px) 0; }
+        .bouquet img { width: clamp(64px, 17vw, 84px); height: auto; }
+
+        .bloc + .bloc { margin-top: 0; }
+
+        /* =========================================
+           CARTE D'INVITATION — FOND DAMASSÉ (version d'origine)
+        ========================================= */
+        .hero-damask {
+            --burgundy: #651f36;
+            --burgundy-dark: #421322;
+            --gold: #b59a67;
+            --ivory: #faf7f1;
+            --text: #44333b;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--burgundy);
+            background-image:
+                    linear-gradient(rgba(66, 19, 34, .18), rgba(66, 19, 34, .18)),
+                    url("fond2.14.03.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 86vh;
+            min-height: 86svh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 70px 24px;
+            text-align: center;
+        }
+        .hero-damask::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(45, 10, 20, .32);
+            pointer-events: none;
+        }
+
+        .hero-frame {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 860px;
+            padding: clamp(34px, 6vw, 75px) 25px;
+            background: rgba(250, 247, 241, .97);
+            border: 1px solid var(--gold);
+            outline: 1px solid rgba(181, 154, 103, .55);
+            outline-offset: -10px;
+            box-shadow: 0 25px 70px rgba(25, 0, 8, .35);
+            border-radius: 4px;
+        }
+
+        .hero-logo {
+            display: block;
+            width: clamp(95px, 15vw, 140px);
+            max-height: 140px;
+            object-fit: contain;
+            margin: 0 auto 22px;
+            mix-blend-mode: multiply;
+            transition: transform 0.4s ease;
+        }
+        .hero-logo:hover { transform: scale(1.04); }
+
+        .eyebrow {
+            color: var(--burgundy);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            margin-top: 18px;
+            color: var(--burgundy);
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(72px, 13vw, 125px);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+        .hero-ampersand {
+            display: block;
+            margin: -6px 0;
+            color: var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-style: italic;
+        }
+        .hero-subtitle {
+            max-width: 580px;
+            margin: 24px auto 0;
+            color: var(--text);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(22px, 3.5vw, 30px);
+            line-height: 1.5;
+        }
+        .hero-date {
+            margin-top: 20px;
+            color: var(--burgundy);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .gold-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px auto;
+            color: var(--gold);
+        }
+        .gold-divider::before, .gold-divider::after {
+            content: "";
+            width: 50px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .hero-button {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 16px 34px;
+            background: var(--burgundy);
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 2px;
+            font-size: 11px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            transition: all 0.35s ease;
+            box-shadow: 0 4px 18px rgba(101, 31, 54, 0.25);
+        }
+        .hero-button:hover {
+            background: var(--burgundy-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(66, 19, 34, 0.35);
+        }
+
+        /* =========================================
+           COMPTE À REBOURS
+        ========================================= */
+        .countdown-section {
+            padding: clamp(60px, 9vw, 84px) 20px;
+            background-color: var(--bordeaux-deep);
+            background-image: url("textures/velours.png");
+            background-size: 320px 320px;
+            color: var(--ivoire);
+            text-align: center;
+        }
+        .countdown-section h2 {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(34px, 6vw, 52px);
+            color: var(--or-doux);
+        }
+        .countdown-intro { margin-top: 8px; color: rgba(246, 241, 233, .78); font-size: 13px; letter-spacing: .04em; }
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            width: 100%;
+            max-width: 620px;
+            margin: 34px auto 0;
+            gap: clamp(6px, 2vw, 14px);
+        }
+        .countdown-unit {
+            min-width: 0;
+            padding: clamp(14px, 2.5vw, 22px) 3px;
+            border: 1px solid rgba(212, 175, 55, .55);
+            background: rgba(246, 241, 233, .03);
+        }
+        .countdown-number {
+            display: block;
+            color: var(--or);
+            font-family: var(--serif);
+            font-size: clamp(25px, 6vw, 54px);
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+        .countdown-label {
+            display: block;
+            margin-top: 8px;
+            color: var(--ivoire);
+            font-size: clamp(8px, 1.8vw, 10.5px);
+            letter-spacing: clamp(.3px, .4vw, 2.2px);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .countdown-finished { margin-top: 20px; color: var(--lilas); font-family: var(--serif); font-style: italic; font-size: 24px; }
+
+        /* =========================================
+           ÉVÉNEMENTS (cartes blanc cassé sur « table » grège)
+        ========================================= */
+        .evenements {
+            padding: clamp(64px, 9vw, 100px) clamp(14px, 4vw, 40px);
+            background-color: var(--table);
+            background-image: url("textures/papier.png");
+            background-size: 420px 420px;
+        }
+        .titre-section { max-width: 640px; margin: 0 auto clamp(40px, 7vw, 60px); text-align: center; }
+        .titre-section h2 {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(32px, 6vw, 50px);
+            line-height: 1.2;
+            color: var(--bordeaux);
+        }
+        .titre-section p { margin-top: 14px; font-size: 14px; color: var(--discret); }
+
+        .grille-cartes {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: stretch;
+            gap: clamp(22px, 3vw, 38px);
+            max-width: 1160px;
+            margin: 0 auto;
+        }
+        .grille-cartes .carte { max-width: none; justify-content: center; }
+
+        /* =========================================
+           RSVP
+        ========================================= */
+        .rsvp {
+            padding: clamp(64px, 9vw, 100px) clamp(14px, 4vw, 24px);
+            background-color: var(--table);
+            background-image: url("textures/papier.png");
+            background-size: 420px 420px;
+        }
+        .carte--rsvp { max-width: 640px; align-items: stretch; text-align: left; padding-bottom: clamp(88px, 14vw, 112px); }
+        .carte--rsvp .entete { text-align: center; }
+        .carte--rsvp .lilas-entete { width: clamp(96px, 26vw, 128px); margin: 0 auto 14px; }
+        .carte--rsvp h2 {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(30px, 7vw, 42px);
+            line-height: 1.2;
+            color: var(--bordeaux);
+        }
+        .carte--rsvp .entete p { margin-top: 10px; font-size: 14px; color: var(--texte); }
+
+        .rsvp-form { display: flex; flex-direction: column; gap: 26px; margin-top: 8px; position: relative; z-index: 3; }
+
+        .name-field, .message-field {
+            width: 100%;
+            border: 0;
+            border-bottom: 1px solid rgba(74, 15, 31, .45);
+            background: rgba(255, 253, 248, .55);
+            color: var(--bordeaux);
+            font-family: var(--serif);
+            font-size: 20px;
+            padding: 14px 16px;
+            outline: none;
+            transition: border-color .3s ease, background-color .3s ease;
+        }
+        .message-field { min-height: 104px; resize: vertical; font-style: italic; font-size: 18px; border: 1px solid rgba(74, 15, 31, .3); }
+        .name-field::placeholder, .message-field::placeholder { color: var(--discret); font-style: italic; opacity: .85; }
+        .name-field:focus, .message-field:focus { border-color: var(--bordeaux); background: #fffdf9; }
+        .name-field:focus-visible, .message-field:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
+
+        .rsvp-row { padding: 22px 6px 6px; border-top: 1px solid rgba(212, 175, 55, .75); }
+        .rsvp-row h3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 6px 14px;
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: 22px;
+            color: var(--bordeaux);
+        }
+        .rsvp-row h3 small {
+            font-family: var(--sans);
+            font-size: 11.5px;
+            font-weight: 400;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--texte);
+        }
+
+        /* Choix « ○ Oui, avec plaisir » comme sur la maquette */
+        .choice { display: grid; gap: 4px; margin-top: 10px; }
+        .pill { position: relative; cursor: pointer; display: block; }
+        .pill input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; margin: 0; }
+        .pill span {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 11px 4px;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--bordeaux);
+        }
+        .pill span::before {
+            content: "";
+            flex: none;
+            width: 20px; height: 20px;
+            border: 1px solid var(--bordeaux);
+            border-radius: 50%;
+            background: transparent;
+            transition: box-shadow .25s ease, background-color .25s ease;
+        }
+        .pill:hover span::before { border-color: var(--or); }
+        .pill input:checked + span::before { background: var(--bordeaux); box-shadow: inset 0 0 0 4px var(--ivoire); }
+        .pill input:focus-visible + span::before { outline: 2px solid var(--or); outline-offset: 3px; }
+
+        .guests {
+            display: none;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin: 8px 0 0 34px;
+            padding-top: 12px;
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 17px;
+            color: var(--texte);
+        }
+        .guests.open { display: flex; animation: apparait .4s ease forwards; }
+        @keyframes apparait { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+        .guests button {
+            width: 34px; height: 34px;
+            border: 1px solid var(--bordeaux);
+            border-radius: 50%;
+            background: transparent;
+            color: var(--bordeaux);
+            font-size: 18px;
+            line-height: 1;
+            cursor: pointer;
+            transition: background-color .2s, color .2s;
+        }
+        .guests button:hover { background: var(--bordeaux); color: var(--ivoire); }
+        .guests output { min-width: 26px; text-align: center; font-style: normal; font-weight: 500; font-size: 22px; color: var(--bordeaux); }
+
+        .submit-button {
+            width: 100%;
+            padding: 18px;
+            border: 1px solid var(--bordeaux);
+            background: var(--bordeaux);
+            color: var(--ivoire);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: .26em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color .35s ease, color .35s ease;
+        }
+        .submit-button:hover { background: transparent; color: var(--bordeaux); }
+
+        .form-message {
+            display: none;
+            padding: 20px;
+            border: 1px solid var(--or);
+            background: rgba(255, 253, 248, .7);
+            color: var(--bordeaux);
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 18px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .form-message.visible { display: block; animation: apparait .5s ease forwards; }
+
+        /* =========================================
+           PIED DE PAGE
+        ========================================= */
+        .footer {
+            padding: 64px 20px 70px;
+            background-color: var(--bordeaux-deep);
+            background-image: url("textures/velours.png");
+            background-size: 320px 320px;
+            border-top: 1px solid rgba(212, 175, 55, .75);
+            color: var(--ivoire);
+            text-align: center;
+        }
+        .footer .monogramme { margin: 0 auto 16px; width: 96px; filter: drop-shadow(0 3px 10px rgba(0, 0, 0, .4)); }
+        .footer-names { font-family: var(--serif); font-size: clamp(34px, 8vw, 50px); color: var(--or-doux); line-height: 1.2; }
+        .footer .sep { margin: 20px auto; filter: brightness(1.3); }
+        .footer-date { font-weight: 400; font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: #e8d6ae; }
+        .footer-devise { margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 16px; color: rgba(246, 241, 233, .78); }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+        @media (max-width: 850px) { .hero-damask { background-attachment: scroll; } }
+        @media (max-width: 900px) {
+            .grille-cartes { grid-template-columns: minmax(0, 560px); justify-content: center; }
+        }
+        @media (max-width: 600px) {
+            .hero-damask { min-height: 75svh; padding: 35px 16px; }
+            .hero-frame { padding: 35px 18px; }
+            .hero h1 { font-size: clamp(66px, 15vw, 88px); }
+            .topbar { padding: 14px 5%; }
+            .topbar-brand { font-size: 19px; }
+            .topbar a { font-size: 10px; letter-spacing: .14em; }
+            .coin { width: clamp(84px, 30%, 118px); }
+            .carte--ivoire::before { inset: 12px; }
+            .guests { margin-left: 4px; }
+        }
+        @media (max-width: 360px) {
+            .countdown { gap: 4px; }
+            .countdown-number { font-size: 22px; }
+            .countdown-label { font-size: 7px; letter-spacing: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .reveal { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- COUVERTURE D'OUVERTURE -->
+<div class="opening-screen" id="openingScreen">
+    <div class="opening-photo left"></div>
+    <div class="opening-photo right"></div>
+
+    <div class="cover-shade"></div>
+
+    <div class="cover-content">
+        <div class="cover-top">
+            <p class="cover-kicker">C'est un grand jour</p>
+            <h1 class="cover-title">Vous êtes invités</h1>
+            <p class="cover-subtitle">au mariage de</p>
+            <h2 class="cover-names">Noa <em>&amp;</em> Eitan</h2>
+        </div>
+
+        <div class="cover-bottom">
+            <p class="cover-date">25 janvier 2027</p>
+            <p class="cover-hint">✧ Touchez pour ouvrir l'invitation ✧</p>
+        </div>
+    </div>
+</div>
+
+<!-- NAVIGATION -->
+<header class="topbar">
+    <div class="topbar-brand">N &amp; E</div>
+    <nav aria-label="Navigation">
+        <a href="#evenements">Nos événements</a>
+        <a href="#rsvp">Répondre</a>
+    </nav>
+</header>
+
+<main>
+
+    <!-- CARTE D'INVITATION -->
+    <section class="hero hero-damask">
+        <div class="hero-frame reveal">
+            <img src="logos.35.30-removebg-preview.png"
+                 alt="Monogramme de Noa et Eitan"
+                 class="hero-logo"
+                 onerror="this.onerror=null;this.src='ornements/monogramme.png'">
+
+            <div class="eyebrow">Une invitation à célébrer l'amour</div>
+
+            <h1>Noa</h1>
+            <span class="hero-ampersand">&amp;</span>
+            <h1>Eitan</h1>
+
+            <div class="gold-divider">✧</div>
+
+            <p class="hero-subtitle">
+                Nous avons la joie de vous inviter à célébrer
+                avec nous le début de notre nouvelle vie.
+            </p>
+
+            <p class="hero-date">25 &amp; 27 janvier 2027</p>
+
+            <a href="#rsvp" class="hero-button">Confirmer ma présence</a>
+        </div>
+    </section>
+
+    <!-- COMPTEUR -->
+    <section class="countdown-section" aria-labelledby="countdown-title">
+        <h2 id="countdown-title">Bientôt réunis</h2>
+        <p class="countdown-intro">Le compte à rebours avant notre mariage civil</p>
+
+        <div class="countdown" id="countdown">
+            <div class="countdown-unit">
+                <span class="countdown-number" id="days">0</span>
+                <span class="countdown-label">Jours</span>
+            </div>
+            <div class="countdown-unit">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Heures</span>
+            </div>
+            <div class="countdown-unit">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-unit">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Secondes</span>
+            </div>
+        </div>
+
+        <p class="countdown-finished" id="countdownFinished" hidden>Le grand jour est arrivé ♡</p>
+    </section>
+
+    <!-- ÉVÉNEMENTS — cartes blanc cassé -->
+    <section class="evenements" id="evenements">
+        <div class="titre-section">
+            <h2>Deux jours pour se retrouver</h2>
+            <p>Deux belles occasions de nous retrouver, entourés de ceux que nous aimons.</p>
+        </div>
+
+        <div class="grille-cartes">
+            <!-- MAIRIE -->
+            <article class="carte carte--ivoire filigrane reveal">
+                <img class="coin coin--tl" src="ornements/corner-tl.png" alt="" aria-hidden="true" loading="lazy">
+                <img class="coin coin--br" src="ornements/corner-br.png" alt="" aria-hidden="true" loading="lazy">
+
+                <img class="monogramme" src="ornements/monogramme.png" alt="" aria-hidden="true" loading="lazy">
+
+                <p class="surtitre">Nous serons heureux<br>de vous retrouver à la</p>
+                <h3 class="titre-evenement">Mairie</h3>
+
+                <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
+
+                <p class="date-evenement">Lundi 25 janvier 2027</p>
+                <p class="heure">L'horaire sera communiqué prochainement</p>
+
+                <img class="sep sep--dots" src="ornements/div-dots.png" alt="" aria-hidden="true" loading="lazy">
+
+                <p class="lieu"><strong>Mairie de Charenton-le-Pont</strong>Charenton-le-Pont, France</p>
+
+                <img class="sep sep--wave" src="ornements/div-wave.png" alt="" aria-hidden="true" loading="lazy">
+
+                <p class="mot">Votre présence rendra ce moment encore plus précieux.</p>
+            </article>
+
+            <!-- HOUPPA & SOIRÉE -->
+            <article class="carte carte--ivoire filigrane reveal">
+                <img class="coin coin--tl" src="ornements/corner-tl.png" alt="" aria-hidden="true" loading="lazy">
+                <img class="coin coin--br" src="ornements/corner-br.png" alt="" aria-hidden="true" loading="lazy">
+
+                <img class="monogramme" src="ornements/monogramme.png" alt="" aria-hidden="true" loading="lazy">
+
+                <div class="bloc">
+                    <p class="surtitre">Nous avons la joie<br>de vous inviter à notre</p>
+                    <h3 class="titre-evenement">Houppa</h3>
+                    <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
+                    <p class="date-evenement">Mercredi 27 janvier 2027</p>
+                    <p class="heure">Horaire communiqué prochainement</p>
+                    <p class="lieu" style="margin-top:10px">Le lieu sera communiqué prochainement.</p>
+                </div>
+
+                <div class="bouquet" aria-hidden="true">
+                    <img src="ornements/sprig-l.png" alt="" loading="lazy">
+                    <img src="ornements/sprig-r.png" alt="" loading="lazy">
+                </div>
+
+                <div class="bloc">
+                    <p class="surtitre">Puis, pour célébrer ensemble,</p>
+                    <h3 class="titre-evenement">Soirée</h3>
+                    <img class="sep sep--wave" src="ornements/div-wave.png" alt="" aria-hidden="true" loading="lazy">
+                    <p class="mot">Une cérémonie pleine d'émotion, suivie d'une soirée inoubliable.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- FORMULAIRE RSVP -->
+    <section class="rsvp" id="rsvp">
+        <article class="carte carte--ivoire carte--rsvp reveal">
+            <img class="coin coin--tl" src="ornements/corner-tl.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="coin coin--br" src="ornements/corner-br.png" alt="" aria-hidden="true" loading="lazy">
+
+            <div class="entete">
+                <img class="lilas-entete" src="ornements/lilas.png" alt="" aria-hidden="true" loading="lazy">
+                <h2>Serez-vous des nôtres ?</h2>
+                <p>Merci de nous confirmer votre présence en quelques clics.</p>
+                <img class="sep sep--dots" src="ornements/div-dots.png" alt="" aria-hidden="true" loading="lazy" style="margin-bottom:6px">
+            </div>
+
+            <form class="rsvp-form" id="rsvpForm">
+                <div class="field-group">
+                    <input class="name-field" id="nom" name="nom" type="text" autocomplete="name"
+                           maxlength="100" placeholder="Votre prénom et votre nom" aria-label="Votre nom" required>
+                </div>
+
+                <div class="rsvp-row">
+                    <h3>La Mairie <small>Lundi 25 janvier 2027</small></h3>
+                    <div class="choice">
+                        <label class="pill"><input type="radio" name="mairie" value="oui" required><span>Oui, avec plaisir</span></label>
+                        <label class="pill"><input type="radio" name="mairie" value="non"><span>Non, avec regret</span></label>
+                    </div>
+                    <div class="guests" id="mairieGuestsBox">
+                        <span>Nombre de participants :</span>
+                        <button type="button" data-box="mairie" data-step="-1" aria-label="Moins">−</button>
+                        <output id="mairieGuests">1</output>
+                        <button type="button" data-box="mairie" data-step="1" aria-label="Plus">+</button>
+                    </div>
+                </div>
+
+                <div class="rsvp-row">
+                    <h3>Houppa &amp; Soirée <small>Mercredi 27 janvier 2027</small></h3>
+                    <div class="choice">
+                        <label class="pill"><input type="radio" name="houppa" value="oui" required><span>Oui, avec plaisir</span></label>
+                        <label class="pill"><input type="radio" name="houppa" value="non"><span>Non, avec regret</span></label>
+                    </div>
+                    <div class="guests" id="houppaGuestsBox">
+                        <span>Nombre de participants :</span>
+                        <button type="button" data-box="houppa" data-step="-1" aria-label="Moins">−</button>
+                        <output id="houppaGuests">1</output>
+                        <button type="button" data-box="houppa" data-step="1" aria-label="Plus">+</button>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <textarea class="message-field" name="message" maxlength="500"
+                              placeholder="Un petit mot doux pour les mariés ? (facultatif)" aria-label="Un petit mot"></textarea>
+                </div>
+
+                <button class="submit-button" type="submit">Confirmer ma présence</button>
+
+                <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
+            </form>
+        </article>
+    </section>
+
+</main>
+
+<!-- PIED DE PAGE -->
+<footer class="footer">
+    <img class="monogramme" src="ornements/monogramme.png" alt="Monogramme de Noa et Eitan" loading="lazy">
+
+    <div class="footer-names">Noa &amp; Eitan</div>
+    <img class="sep sep--wave" src="ornements/div-wave.png" alt="" aria-hidden="true" loading="lazy">
+    <p class="footer-date">Janvier 2027</p>
+    <p class="footer-devise">Une même histoire, deux jours, un seul chemin.</p>
+</footer>
+
+<script>
+    "use strict";
+
+    /* ANIMATION D'OUVERTURE */
+    const openingScreen = document.getElementById("openingScreen");
+    let isOpening = false;
+
+    function initScrollObserver() {
+        const reveals = document.querySelectorAll(".reveal");
+
+        if (!("IntersectionObserver" in window)) {
+            reveals.forEach(el => el.classList.add("active"));
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        reveals.forEach(el => observer.observe(el));
+    }
+
+    if (openingScreen) {
+        openingScreen.addEventListener("click", () => {
+            if (isOpening) return;
+
+            isOpening = true;
+            openingScreen.classList.add("opening");
+
+            window.setTimeout(() => {
+                openingScreen.remove();
+                document.body.style.overflow = "auto";
+                initScrollObserver();
+            }, 3600);
+        });
+    } else {
+        document.body.style.overflow = "auto";
+        initScrollObserver();
+    }
+
+    /* COMPTE À REBOURS — HEURE DE PARIS */
+    const parisFormatter = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Paris",
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit",
+        hourCycle: "h23"
+    });
+
+    function getParisParts(date) {
+        return Object.fromEntries(
+            parisFormatter.formatToParts(date)
+                .filter(p => p.type !== "literal")
+                .map(p => [p.type, Number(p.value)])
+        );
+    }
+
+    function toWallClock(parts) {
+        return Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
+    }
+
+    function getParisTimestamp(year, month, day) {
+        const target = Date.UTC(year, month - 1, day);
+        let guess = target;
+        for (let i = 0; i < 3; i++) {
+            guess += target - toWallClock(getParisParts(new Date(guess)));
+        }
+        return guess;
+    }
+
+    const weddingTarget = getParisTimestamp(2027, 1, 25);
+
+    function updateCountdown() {
+        const now = toWallClock(getParisParts(new Date()));
+        let diff = Math.max(0, weddingTarget - now);
+
+        const days = Math.floor(diff / 86400000); diff %= 86400000;
+        const hours = Math.floor(diff / 3600000); diff %= 3600000;
+        const minutes = Math.floor(diff / 60000); diff %= 60000;
+        const seconds = Math.floor(diff / 1000);
+
+        document.getElementById("days").textContent = String(days);
+        document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+        document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+
+        if (now >= weddingTarget) {
+            document.getElementById("countdownFinished").hidden = false;
+        }
+    }
+
+    updateCountdown();
+    window.setInterval(updateCountdown, 1000);
+
+    /* RSVP — compteur d'invités, affiché seulement si présent */
+    const rsvpForm = document.getElementById("rsvpForm");
+    const formMessage = document.getElementById("formMessage");
+    const guests = { mairie: 1, houppa: 1 };
+
+    ["mairie", "houppa"].forEach(key => {
+        const box = document.getElementById(key + "GuestsBox");
+        rsvpForm.querySelectorAll(`input[name="${key}"]`).forEach(radio => {
+            radio.addEventListener("change", () => {
+                box.classList.toggle("open", radio.value === "oui" && radio.checked);
+            });
+        });
+    });
+
+    rsvpForm.querySelectorAll(".guests button").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const key = btn.dataset.box;
+            guests[key] = Math.max(1, Math.min(8, guests[key] + Number(btn.dataset.step)));
+            document.getElementById(key + "Guests").textContent = guests[key];
+        });
+    });
+
+    /* Confirmation locale uniquement */
+    rsvpForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!rsvpForm.reportValidity()) return;
+
+        const data = new FormData(rsvpForm);
+        const nom = String(data.get("nom") || "").trim();
+        if (!nom) return;
+
+        const fmt = key => data.get(key) === "oui" ? `présent(e) à ${guests[key]}` : "absent(e)";
+
+        formMessage.textContent =
+            `Merci ${nom}, c'est noté ✧ Mairie : ${fmt("mairie")} · Houppa & soirée : ${fmt("houppa")}. ` +
+            `(Démo : rien n'est envoyé tant que le formulaire n'est pas relié à un service.)`;
+
+        formMessage.classList.add("visible");
+        formMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+</script>
+
+</body>
+</html>
