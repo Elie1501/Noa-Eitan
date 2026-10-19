@@ -8,7 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
     <style>
         /* =========================================
@@ -234,6 +234,19 @@
             padding: 4px 10px; border: 1px solid rgba(212, 175, 55, .5);
             background: rgba(43, 9, 18, .55); backdrop-filter: blur(6px);
         }
+
+
+        .titre-evenement--duo { font-size: clamp(24px, 6.8vw, 38px); letter-spacing: .16em; text-indent: .16em; }
+        .titre-evenement--duo + .sep { margin-top: clamp(14px, 3vw, 20px); }
+
+        /* בס״ד — coin haut droit des cartes */
+        .besaad {
+            position: absolute; top: 26px; right: 30px; z-index: 3;
+            font-family: "Frank Ruhl Libre", "Cormorant Garamond", serif;
+            font-size: clamp(15px, 4vw, 18px); font-weight: 500; line-height: 1;
+            color: var(--bordeaux); opacity: .85; direction: rtl; pointer-events: none;
+        }
+        .hero-frame .besaad { top: 24px; right: 28px; }
 
         /* =========================================
            LA CARTE : socle commun
@@ -838,6 +851,7 @@
             .grille-cartes { grid-template-columns: minmax(0, 560px); justify-content: center; }
         }
         @media (max-width: 600px) {
+            .besaad { top: 22px; right: 24px; }
             .cover-content { padding-top: clamp(18px, 3.2vh, 32px); }
             .cover-kicker { font-size: 12px; margin-bottom: 12px; }
             .cover-title { font-size: 16px; }
@@ -922,6 +936,7 @@
     <!-- CARTE D'INVITATION -->
     <section class="hero hero-damask">
         <div class="hero-frame reveal">
+            <span class="besaad" lang="he" dir="rtl" aria-hidden="true">בס״ד</span>
             <img src="logos.35.30-removebg-preview.png"
                  alt="Monogramme de Noa et Eitan"
                  class="hero-logo"
@@ -936,8 +951,8 @@
             <div class="gold-divider">✧</div>
 
             <p class="hero-subtitle" data-i18n="hsub">
-                Nous avons la joie de vous inviter à célébrer
-                avec nous le début de notre nouvelle vie.
+                Nous commençons une nouvelle vie, et nous serions heureux
+                de l'ouvrir en votre compagnie.
             </p>
 
             <p class="hero-date" data-i18n="hdate">25 &amp; 27 janvier 2027</p>
@@ -976,19 +991,20 @@
     <!-- ÉVÉNEMENTS — cartes blanc cassé -->
     <section class="evenements" id="evenements">
         <div class="titre-section">
-            <h2 data-i18n="evt">Deux jours pour se retrouver</h2>
-            <p data-i18n="evp">Deux belles occasions de nous retrouver, entourés de ceux que nous aimons.</p>
+            <h2 data-i18n="evt">Deux journées à vivre ensemble</h2>
+            <p data-i18n="evp">Notre histoire s'écrit en plusieurs temps, et nous rêvons d'en partager les plus beaux avec vous.</p>
         </div>
 
         <div class="grille-cartes">
             <!-- MAIRIE -->
             <article class="carte carte--ivoire filigrane reveal">
+                <span class="besaad" lang="he" dir="rtl" aria-hidden="true">בס״ד</span>
                 <img class="coin coin--tl" src="ornements/corner-tl.png" alt="" aria-hidden="true" loading="lazy">
                 <img class="coin coin--br" src="ornements/corner-br.png" alt="" aria-hidden="true" loading="lazy">
 
                 <img class="monogramme" src="ornements/monogramme.png" alt="" aria-hidden="true" loading="lazy">
 
-                <p class="surtitre" data-i18n="mair_s">Nous serons heureux<br>de vous retrouver à la</p>
+                <p class="surtitre" data-i18n="mair_s">Nous aurons le plaisir<br>de vous accueillir à la</p>
                 <h3 class="titre-evenement" data-i18n="mair_t">Mairie</h3>
 
                 <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
@@ -1003,14 +1019,15 @@
 
             <!-- HOUPPA & SOIRÉE -->
             <article class="carte carte--ivoire filigrane reveal">
+                <span class="besaad" lang="he" dir="rtl" aria-hidden="true">בס״ד</span>
                 <img class="coin coin--tl" src="ornements/corner-tl.png" alt="" aria-hidden="true" loading="lazy">
                 <img class="coin coin--br" src="ornements/corner-br.png" alt="" aria-hidden="true" loading="lazy">
 
                 <img class="monogramme" src="ornements/monogramme.png" alt="" aria-hidden="true" loading="lazy">
 
                 <div class="bloc">
-                    <p class="surtitre" data-i18n="hou_s">Nous avons la joie<br>de vous inviter à notre</p>
-                    <h3 class="titre-evenement" data-i18n="hou_t">Houppa</h3>
+                    <p class="surtitre" data-i18n="hou_s">Nous vous convions avec joie<br>à notre</p>
+                    <h3 class="titre-evenement titre-evenement--duo" data-i18n="hou_t">Houppa <br>–</br> Soirée</h3>
                     <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
                     <p class="date-evenement" data-i18n="date27">Mercredi 27 janvier 2027</p>
                     <p class="heure" data-i18n="hou_h">Horaire communiqué prochainement</p>
@@ -1021,11 +1038,7 @@
                     <img src="ornements/sprig-l.png" alt="" loading="lazy">
                 </div>
 
-                <div class="bloc">
-                    <p class="surtitre" data-i18n="soi_s">Puis, pour célébrer ensemble,</p>
-                    <h3 class="titre-evenement" data-i18n="soi_t">Soirée</h3>
-                    <p class="mot" style="margin-top:18px" data-i18n="soi_m">Une cérémonie pleine d'émotion, suivie d'une soirée inoubliable.</p>
-                </div>
+                <p class="mot" data-i18n="soi_m">Une cérémonie pleine d'émotion, suivie d'une soirée inoubliable.</p>
             </article>
         </div>
     </section>
@@ -1033,6 +1046,7 @@
     <!-- FORMULAIRE RSVP -->
     <section class="rsvp" id="rsvp">
         <article class="carte carte--ivoire carte--rsvp reveal">
+                <span class="besaad" lang="he" dir="rtl" aria-hidden="true">בס״ד</span>
             <img class="coin coin--tl" src="ornements/corner-tl.png" alt="" aria-hidden="true" loading="lazy">
             <img class="coin coin--br" src="ornements/corner-br.png" alt="" aria-hidden="true" loading="lazy">
 
@@ -1116,32 +1130,30 @@
         navev: "Nuestros eventos",
         navrsvp: "Responder",
         eyebrow: "Una invitación para celebrar el amor",
-        hsub: "Con mucha alegría les invitamos a celebrar con nosotros el comienzo de nuestra nueva vida.",
+        hsub: "Comenzamos una nueva vida y nos hará muy felices abrirla en su compañía.",
         hdate: "25 y 27 de enero de 2027",
         hbtn: "Confirmar mi asistencia",
         cdt: "Muy pronto juntos",
         cdi: "La cuenta atrás para nuestra boda civil",
         d: "Días", hh: "Horas", mm: "Minutos", ss: "Segundos",
         fin: "¡El gran día ha llegado ♡",
-        evt: "Dos días para reencontrarnos",
-        evp: "Dos hermosas ocasiones para reunirnos, rodeados de quienes más queremos.",
-        mair_s: "Nos hará felices<br>recibirles en el",
-        mair_t: "Ayuntamiento",
+        evt: "Dos jornadas para vivir juntos",
+        evp: "Nuestra historia se escribe en diferentes momentos, y soñamos con compartir los más hermosos con ustedes.",
+        mair_s: "Tendremos el placer<br>de recibirles en el",
+        mair_t: "Civil",
         date25: "Lunes 25 de enero de 2027",
         mair_h: "El horario se comunicará próximamente",
-        mair_l: "<strong>Ayuntamiento de Charenton-le-Pont</strong>Charenton-le-Pont, Francia",
+        mair_l: "<strong>Civil de Charenton-le-Pont</strong>Charenton-le-Pont, Francia",
         mair_m: "Su presencia hará este momento aún más especial.",
-        hou_s: "Tenemos la alegría<br>de invitarles a nuestra",
-        hou_t: "Jupá",
+        hou_s: "Les convocamos con alegría<br>a nuestra",
+        hou_t: "Jupá – Fiesta",
         date27: "Miércoles 27 de enero de 2027",
         hou_h: "Horario por confirmar próximamente",
         hou_l: "El lugar se comunicará próximamente.",
-        soi_s: "Y después, para celebrar juntos,",
-        soi_t: "Fiesta",
         soi_m: "Una ceremonia llena de emoción, seguida de una noche inolvidable.",
         rs_t: "¿Estarán con nosotros?",
         rs_p: "Les rogamos confirmar su asistencia en unos pocos clics.",
-        rs_mair: "El Ayuntamiento <small>Lunes 25 de enero de 2027</small>",
+        rs_mair: "El Civil <small>Lunes 25 de enero de 2027</small>",
         rs_hou: "Jupá y Fiesta <small>Miércoles 27 de enero de 2027</small>",
         oui: "Sí, con mucho gusto",
         non: "No, lamentablemente",
@@ -1310,7 +1322,7 @@
     rsvpForm.querySelectorAll(".guests button").forEach(btn => {
         btn.addEventListener("click", () => {
             const key = btn.dataset.box;
-            guests[key] = Math.max(1, Math.min(8, guests[key] + Number(btn.dataset.step)));
+            guests[key] = Math.max(1, Math.min(6, guests[key] + Number(btn.dataset.step)));
             document.getElementById(key + "Guests").textContent = guests[key];
         });
     });
@@ -1330,7 +1342,7 @@
             : (es ? "no asistirá" : "absent(e)");
 
         formMessage.textContent = es
-            ? `Gracias ${nom}, queda anotado ✧ Ayuntamiento: ${fmt("mairie")} · Jupá y fiesta: ${fmt("houppa")}. ` +
+            ? `Gracias ${nom}, queda anotado ✧ Civil: ${fmt("mairie")} · Jupá y fiesta: ${fmt("houppa")}. ` +
               `(Demo: no se envía nada mientras el formulario no esté conectado a un servicio.)`
             : `Merci ${nom}, c'est noté ✧ Mairie : ${fmt("mairie")} · Houppa & soirée : ${fmt("houppa")}. ` +
               `(Démo : rien n'est envoyé tant que le formulaire n'est pas relié à un service.)`;
