@@ -242,10 +242,10 @@
         .coin--br { bottom: 10px; right: 10px; }
 
         /* Séparateurs de la planche */
-        .sep { height: auto; margin: clamp(22px, 4vw, 30px) auto; }
-        .sep--star { width: min(250px, 70%); }
-        .sep--dots { width: min(250px, 70%); }
-        .sep--wave { width: min(230px, 66%); }
+        .sep { height: auto; margin: clamp(20px, 4vw, 26px) auto; opacity: .72; }
+        .sep--star { width: min(150px, 46%); }
+        .sep--dots { width: min(150px, 46%); }
+        .sep--wave { width: min(150px, 46%); }
 
         .monogramme { width: clamp(104px, 28vw, 138px); height: auto; margin-bottom: clamp(22px, 4vw, 30px); }
         .monogramme--grand { width: clamp(132px, 36vw, 178px); }
@@ -813,6 +813,11 @@
             .grille-cartes { grid-template-columns: minmax(0, 560px); justify-content: center; }
         }
         @media (max-width: 600px) {
+            .cover-content { padding-top: clamp(18px, 3.2vh, 32px); }
+            .cover-kicker { font-size: 12px; margin-bottom: 12px; }
+            .cover-title { font-size: 16px; }
+            .cover-subtitle { margin-top: 6px; font-size: 16px; }
+            .cover-names { margin-top: 2px; font-size: clamp(42px, 12vw, 58px); }
             .hero-damask { min-height: 75svh; padding: 35px 16px; }
             .hero-frame { padding: 27px 18px 35px; }
             .hero h1 { font-size: clamp(66px, 15vw, 88px); }
@@ -951,13 +956,9 @@
                 <p class="date-evenement">Lundi 25 janvier 2027</p>
                 <p class="heure">L'horaire sera communiqué prochainement</p>
 
-                <img class="sep sep--dots" src="ornements/div-dots.png" alt="" aria-hidden="true" loading="lazy">
+                <p class="lieu" style="margin-top:22px"><strong>Mairie de Charenton-le-Pont</strong>Charenton-le-Pont, France</p>
 
-                <p class="lieu"><strong>Mairie de Charenton-le-Pont</strong>Charenton-le-Pont, France</p>
-
-                <img class="sep sep--wave" src="ornements/div-wave.png" alt="" aria-hidden="true" loading="lazy">
-
-                <p class="mot">Votre présence rendra ce moment encore plus précieux.</p>
+                <p class="mot" style="margin-top:26px">Votre présence rendra ce moment encore plus précieux.</p>
             </article>
 
             <!-- HOUPPA & SOIRÉE -->
@@ -984,8 +985,7 @@
                 <div class="bloc">
                     <p class="surtitre">Puis, pour célébrer ensemble,</p>
                     <h3 class="titre-evenement">Soirée</h3>
-                    <img class="sep sep--wave" src="ornements/div-wave.png" alt="" aria-hidden="true" loading="lazy">
-                    <p class="mot">Une cérémonie pleine d'émotion, suivie d'une soirée inoubliable.</p>
+                    <p class="mot" style="margin-top:18px">Une cérémonie pleine d'émotion, suivie d'une soirée inoubliable.</p>
                 </div>
             </article>
         </div>
@@ -1057,7 +1057,7 @@
     <img class="monogramme" src="ornements/monogramme.png" alt="Monogramme de Noa et Eitan" loading="lazy">
 
     <div class="footer-names">Noa &amp; Eitan</div>
-    <img class="sep sep--wave" src="ornements/div-wave.png" alt="" aria-hidden="true" loading="lazy">
+    <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
     <p class="footer-date">Janvier 2027</p>
     <p class="footer-devise">Une même histoire, deux jours, un seul chemin.</p>
 </footer>
