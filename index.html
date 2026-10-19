@@ -210,6 +210,31 @@
         .topbar a:hover { color: var(--or-doux); }
         .topbar a:hover::after { width: 100%; }
 
+
+        /* =========================================
+           BOUTON DE LANGUE FR | ES
+        ========================================= */
+        .topbar-right { display: flex; align-items: center; gap: clamp(14px, 3vw, 28px); }
+        .lang-toggle {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: var(--sans); font-size: 11px; letter-spacing: .18em;
+            color: rgba(212, 175, 55, .55);
+        }
+        .lang-toggle button {
+            background: none; border: 0; padding: 6px 4px; cursor: pointer;
+            font: inherit; letter-spacing: inherit; color: var(--ivoire); opacity: .6;
+            border-bottom: 1px solid transparent;
+            transition: opacity .3s ease, color .3s ease, border-color .3s ease;
+        }
+        .lang-toggle button:hover { opacity: 1; }
+        .lang-toggle button[aria-pressed="true"] { opacity: 1; color: var(--or-doux); border-bottom-color: var(--or); }
+        .lang-toggle button:focus-visible { outline: 1px solid var(--or); outline-offset: 2px; }
+        .lang-toggle--cover {
+            position: absolute; top: max(14px, env(safe-area-inset-top)); right: 16px; z-index: 20;
+            padding: 4px 10px; border: 1px solid rgba(212, 175, 55, .5);
+            background: rgba(43, 9, 18, .55); backdrop-filter: blur(6px);
+        }
+
         /* =========================================
            LA CARTE : socle commun
         ========================================= */
@@ -317,7 +342,7 @@
             background-position: 0 0, 0 0, center;
         }
         .carte--bordeaux .coin {
-            filter: brightness(1.28) contrast(1.05) drop-shadow(0 0 7px rgba(212, 175, 55, .28));
+            filter: drop-shadow(0 0 7px rgba(212, 175, 55, .28));
         }
         .carte--bordeaux .monogramme { filter: drop-shadow(0 4px 14px rgba(0, 0, 0, .35)); }
         .carte--bordeaux .surtitre { color: #e8d6ae; }
@@ -821,7 +846,10 @@
             .hero-damask { min-height: 75svh; padding: 35px 16px; }
             .hero-frame { padding: 27px 18px 35px; }
             .hero h1 { font-size: clamp(66px, 15vw, 88px); }
-            .topbar { padding: 14px 5%; }
+            .topbar { padding: 12px 4%; gap: 10px; }
+            .topbar-right { gap: 12px; }
+            .topbar nav { gap: 12px; }
+            .lang-toggle { font-size: 10px; letter-spacing: .1em; }
             .topbar-brand { font-size: 19px; }
             .topbar a { font-size: 10px; letter-spacing: .14em; }
             .coin { width: clamp(84px, 30%, 118px); }
@@ -848,6 +876,11 @@
 
 <!-- COUVERTURE D'OUVERTURE -->
 <div class="opening-screen" id="openingScreen">
+    <div class="lang-toggle lang-toggle--cover" role="group" aria-label="Langue / Idioma">
+        <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+        <span aria-hidden="true">|</span>
+        <button type="button" data-lang="es" aria-pressed="false">ES</button>
+    </div>
     <div class="opening-photo left"></div>
     <div class="opening-photo right"></div>
 
@@ -855,15 +888,15 @@
 
     <div class="cover-content">
         <div class="cover-top">
-            <p class="cover-kicker">C'est un grand jour</p>
-            <h1 class="cover-title">Vous êtes invités</h1>
-            <p class="cover-subtitle">au mariage de</p>
+            <p class="cover-kicker" data-i18n="kicker">C'est un grand jour</p>
+            <h1 class="cover-title" data-i18n="ctitle">Vous êtes invités</h1>
+            <p class="cover-subtitle" data-i18n="csub">au mariage de</p>
             <h2 class="cover-names">Noa <em>&amp;</em> Eitan</h2>
         </div>
 
         <div class="cover-bottom">
-            <p class="cover-date">25 janvier 2027</p>
-            <p class="cover-hint">✧ Touchez pour ouvrir l'invitation ✧</p>
+            <p class="cover-date" data-i18n="cdate">25 janvier 2027</p>
+            <p class="cover-hint" data-i18n="chint">✧ Touchez pour ouvrir l'invitation ✧</p>
         </div>
     </div>
 </div>
@@ -871,10 +904,17 @@
 <!-- NAVIGATION -->
 <header class="topbar">
     <div class="topbar-brand">N &amp; E</div>
+    <div class="topbar-right">
     <nav aria-label="Navigation">
-        <a href="#evenements">Nos événements</a>
-        <a href="#rsvp">Répondre</a>
+        <a href="#evenements" data-i18n="navev">Nos événements</a>
+        <a href="#rsvp" data-i18n="navrsvp">Répondre</a>
     </nav>
+    <div class="lang-toggle" role="group" aria-label="Langue / Idioma">
+        <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+        <span aria-hidden="true">|</span>
+        <button type="button" data-lang="es" aria-pressed="false">ES</button>
+    </div>
+    </div>
 </header>
 
 <main>
@@ -887,7 +927,7 @@
                  class="hero-logo"
                  onerror="this.onerror=null;this.src='ornements/monogramme.png'">
 
-            <div class="eyebrow">Une invitation à célébrer l'amour</div>
+            <div class="eyebrow" data-i18n="eyebrow">Une invitation à célébrer l'amour</div>
 
             <h1>Noa</h1>
             <span class="hero-ampersand">&amp;</span>
@@ -895,49 +935,49 @@
 
             <div class="gold-divider">✧</div>
 
-            <p class="hero-subtitle">
+            <p class="hero-subtitle" data-i18n="hsub">
                 Nous avons la joie de vous inviter à célébrer
                 avec nous le début de notre nouvelle vie.
             </p>
 
-            <p class="hero-date">25 &amp; 27 janvier 2027</p>
+            <p class="hero-date" data-i18n="hdate">25 &amp; 27 janvier 2027</p>
 
-            <a href="#rsvp" class="hero-button">Confirmer ma présence</a>
+            <a href="#rsvp" class="hero-button" data-i18n="hbtn">Confirmer ma présence</a>
         </div>
     </section>
 
     <!-- COMPTEUR -->
     <section class="countdown-section" aria-labelledby="countdown-title">
-        <h2 id="countdown-title">Bientôt réunis</h2>
-        <p class="countdown-intro">Le compte à rebours avant notre mariage civil</p>
+        <h2 id="countdown-title" data-i18n="cdt">Bientôt réunis</h2>
+        <p class="countdown-intro" data-i18n="cdi">Le compte à rebours avant notre mariage civil</p>
 
         <div class="countdown" id="countdown">
             <div class="countdown-unit">
                 <span class="countdown-number" id="days">0</span>
-                <span class="countdown-label">Jours</span>
+                <span class="countdown-label" data-i18n="d">Jours</span>
             </div>
             <div class="countdown-unit">
                 <span class="countdown-number" id="hours">00</span>
-                <span class="countdown-label">Heures</span>
+                <span class="countdown-label" data-i18n="hh">Heures</span>
             </div>
             <div class="countdown-unit">
                 <span class="countdown-number" id="minutes">00</span>
-                <span class="countdown-label">Minutes</span>
+                <span class="countdown-label" data-i18n="mm">Minutes</span>
             </div>
             <div class="countdown-unit">
                 <span class="countdown-number" id="seconds">00</span>
-                <span class="countdown-label">Secondes</span>
+                <span class="countdown-label" data-i18n="ss">Secondes</span>
             </div>
         </div>
 
-        <p class="countdown-finished" id="countdownFinished" hidden>Le grand jour est arrivé ♡</p>
+        <p class="countdown-finished" id="countdownFinished" hidden data-i18n="fin">Le grand jour est arrivé ♡</p>
     </section>
 
     <!-- ÉVÉNEMENTS — cartes blanc cassé -->
     <section class="evenements" id="evenements">
         <div class="titre-section">
-            <h2>Deux jours pour se retrouver</h2>
-            <p>Deux belles occasions de nous retrouver, entourés de ceux que nous aimons.</p>
+            <h2 data-i18n="evt">Deux jours pour se retrouver</h2>
+            <p data-i18n="evp">Deux belles occasions de nous retrouver, entourés de ceux que nous aimons.</p>
         </div>
 
         <div class="grille-cartes">
@@ -948,17 +988,17 @@
 
                 <img class="monogramme" src="ornements/monogramme.png" alt="" aria-hidden="true" loading="lazy">
 
-                <p class="surtitre">Nous serons heureux<br>de vous retrouver à la</p>
-                <h3 class="titre-evenement">Mairie</h3>
+                <p class="surtitre" data-i18n="mair_s">Nous serons heureux<br>de vous retrouver à la</p>
+                <h3 class="titre-evenement" data-i18n="mair_t">Mairie</h3>
 
                 <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
 
-                <p class="date-evenement">Lundi 25 janvier 2027</p>
-                <p class="heure">L'horaire sera communiqué prochainement</p>
+                <p class="date-evenement" data-i18n="date25">Lundi 25 janvier 2027</p>
+                <p class="heure" data-i18n="mair_h">L'horaire sera communiqué prochainement</p>
 
-                <p class="lieu" style="margin-top:22px"><strong>Mairie de Charenton-le-Pont</strong>Charenton-le-Pont, France</p>
+                <p class="lieu" style="margin-top:22px" data-i18n="mair_l"><strong>Mairie de Charenton-le-Pont</strong>Charenton-le-Pont, France</p>
 
-                <p class="mot" style="margin-top:26px">Votre présence rendra ce moment encore plus précieux.</p>
+                <p class="mot" style="margin-top:26px" data-i18n="mair_m">Votre présence rendra ce moment encore plus précieux.</p>
             </article>
 
             <!-- HOUPPA & SOIRÉE -->
@@ -969,23 +1009,22 @@
                 <img class="monogramme" src="ornements/monogramme.png" alt="" aria-hidden="true" loading="lazy">
 
                 <div class="bloc">
-                    <p class="surtitre">Nous avons la joie<br>de vous inviter à notre</p>
-                    <h3 class="titre-evenement">Houppa</h3>
+                    <p class="surtitre" data-i18n="hou_s">Nous avons la joie<br>de vous inviter à notre</p>
+                    <h3 class="titre-evenement" data-i18n="hou_t">Houppa</h3>
                     <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
-                    <p class="date-evenement">Mercredi 27 janvier 2027</p>
-                    <p class="heure">Horaire communiqué prochainement</p>
-                    <p class="lieu" style="margin-top:10px">Le lieu sera communiqué prochainement.</p>
+                    <p class="date-evenement" data-i18n="date27">Mercredi 27 janvier 2027</p>
+                    <p class="heure" data-i18n="hou_h">Horaire communiqué prochainement</p>
+                    <p class="lieu" style="margin-top:10px" data-i18n="hou_l">Le lieu sera communiqué prochainement.</p>
                 </div>
 
                 <div class="bouquet" aria-hidden="true">
                     <img src="ornements/sprig-l.png" alt="" loading="lazy">
-                    <img src="ornements/sprig-r.png" alt="" loading="lazy">
                 </div>
 
                 <div class="bloc">
-                    <p class="surtitre">Puis, pour célébrer ensemble,</p>
-                    <h3 class="titre-evenement">Soirée</h3>
-                    <p class="mot" style="margin-top:18px">Une cérémonie pleine d'émotion, suivie d'une soirée inoubliable.</p>
+                    <p class="surtitre" data-i18n="soi_s">Puis, pour célébrer ensemble,</p>
+                    <h3 class="titre-evenement" data-i18n="soi_t">Soirée</h3>
+                    <p class="mot" style="margin-top:18px" data-i18n="soi_m">Une cérémonie pleine d'émotion, suivie d'une soirée inoubliable.</p>
                 </div>
             </article>
         </div>
@@ -999,25 +1038,25 @@
 
             <div class="entete">
                 <img class="lilas-entete" src="ornements/lilas.png" alt="" aria-hidden="true" loading="lazy">
-                <h2>Serez-vous des nôtres ?</h2>
-                <p>Merci de nous confirmer votre présence en quelques clics.</p>
+                <h2 data-i18n="rs_t">Serez-vous des nôtres ?</h2>
+                <p data-i18n="rs_p">Merci de nous confirmer votre présence en quelques clics.</p>
                 <img class="sep sep--dots" src="ornements/div-dots.png" alt="" aria-hidden="true" loading="lazy" style="margin-bottom:6px">
             </div>
 
             <form class="rsvp-form" id="rsvpForm">
                 <div class="field-group">
                     <input class="name-field" id="nom" name="nom" type="text" autocomplete="name"
-                           maxlength="100" placeholder="Votre prénom et votre nom" aria-label="Votre nom" required>
+                           maxlength="100" placeholder="Votre prénom et votre nom" data-i18n-ph="ph_nom" aria-label="Votre nom" required>
                 </div>
 
                 <div class="rsvp-row">
-                    <h3>La Mairie <small>Lundi 25 janvier 2027</small></h3>
+                    <h3 data-i18n="rs_mair">La Mairie <small>Lundi 25 janvier 2027</small></h3>
                     <div class="choice">
-                        <label class="pill"><input type="radio" name="mairie" value="oui" required><span>Oui, avec plaisir</span></label>
-                        <label class="pill"><input type="radio" name="mairie" value="non"><span>Non, avec regret</span></label>
+                        <label class="pill"><input type="radio" name="mairie" value="oui" required><span data-i18n="oui">Oui, avec plaisir</span></label>
+                        <label class="pill"><input type="radio" name="mairie" value="non"><span data-i18n="non">Non, avec regret</span></label>
                     </div>
                     <div class="guests" id="mairieGuestsBox">
-                        <span>Nombre de participants :</span>
+                        <span data-i18n="nb">Nombre de participants :</span>
                         <button type="button" data-box="mairie" data-step="-1" aria-label="Moins">−</button>
                         <output id="mairieGuests">1</output>
                         <button type="button" data-box="mairie" data-step="1" aria-label="Plus">+</button>
@@ -1025,13 +1064,13 @@
                 </div>
 
                 <div class="rsvp-row">
-                    <h3>Houppa &amp; Soirée <small>Mercredi 27 janvier 2027</small></h3>
+                    <h3 data-i18n="rs_hou">Houppa &amp; Soirée <small>Mercredi 27 janvier 2027</small></h3>
                     <div class="choice">
-                        <label class="pill"><input type="radio" name="houppa" value="oui" required><span>Oui, avec plaisir</span></label>
-                        <label class="pill"><input type="radio" name="houppa" value="non"><span>Non, avec regret</span></label>
+                        <label class="pill"><input type="radio" name="houppa" value="oui" required><span data-i18n="oui">Oui, avec plaisir</span></label>
+                        <label class="pill"><input type="radio" name="houppa" value="non"><span data-i18n="non">Non, avec regret</span></label>
                     </div>
                     <div class="guests" id="houppaGuestsBox">
-                        <span>Nombre de participants :</span>
+                        <span data-i18n="nb">Nombre de participants :</span>
                         <button type="button" data-box="houppa" data-step="-1" aria-label="Moins">−</button>
                         <output id="houppaGuests">1</output>
                         <button type="button" data-box="houppa" data-step="1" aria-label="Plus">+</button>
@@ -1040,10 +1079,10 @@
 
                 <div class="field-group">
                     <textarea class="message-field" name="message" maxlength="500"
-                              placeholder="Un petit mot doux pour les mariés ? (facultatif)" aria-label="Un petit mot"></textarea>
+                              placeholder="Un petit mot doux pour les mariés ? (facultatif)" data-i18n-ph="ph_msg" aria-label="Un petit mot"></textarea>
                 </div>
 
-                <button class="submit-button" type="submit">Confirmer ma présence</button>
+                <button class="submit-button" data-i18n="submit" type="submit">Confirmer ma présence</button>
 
                 <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
             </form>
@@ -1058,12 +1097,106 @@
 
     <div class="footer-names">Noa &amp; Eitan</div>
     <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
-    <p class="footer-date">Janvier 2027</p>
-    <p class="footer-devise">Une même histoire, deux jours, un seul chemin.</p>
+    <p class="footer-date" data-i18n="fdate">Janvier 2027</p>
+    <p class="footer-devise" data-i18n="fdev">Une même histoire, deux jours, un seul chemin.</p>
 </footer>
 
 <script>
     "use strict";
+
+    /* =========================================
+       LANGUE FR / ES
+    ========================================= */
+    const I18N_ES = {
+        kicker: "Es un gran día",
+        ctitle: "Están invitados",
+        csub: "a la boda de",
+        cdate: "25 de enero de 2027",
+        chint: "✧ Toque para abrir la invitación ✧",
+        navev: "Nuestros eventos",
+        navrsvp: "Responder",
+        eyebrow: "Una invitación para celebrar el amor",
+        hsub: "Con mucha alegría les invitamos a celebrar con nosotros el comienzo de nuestra nueva vida.",
+        hdate: "25 y 27 de enero de 2027",
+        hbtn: "Confirmar mi asistencia",
+        cdt: "Muy pronto juntos",
+        cdi: "La cuenta atrás para nuestra boda civil",
+        d: "Días", hh: "Horas", mm: "Minutos", ss: "Segundos",
+        fin: "¡El gran día ha llegado ♡",
+        evt: "Dos días para reencontrarnos",
+        evp: "Dos hermosas ocasiones para reunirnos, rodeados de quienes más queremos.",
+        mair_s: "Nos hará felices<br>recibirles en el",
+        mair_t: "Ayuntamiento",
+        date25: "Lunes 25 de enero de 2027",
+        mair_h: "El horario se comunicará próximamente",
+        mair_l: "<strong>Ayuntamiento de Charenton-le-Pont</strong>Charenton-le-Pont, Francia",
+        mair_m: "Su presencia hará este momento aún más especial.",
+        hou_s: "Tenemos la alegría<br>de invitarles a nuestra",
+        hou_t: "Jupá",
+        date27: "Miércoles 27 de enero de 2027",
+        hou_h: "Horario por confirmar próximamente",
+        hou_l: "El lugar se comunicará próximamente.",
+        soi_s: "Y después, para celebrar juntos,",
+        soi_t: "Fiesta",
+        soi_m: "Una ceremonia llena de emoción, seguida de una noche inolvidable.",
+        rs_t: "¿Estarán con nosotros?",
+        rs_p: "Les rogamos confirmar su asistencia en unos pocos clics.",
+        rs_mair: "El Ayuntamiento <small>Lunes 25 de enero de 2027</small>",
+        rs_hou: "Jupá y Fiesta <small>Miércoles 27 de enero de 2027</small>",
+        oui: "Sí, con mucho gusto",
+        non: "No, lamentablemente",
+        nb: "Número de participantes:",
+        submit: "Confirmar mi asistencia",
+        fdate: "Enero de 2027",
+        fdev: "Una misma historia, dos días, un solo camino.",
+        ph_nom: "Su nombre y apellido",
+        ph_msg: "¿Unas palabras cariñosas para los novios? (opcional)"
+    };
+    const I18N_META = {
+        fr: { title: "Noa Arous & Eitan Benarroch — Notre mariage", htmlLang: "fr" },
+        es: { title: "Noa Arous & Eitan Benarroch — Nuestra boda", htmlLang: "es" }
+    };
+
+    // Le français d'origine est lu directement dans le HTML : une seule source de vérité.
+    const FR_SOURCE = new Map();
+    document.querySelectorAll("[data-i18n]").forEach(el => FR_SOURCE.set(el, el.innerHTML));
+    document.querySelectorAll("[data-i18n-ph]").forEach(el => FR_SOURCE.set(el, el.getAttribute("placeholder")));
+
+    let currentLang = "fr";
+
+    function setLang(lang) {
+        if (lang !== "fr" && lang !== "es") return;
+        currentLang = lang;
+
+        FR_SOURCE.forEach((frValue, el) => {
+            if (el.hasAttribute("data-i18n-ph")) {
+                el.setAttribute("placeholder", lang === "es" ? I18N_ES[el.dataset.i18nPh] : frValue);
+            } else {
+                const es = I18N_ES[el.dataset.i18n];
+                el.innerHTML = (lang === "es" && es !== undefined) ? es : frValue;
+            }
+        });
+
+        document.documentElement.lang = I18N_META[lang].htmlLang;
+        document.title = I18N_META[lang].title;
+        document.querySelectorAll(".lang-toggle button").forEach(btn =>
+            btn.setAttribute("aria-pressed", String(btn.dataset.lang === lang)));
+
+        try { localStorage.setItem("lang", lang); } catch (_) { /* stockage indisponible : on ignore */ }
+    }
+
+    document.querySelectorAll(".lang-toggle button").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();          // ne pas déclencher l'ouverture de la couverture
+            setLang(btn.dataset.lang);
+        });
+    });
+
+    (function initLang() {
+        let lang = new URLSearchParams(location.search).get("lang");   // ?lang=es pour partager le lien en espagnol
+        if (!lang) { try { lang = localStorage.getItem("lang"); } catch (_) {} }
+        if (lang === "es") setLang("es");
+    })();
 
     /* ANIMATION D'OUVERTURE */
     const openingScreen = document.getElementById("openingScreen");
@@ -1191,11 +1324,16 @@
         const nom = String(data.get("nom") || "").trim();
         if (!nom) return;
 
-        const fmt = key => data.get(key) === "oui" ? `présent(e) à ${guests[key]}` : "absent(e)";
+        const es = currentLang === "es";
+        const fmt = key => data.get(key) === "oui"
+            ? (es ? `asistirá (${guests[key]})` : `présent(e) à ${guests[key]}`)
+            : (es ? "no asistirá" : "absent(e)");
 
-        formMessage.textContent =
-            `Merci ${nom}, c'est noté ✧ Mairie : ${fmt("mairie")} · Houppa & soirée : ${fmt("houppa")}. ` +
-            `(Démo : rien n'est envoyé tant que le formulaire n'est pas relié à un service.)`;
+        formMessage.textContent = es
+            ? `Gracias ${nom}, queda anotado ✧ Ayuntamiento: ${fmt("mairie")} · Jupá y fiesta: ${fmt("houppa")}. ` +
+              `(Demo: no se envía nada mientras el formulario no esté conectado a un servicio.)`
+            : `Merci ${nom}, c'est noté ✧ Mairie : ${fmt("mairie")} · Houppa & soirée : ${fmt("houppa")}. ` +
+              `(Démo : rien n'est envoyé tant que le formulaire n'est pas relié à un service.)`;
 
         formMessage.classList.add("visible");
         formMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
