@@ -236,6 +236,18 @@
         }
 
 
+
+        .kol-sasson { display: block; margin: 0 auto; width: min(100%, 540px); height: auto; opacity: .92; }
+        .titre-section:has(.kol-sasson) { max-width: 760px; }
+
+        /* « se diront Oui » — carte Mairie */
+        .oui-line {
+            font-family: var(--serif); font-style: italic; font-weight: 400;
+            font-size: clamp(18px, 4.6vw, 24px); line-height: 1.4;
+            color: var(--bordeaux); margin-bottom: clamp(16px, 3vw, 22px);
+        }
+        .oui-line em { font-style: normal; color: #9e6942; letter-spacing: .02em; }
+
         .titre-evenement--duo { font-size: clamp(24px, 6.8vw, 38px); letter-spacing: .16em; text-indent: .16em; }
         .titre-evenement--duo + .sep { margin-top: clamp(14px, 3vw, 20px); }
 
@@ -991,8 +1003,8 @@
     <!-- ÉVÉNEMENTS — cartes blanc cassé -->
     <section class="evenements" id="evenements">
         <div class="titre-section">
-            <h2 data-i18n="evt">Deux moments d'exception</h2>
-            <p data-i18n="evp">Notre histoire s'écrit en plusieurs temps, et nous serions honorés de partager avec vous les plus beaux.</p>
+            <img class="kol-sasson" src="ornements/kol-sasson.png" width="900" height="236"
+                 lang="he" alt="קול ששון וקול שמחה, קול חתן וקול כלה">
         </div>
 
         <div class="grille-cartes">
@@ -1003,6 +1015,8 @@
                 <img class="coin coin--br" src="ornements/corner-br.png" alt="" aria-hidden="true" loading="lazy">
 
                 <img class="monogramme" src="ornements/monogramme.png" alt="" aria-hidden="true" loading="lazy">
+
+                <p class="oui-line" data-i18n="mair_oui">Noa &amp; Eitan se diront <em><br>« Oui »</br></em></p>
 
                 <p class="surtitre" data-i18n="mair_s">Nous vous convions<br>à la</p>
                 <h3 class="titre-evenement" data-i18n="mair_t">Mairie</h3>
@@ -1137,8 +1151,7 @@
         cdi: "La cuenta atrás para nuestra boda civil",
         d: "Días", hh: "Horas", mm: "Minutos", ss: "Segundos",
         fin: "¡El gran día ha llegado ♡",
-        evt: "Dos momentos excepcionales",
-        evp: "Nuestra historia se escribe en varios momentos, y nos sentiríamos honrados de compartir con ustedes los más bellos.",
+        mair_oui: "Noa y Eitan se dirán <em>« Sí »</em>",
         mair_s: "Les invitamos<br>al",
         mair_t: "Civil",
         date25: "Lunes 25 de enero de 2027",
