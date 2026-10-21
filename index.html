@@ -248,6 +248,29 @@
         }
         .oui-line em { font-style: normal; color: #9e6942; letter-spacing: .02em; }
 
+
+        /* Prénoms en hébreu — carte Houppa */
+        .prenoms-he {
+            font-family: "Frank Ruhl Libre", "Cormorant Garamond", serif;
+            font-weight: 500; line-height: 1.1;
+            font-size: clamp(34px, 9vw, 48px);
+            color: var(--bordeaux); margin-bottom: clamp(14px, 3vw, 20px);
+        }
+
+        /* Bandeau lilas léger, d'un filet doré à l'autre */
+        .bandeau-lilas {
+            position: relative; z-index: 2; align-self: stretch;
+            margin: clamp(22px, 4vw, 30px) calc(17px - clamp(30px, 8vw, 62px)) 0;
+            padding: 14px clamp(20px, 6vw, 40px);
+            background: linear-gradient(90deg, rgba(201, 167, 217, .14), rgba(201, 167, 217, .34) 50%, rgba(201, 167, 217, .14));
+            border-top: 1px solid rgba(160, 120, 185, .35);
+            border-bottom: 1px solid rgba(160, 120, 185, .35);
+        }
+        .bandeau-lilas p {
+            font-family: var(--serif); font-style: italic;
+            font-size: clamp(14px, 3.7vw, 16px); line-height: 1.6; color: var(--bordeaux);
+        }
+
         .titre-evenement--duo { font-size: clamp(24px, 6.8vw, 38px); letter-spacing: .16em; text-indent: .16em; }
         .titre-evenement--duo + .sep { margin-top: clamp(14px, 3vw, 20px); }
 
@@ -1028,7 +1051,6 @@
 
                 <p class="lieu" style="margin-top:22px" data-i18n="mair_l"><strong>Mairie de Charenton-le-Pont</strong>42 rue de Paris, 94220 Charenton-le-Pont</p>
 
-                <p class="mot" style="margin-top:26px" data-i18n="mair_m">Un instant suspendu, placé sous le signe d'Hachem, de l'amour, du partage et de la tradition, avant de laisser place à notre cérémonie religieuse.</p>
             </article>
 
             <!-- HOUPPA -->
@@ -1040,19 +1062,23 @@
                 <img class="monogramme" src="ornements/monogramme.png" alt="" aria-hidden="true" loading="lazy">
 
                 <div class="bloc">
-                    <p class="surtitre" data-i18n="hou_s">Pour partager ces merveilleux moments et prolonger la magie de notre union,<br>nous vous convions à notre</p>
+                    <p class="prenoms-he" lang="he" dir="rtl">נועה ואיתן</p>
                     <h3 class="titre-evenement" data-i18n="hou_t">Houppa</h3>
                     <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
                     <p class="date-evenement" data-i18n="date27">Mercredi 27 janvier 2027</p>
-                    <p class="heure" data-i18n="hou_h">17h</p>
-                    <p class="lieu" style="margin-top:10px" data-i18n="hou_l"><strong>Manoir des Vignes</strong>58 rue Bernard, 93000 Bobigny</p>
+                    <p class="heure" data-i18n="hou_h">17h30</p>
+                    <p class="lieu" style="margin-top:10px" data-i18n="hou_l"><strong>Manoir des Vignes · Ritz Plaza</strong>58 rue Bernard, 93000 Bobigny</p>
+                </div>
+
+                <div class="bandeau-lilas" role="note">
+                    <p data-i18n="hou_v">Le voiturier vous attendra devant la salle Ritz Plaza.</p>
                 </div>
 
                 <div class="bouquet" aria-hidden="true">
                     <img src="ornements/sprig-l.png" alt="" loading="lazy">
                 </div>
 
-                <p class="mot" data-i18n="soi_m">Une réception suivra la cérémonie religieuse.</p>
+                <p class="mot" data-i18n="soi_m">La cérémonie sera suivie de la réception dans la salle Baccarat.</p>
             </article>
         </div>
     </section>
@@ -1157,13 +1183,12 @@
         date25: "Lunes 25 de enero de 2027",
         mair_h: "14 h",
         mair_l: "<strong>Civil de Charenton-le-Pont</strong>42 rue de Paris, 94220 Charenton-le-Pont, Francia",
-        mair_m: "Un instante suspendido, bajo el signo de Hashem, del amor, de compartir y de la tradición, antes de dar paso a nuestra ceremonia religiosa.",
-        hou_s: "Para compartir estos momentos maravillosos y prolongar la magia de nuestra unión,<br>les invitamos a nuestra",
         hou_t: "Jupá",
         date27: "Miércoles 27 de enero de 2027",
-        hou_h: "17 h",
-        hou_l: "<strong>Manoir des Vignes</strong>58 rue Bernard, 93000 Bobigny, Francia",
-        soi_m: "Una recepción seguirá a la ceremonia religiosa.",
+        hou_h: "17:30 h",
+        hou_l: "<strong>Manoir des Vignes · Ritz Plaza</strong>58 rue Bernard, 93000 Bobigny, Francia",
+        hou_v: "El valet parking les esperará frente al salón Ritz Plaza.",
+        soi_m: "La ceremonia será seguida de la recepción en el salón Baccarat.",
         rs_t: "¿Estarán con nosotros?",
         rs_p: "Les agradecemos que nos confirmen su asistencia.",
         rs_mair: "El Civil <small>Lunes 25 de enero de 2027</small>",
