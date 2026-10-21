@@ -250,19 +250,26 @@
 
 
         /* Prénoms en hébreu — carte Houppa */
-        .noms-houppa {
-            margin: 0 auto clamp(22px, 5vw, 32px);
-            color: var(--bordeaux);
-            font-family: var(--serif); font-weight: 400;
-            font-size: clamp(42px, 11vw, 58px); line-height: 1.05;
-            letter-spacing: .035em;
+        .noms-houppa-paire {
+            display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            justify-content: center; align-items: start;
+            gap: clamp(8px, 3vw, 18px); width: 100%;
+            margin: 0 auto clamp(26px, 6vw, 38px); color: var(--bordeaux);
         }
-        .prenoms-he-paire {
-            display: flex; justify-content: space-evenly; align-items: center;
-            gap: 18px; margin: -14px auto clamp(26px, 6vw, 38px);
-            color: var(--bordeaux);
+        .nom-houppa {
+            min-width: 0; text-align: center;
+        }
+        .nom-houppa-latin {
+            font-family: var(--serif); font-weight: 400;
+            font-size: clamp(30px, 7.6vw, 48px); line-height: 1.1;
+            letter-spacing: .025em;
+        }
+        .noms-houppa-amp {
+            font-family: var(--serif); font-weight: 400;
+            font-size: clamp(28px, 6.8vw, 40px); line-height: 1.1;
         }
         .prenoms-he {
+            margin-top: 5px;
             font-family: "Frank Ruhl Libre", "Cormorant Garamond", serif;
             font-weight: 400; line-height: 1.2;
             font-size: clamp(30px, 7.5vw, 40px);
@@ -1079,12 +1086,18 @@
                 <img class="monogramme" src="ornements/monogramme.png" alt="" aria-hidden="true" loading="lazy">
 
                 <div class="bloc">
-                    <p class="noms-houppa">Noa &amp; Eitan</p>
-                    <div class="prenoms-he-paire" lang="he" dir="rtl" aria-label="Noa et Eitan en hébreu">
-                        <span class="prenoms-he">נועה</span>
-                        <span class="prenoms-he">איתן</span>
+                    <div class="noms-houppa-paire" aria-label="Noa et Eitan">
+                        <div class="nom-houppa">
+                            <p class="nom-houppa-latin">Noa</p>
+                            <p class="prenoms-he" lang="he" dir="rtl">נועה</p>
+                        </div>
+                        <span class="noms-houppa-amp" aria-hidden="true">&amp;</span>
+                        <div class="nom-houppa">
+                            <p class="nom-houppa-latin">Eitan</p>
+                            <p class="prenoms-he" lang="he" dir="rtl">איתן</p>
+                        </div>
                     </div>
-                    <p class="invitation-houppa" data-i18n="hou_inv">Ont la joie de vous inviter à célébrer leur mariage religieux et seraient honorés de votre présence à la cérémonie sous la Houppa.</p>
+                    <p class="invitation-houppa" data-i18n="hou_inv">Ont la joie de vous inviter à célébrer leur mariage religieux</p>
                     <h3 class="titre-evenement" data-i18n="hou_t">Houppa</h3>
                     <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
                     <p class="date-evenement" data-i18n="date27">Le mercredi 27 janvier 2027</p>
@@ -1093,7 +1106,7 @@
                 </div>
 
                 <div class="bandeau-lilas" role="note">
-                    <p data-i18n="hou_v">Le voiturier vous attendra devant la salle Ritz Plaza.</p>
+                    <p data-i18n="hou_v">Le voiturier vous attendra au Manoir des Vignes.</p>
                 </div>
 
                 <div class="bouquet" aria-hidden="true">
@@ -1209,8 +1222,8 @@
         date27: "El miércoles 27 de enero de 2027",
         hou_h: "A las 17:30 h",
         hou_l: "<strong>en el Manoir des Vignes · Ritz Plaza</strong>58 rue Bernard, 93000 Bobigny, Francia",
-        hou_inv: "Tienen la alegría de invitarles a celebrar su matrimonio religioso y se sentirían honrados con su presencia en la ceremonia bajo la Jupá.",
-        hou_v: "El valet parking les esperará frente al salón Ritz Plaza.",
+        hou_inv: "Tienen la alegría de invitarles a celebrar su matrimonio religioso.",
+        hou_v: "El aparcacoches les esperará en el Manoir des Vignes.",
         soi_m: "La ceremonia será seguida de la recepción en el salón Baccarat.",
         rs_t: "¿Estarán con nosotros?",
         rs_p: "Les agradecemos que nos confirmen su asistencia.",
