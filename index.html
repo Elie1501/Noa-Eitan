@@ -883,6 +883,7 @@
             line-height: 1.6;
         }
         .form-message.visible { display: block; animation: apparait .5s ease forwards; }
+        .form-message.error { border-color: #a33; color: #7a1f1f; }
 
         /* =========================================
            PIED DE PAGE
@@ -1133,6 +1134,10 @@
             </div>
 
             <form class="rsvp-form" id="rsvpForm">
+                <!-- Honeypot anti-spam : invisible pour un humain, les bots le remplissent -->
+                <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+                    <input type="text" name="website" tabindex="-1" autocomplete="off">
+                </div>
                 <div class="field-group">
                     <input class="name-field" id="nom" name="nom" type="text" autocomplete="name"
                            maxlength="100" placeholder="Votre prénom et votre nom" data-i18n-ph="ph_nom" aria-label="Votre nom" required>
@@ -1205,7 +1210,7 @@
         navev: "Nuestros eventos",
         navrsvp: "Responder",
         eyebrow: "Una ocasión para compartir",
-        hsub: "Tienen la dicha de anunciarles su matrimonio y se sentirían honrados con su presencia en sus ceremonias.",
+        hsub: "Tenemos el placer de anunciaros nuestro enlace y nos sentiríamos honrados con vuestra presencia.",
         hdate: "25 y 27 de enero de 2027",
         hbtn: "Confirmar mi asistencia",
         cdt: "Muy pronto juntos",
@@ -1213,7 +1218,7 @@
         d: "Días", hh: "Horas", mm: "Minutos", ss: "Segundos",
         fin: "¡El gran día ha llegado ♡",
         mair_oui: "Noa y Eitan se darán el <em><br>« Sí »</em>",
-        mair_s: "Les invitamos<br>a la",
+        mair_s: "Los invitamos<br>a la",
         mair_t: "Ceremonia civil",
         date25: "Lunes 25 de enero de 2027",
         mair_h: "14 h",
@@ -1222,9 +1227,9 @@
         date27: "El miércoles 27 de enero de 2027",
         hou_h: "A las 17:30 h",
         hou_l: "<strong>en el Manoir des Vignes · Ritz Plaza</strong>58 rue Bernard, 93000 Bobigny, Francia",
-        hou_inv: "Se complacen en invitarles a celebrar su enlace religioso.",
-        hou_v: "Un servicio de aparcacoches estará a su disposición.",
-        soi_m: "La ceremonia será seguida de la recepción en el salón Baccarat.",
+        hou_inv: "Nos complace invitaros a celebrar nuestro enlace religioso.",
+        hou_v: "Un servicio de aparcacoches estará a vuestra disposición.",
+        soi_m: "A la ceremonia le seguirá una recepción en el Salón Baccarat.",
         rs_t: "¿Contaremos con vosotros?",
         rs_p: "Os agradecemos que nos confirmen vuestra asistencia.",
         rs_mair: "La ceremonia civil <small>Lunes 25 de enero de 2027</small>",
@@ -1235,7 +1240,7 @@
         submit: "Confirmar mi asistencia",
         fdate: "Enero de 2027",
         fdev: "Una misma historia, dos días, un solo camino.",
-        ph_nom: "Su nombre y apellido",
+        ph_nom: "Nombre y Apellidos",
         ph_msg: "¿Unas palabras cariñosas para los novios? (opcional)"
     };
     const I18N_META = {
@@ -1401,28 +1406,70 @@
         });
     });
 
-    /* Confirmation locale uniquement */
-    rsvpForm.addEventListener("submit", (event) => {
+    /* =========================================
+       ENVOI VERS GOOGLE SHEETS (Apps Script)
+       Colle ici l'URL du déploiement « Application Web »
+       (elle se termine par /exec).
+    ========================================= */
+    const SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbybll9C6WzOCKJDk3SgVYU2jCFhP0Sas_bkjqc9kZfxHyPUL_o55jmK99GByYma6Uj4fA/exec";
+
+    const submitBtn = rsvpForm.querySelector(".submit-button");
+
+    function showFormMessage(text, isError = false) {
+        formMessage.textContent = text;
+        formMessage.classList.toggle("error", isError);
+        formMessage.classList.add("visible");
+        formMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    rsvpForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         if (!rsvpForm.reportValidity()) return;
 
         const data = new FormData(rsvpForm);
+        const es = currentLang === "es";
+
+        // Honeypot rempli = bot : on simule un succès sans rien envoyer
+        if (data.get("website")) { showFormMessage(es ? "¡Gracias!" : "Merci !"); return; }
+
         const nom = String(data.get("nom") || "").trim();
         if (!nom) return;
 
-        const es = currentLang === "es";
-        const fmt = key => data.get(key) === "oui"
-            ? (es ? `asistirá (${guests[key]})` : `présent(e) à ${guests[key]}`)
-            : (es ? "no asistirá" : "absent(e)");
+        const mairie = data.get("mairie") === "oui";
+        const houppa = data.get("houppa") === "oui";
 
-        formMessage.textContent = es
-            ? `Gracias ${nom}, queda anotado ✧ Ceremonia civil: ${fmt("mairie")} · Jupá: ${fmt("houppa")}. ` +
-              `(Demo: no se envía nada mientras el formulario no esté conectado a un servicio.)`
-            : `Merci ${nom}, c'est noté ✧ Mairie : ${fmt("mairie")} · Houppa : ${fmt("houppa")}. ` +
-              `(Démo : rien n'est envoyé tant que le formulaire n'est pas relié à un service.)`;
+        const payload = new URLSearchParams({
+            nom,
+            mairie: mairie ? "Oui" : "Non",
+            nbMairie: mairie ? String(guests.mairie) : "0",
+            houppa: houppa ? "Oui" : "Non",
+            nbHouppa: houppa ? String(guests.houppa) : "0",
+            message: String(data.get("message") || "").trim(),
+            langue: currentLang
+        });
 
-        formMessage.classList.add("visible");
-        formMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        // Lien pas encore configuré : on reste en mode démo
+        if (!SHEET_WEBHOOK_URL.startsWith("https://")) {
+            showFormMessage(es
+                ? `Gracias ${nom} ✧ (Demo: el formulario aún no está conectado al Google Sheet.)`
+                : `Merci ${nom} ✧ (Démo : le formulaire n'est pas encore relié au Google Sheet.)`);
+            return;
+        }
+
+        submitBtn.disabled = true;
+        try {
+            // « no-cors » : requête simple (pas de preflight), la réponse est opaque.
+            await fetch(SHEET_WEBHOOK_URL, { method: "POST", mode: "no-cors", body: payload });
+            showFormMessage(es
+                ? `¡Gracias ${nom}, vuestra respuesta ha sido registrada ✧`
+                : `Merci ${nom}, votre réponse a bien été enregistrée ✧`);
+            // Bouton laissé désactivé : évite les doublons
+        } catch (err) {
+            submitBtn.disabled = false;
+            showFormMessage(es
+                ? "No se pudo enviar. Comprobad vuestra conexión e intentadlo de nuevo."
+                : "Envoi impossible. Vérifiez votre connexion et réessayez.", true);
+        }
     });
 </script>
 
