@@ -1023,7 +1023,7 @@
     <!-- COMPTEUR -->
     <section class="countdown-section" aria-labelledby="countdown-title">
         <h2 id="countdown-title" data-i18n="cdt">Bientôt réunis</h2>
-        <p class="countdown-intro" data-i18n="cdi">Le compte à rebours avant notre mariage civil</p>
+        <p class="countdown-intro" data-i18n="cdi">Le compte à rebours avant notre mariage</p>
 
         <div class="countdown" id="countdown">
             <div class="countdown-unit">
@@ -1105,15 +1105,15 @@
                     <p class="lieu" style="margin-top:10px" data-i18n="hou_l"><strong>au Manoir des Vignes · Ritz Plaza</strong>58 rue Bernard, 93000 Bobigny</p>
                 </div>
 
-                <div class="bandeau-lilas" role="note">
-                    <p data-i18n="hou_v">Un service de voiturier sera à votre disposition..</p>
-                </div>
+                <p class="mot" style="margin-top:clamp(22px, 4vw, 30px)" data-i18n="soi_m">La cérémonie sera suivie de la réception dans la salle Baccarat.</p>
 
                 <div class="bouquet" aria-hidden="true">
                     <img src="ornements/sprig-l.png" alt="" loading="lazy">
                 </div>
 
-                <p class="mot" data-i18n="soi_m">La cérémonie sera suivie de la réception dans la salle Baccarat.</p>
+                <div class="bandeau-lilas" role="note">
+                    <p data-i18n="hou_v">Un service de voiturier sera à votre disposition.</p>
+                </div>
             </article>
         </div>
     </section>
@@ -1204,30 +1204,30 @@
         chint: "✧ Toque para abrir la invitación ✧",
         navev: "Nuestros eventos",
         navrsvp: "Responder",
-        eyebrow: "Un momento para compartir.",
+        eyebrow: "Una ocasión para compartir.",
         hsub: "Tienen la dicha de anunciarles su matrimonio y se sentirían honrados con su presencia en sus ceremonias.",
         hdate: "25 y 27 de enero de 2027",
         hbtn: "Confirmar mi asistencia",
         cdt: "Muy pronto juntos",
-        cdi: "La cuenta atrás para nuestra boda Matrimonio civil",
+        cdi: "La cuenta atrás para nuestra boda",
         d: "Días", hh: "Horas", mm: "Minutos", ss: "Segundos",
         fin: "¡El gran día ha llegado ♡",
         mair_oui: "Noa y Eitan se dirán <em><br>« Sí »</em>",
-        mair_s: "Les invitamos<br>al",
-        mair_t: "Matrimonio civil",
+        mair_s: "Les invitamos<br>a la",
+        mair_t: "Ceremonia civil",
         date25: "Lunes 25 de enero de 2027",
         mair_h: "14 h",
-        mair_l: "<strong>Matrimonio civil de Charenton-le-Pont</strong>42 rue de Paris, 94220 Charenton-le-Pont, Francia",
+        mair_l: "<strong>Ayuntamiento de Charenton-le-Pont</strong>42 rue de Paris, 94220 Charenton-le-Pont, Francia",
         hou_t: "Jupá",
         date27: "El miércoles 27 de enero de 2027",
         hou_h: "A las 17:30 h",
         hou_l: "<strong>en el Manoir des Vignes · Ritz Plaza</strong>58 rue Bernard, 93000 Bobigny, Francia",
-        hou_inv: "Tienen la alegría de invitarles a celebrar su matrimonio religioso.",
+        hou_inv: "Se complacen en invitarles a celebrar su enlace religioso.",
         hou_v: "Un servicio de aparcacoches estará a su disposición.",
         soi_m: "La ceremonia será seguida de la recepción en el salón Baccarat.",
-        rs_t: "¿Estarán con nosotros?",
-        rs_p: "Les agradecemos que nos confirmen su asistencia.",
-        rs_mair: "El Matrimonio civil <small>Lunes 25 de enero de 2027</small>",
+        rs_t: "¿Contaremos con vosotros?",
+        rs_p: "Os agradecemos que nos confirmen vuestra asistencia.",
+        rs_mair: "La ceremonia civil <small>Lunes 25 de enero de 2027</small>",
         rs_hou: "Jupá <small>Miércoles 27 de enero de 2027</small>",
         oui: "Sí, con mucho gusto",
         non: "No, lamentablemente",
@@ -1416,7 +1416,7 @@
             : (es ? "no asistirá" : "absent(e)");
 
         formMessage.textContent = es
-            ? `Gracias ${nom}, queda anotado ✧ Matrimonio civil: ${fmt("mairie")} · Jupá: ${fmt("houppa")}. ` +
+            ? `Gracias ${nom}, queda anotado ✧ Ceremonia civil: ${fmt("mairie")} · Jupá: ${fmt("houppa")}. ` +
               `(Demo: no se envía nada mientras el formulario no esté conectado a un servicio.)`
             : `Merci ${nom}, c'est noté ✧ Mairie : ${fmt("mairie")} · Houppa : ${fmt("houppa")}. ` +
               `(Démo : rien n'est envoyé tant que le formulaire n'est pas relié à un service.)`;
