@@ -250,35 +250,11 @@
 
 
         /* Prénoms en hébreu — carte Houppa */
-        .noms-houppa-paire {
-            display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-            justify-content: center; align-items: start;
-            gap: clamp(8px, 3vw, 18px); width: 100%;
-            margin: 0 auto clamp(26px, 6vw, 38px); color: var(--bordeaux);
-        }
-        .nom-houppa {
-            min-width: 0; text-align: center;
-        }
-        .nom-houppa-latin {
-            font-family: var(--serif); font-weight: 400;
-            font-size: clamp(30px, 7.6vw, 48px); line-height: 1.1;
-            letter-spacing: .025em;
-        }
-        .noms-houppa-amp {
-            font-family: var(--serif); font-weight: 400;
-            font-size: clamp(28px, 6.8vw, 40px); line-height: 1.1;
-        }
         .prenoms-he {
-            margin-top: 5px;
             font-family: "Frank Ruhl Libre", "Cormorant Garamond", serif;
-            font-weight: 400; line-height: 1.2;
-            font-size: clamp(30px, 7.5vw, 40px);
-        }
-        .invitation-houppa {
-            max-width: 460px; margin: 0 auto clamp(22px, 5vw, 34px);
-            font-family: var(--serif); font-style: italic;
-            font-size: clamp(16px, 4vw, 18px); line-height: 1.7;
-            color: var(--texte);
+            font-weight: 500; line-height: 1.1;
+            font-size: clamp(34px, 9vw, 48px);
+            color: var(--bordeaux); margin-bottom: clamp(14px, 3vw, 20px);
         }
 
         /* Bandeau lilas léger, d'un filet doré à l'autre */
@@ -1086,27 +1062,16 @@
                 <img class="monogramme" src="ornements/monogramme.png" alt="" aria-hidden="true" loading="lazy">
 
                 <div class="bloc">
-                    <div class="noms-houppa-paire" aria-label="Noa et Eitan">
-                        <div class="nom-houppa">
-                            <p class="nom-houppa-latin">Noa</p>
-                            <p class="prenoms-he" lang="he" dir="rtl">נועה</p>
-                        </div>
-                        <span class="noms-houppa-amp" aria-hidden="true">&amp;</span>
-                        <div class="nom-houppa">
-                            <p class="nom-houppa-latin">Eitan</p>
-                            <p class="prenoms-he" lang="he" dir="rtl">איתן</p>
-                        </div>
-                    </div>
-                    <p class="invitation-houppa" data-i18n="hou_inv">Ont la joie de vous inviter à célébrer leur mariage religieux</p>
+                    <p class="prenoms-he" lang="he" dir="rtl">נועה ואיתן</p>
                     <h3 class="titre-evenement" data-i18n="hou_t">Houppa</h3>
                     <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
-                    <p class="date-evenement" data-i18n="date27">Le mercredi 27 janvier 2027</p>
-                    <p class="heure" data-i18n="hou_h">À 17h30</p>
-                    <p class="lieu" style="margin-top:10px" data-i18n="hou_l"><strong>au Manoir des Vignes · Ritz Plaza</strong>58 rue Bernard, 93000 Bobigny</p>
+                    <p class="date-evenement" data-i18n="date27">Mercredi 27 janvier 2027</p>
+                    <p class="heure" data-i18n="hou_h">17h30</p>
+                    <p class="lieu" style="margin-top:10px" data-i18n="hou_l"><strong>Manoir des Vignes · Ritz Plaza</strong>58 rue Bernard, 93000 Bobigny</p>
                 </div>
 
                 <div class="bandeau-lilas" role="note">
-                    <p data-i18n="hou_v">Le voiturier vous attendra au Manoir des Vignes.</p>
+                    <p data-i18n="hou_v">Le voiturier vous attendra devant la salle Ritz Plaza.</p>
                 </div>
 
                 <div class="bouquet" aria-hidden="true">
@@ -1219,11 +1184,10 @@
         mair_h: "14 h",
         mair_l: "<strong>Civil de Charenton-le-Pont</strong>42 rue de Paris, 94220 Charenton-le-Pont, Francia",
         hou_t: "Jupá",
-        date27: "El miércoles 27 de enero de 2027",
-        hou_h: "A las 17:30 h",
-        hou_l: "<strong>en el Manoir des Vignes · Ritz Plaza</strong>58 rue Bernard, 93000 Bobigny, Francia",
-        hou_inv: "Tienen la alegría de invitarles a celebrar su matrimonio religioso.",
-        hou_v: "El aparcacoches les esperará en el Manoir des Vignes.",
+        date27: "Miércoles 27 de enero de 2027",
+        hou_h: "17:30 h",
+        hou_l: "<strong>Manoir des Vignes · Ritz Plaza</strong>58 rue Bernard, 93000 Bobigny, Francia",
+        hou_v: "Un servicio de aparcacoches estará a su disposición.",
         soi_m: "La ceremonia será seguida de la recepción en el salón Baccarat.",
         rs_t: "¿Estarán con nosotros?",
         rs_p: "Les agradecemos que nos confirmen su asistencia.",
