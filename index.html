@@ -379,11 +379,14 @@
             text-transform: uppercase;
         }
         .lieu {
+            display: block;
             font-family: var(--serif);
             font-style: italic;
             font-size: clamp(15px, 4vw, 17px);
             line-height: 1.7;
+            transition: opacity .3s ease;
         }
+        .lieu:hover { opacity: .85; }
         .lieu strong {
             display: block;
             font-style: normal;
@@ -1074,7 +1077,7 @@
                 <p class="date-evenement" data-i18n="date25">Lundi 25 janvier 2027</p>
                 <p class="heure" data-i18n="mair_h">14h</p>
 
-                <p class="lieu" style="margin-top:22px" data-i18n="mair_l"><strong>Mairie de Saint-Mandé</strong>10 Pl. Charles Digeon, 94160 Saint-Mandé</p>
+                <a href="https://waze.com/ul?q=10+Pl.+Charles+Digeon+94160+Saint-Mand%C3%A9&amp;navigate=yes" target="_blank" rel="noopener noreferrer" class="lieu" style="margin-top:22px" data-i18n="mair_l"><strong>Mairie de Saint-Mandé</strong>10 Pl. Charles Digeon, 94160 Saint-Mandé</a>
 
             </article>
 
@@ -1103,7 +1106,7 @@
                     <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
                     <p class="date-evenement" data-i18n="date27">Le mercredi 27 janvier 2027</p>
                     <p class="heure" data-i18n="hou_h">À 17h30</p>
-                    <p class="lieu" style="margin-top:10px" data-i18n="hou_l"><strong>au Manoir des Vignes · Ritz Plaza</strong>58 rue Bernard, 93000 Bobigny</p>
+                    <a href="https://waze.com/ul?q=58+rue+Bernard+93000+Bobigny&amp;navigate=yes" target="_blank" rel="noopener noreferrer" class="lieu" style="margin-top:10px" data-i18n="hou_l"><strong>au Manoir des Vignes · Ritz Plaza</strong>58 rue Bernard, 93000 Bobigny</a>
                 </div>
 
                 <p class="mot" style="margin-top:clamp(22px, 4vw, 30px)" data-i18n="soi_m">La cérémonie sera suivie de la réception dans la salle Baccarat.</p>
@@ -1217,7 +1220,7 @@
         cdi: "La cuenta atrás para nuestra boda",
         d: "Días", hh: "Horas", mm: "Minutos", ss: "Segundos",
         fin: "¡El gran día ha llegado ♡",
-        mair_oui: "Noa y Eitan se darán el <em><br>« Sí »</em>",
+        mair_oui: "Noa y Eitan se darán el <em><br>« Sí »</em>",
         mair_s: "Os invitamos<br>a la",
         mair_t: "Ceremonia civil",
         date25: "Lunes 25 de enero de 2027",
