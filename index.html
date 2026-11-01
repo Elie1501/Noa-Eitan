@@ -292,7 +292,13 @@
         }
         .parents-houppa p { min-width: 0; }
         .parents-houppa .nowrap { white-space: nowrap; }
-        .parents-houppa + .invitation-houppa { margin: 14px auto clamp(22px, 5vw, 30px); }
+        /* Phrase d'invitation des parents : même typo que leurs noms */
+        .parents-houppa + .invitation-houppa {
+            margin: 14px auto clamp(22px, 5vw, 30px);
+            font-family: 'Cormorant Garamond', serif; font-style: normal; font-weight: 500;
+            font-size: clamp(14px, 3.9vw, 20px); line-height: 1.35;
+            color: var(--bordeaux);
+        }
 
         .invitation-houppa {
             max-width: 460px; margin: 0 auto clamp(22px, 5vw, 34px);
