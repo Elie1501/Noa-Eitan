@@ -282,6 +282,18 @@
             font-weight: 400; line-height: 1.2;
             font-size: clamp(30px, 7.5vw, 40px);
         }
+        /* Parents — deux colonnes : famille de la mariée à gauche (au-dessus de Noa), du marié à droite */
+        .parents-houppa {
+            display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: clamp(10px, 4vw, 40px); width: 100%;
+            font-family: 'Cormorant Garamond', serif; font-weight: 500;
+            font-size: clamp(14px, 3.9vw, 20px); line-height: 1.35;
+            color: var(--bordeaux);
+        }
+        .parents-houppa p { min-width: 0; }
+        .parents-houppa .nowrap { white-space: nowrap; }
+        .parents-houppa + .invitation-houppa { margin: 14px auto clamp(22px, 5vw, 30px); }
+
         .invitation-houppa {
             max-width: 460px; margin: 0 auto clamp(22px, 5vw, 34px);
             font-family: var(--serif); font-style: italic;
@@ -614,23 +626,6 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 500;
-        }
-
-        /* Noms des parents — en tête du faire-part */
-        .parents {
-            display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            gap: clamp(12px, 4vw, 40px); max-width: 620px;
-            margin: clamp(20px, 4vw, 28px) auto 0;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(17px, 3.4vw, 22px); line-height: 1.35;
-            color: var(--text);
-        }
-        .parents p { min-width: 0; }
-        .hero-intro {
-            margin-top: 12px;
-            font-family: 'Cormorant Garamond', serif; font-style: italic;
-            font-size: clamp(18px, 3.4vw, 22px); line-height: 1.4;
-            color: var(--text);
         }
 
         .gold-divider {
@@ -1032,11 +1027,7 @@
 
             <div class="eyebrow" data-i18n="eyebrow">Un moment à partager</div>
 
-            <div class="parents">
-                <p>Régis &amp; Sophie Arous</p>
-                <p>Yarden Benarroch Martinez</p>
-            </div>
-            <p class="hero-intro" data-i18n="hint">ont la joie de vous faire part du mariage de leurs enfants</p>
+            <br>
             <h1>Noa</h1>
             <span class="hero-ampersand">&amp;</span>
             <h1>Eitan</h1>
@@ -1044,6 +1035,7 @@
             <div class="gold-divider">✧</div>
 
             <p class="hero-subtitle" data-i18n="hsub">
+                Ont la joie de vous faire part de leur mariage
                 et seraient honorés de votre présence à leurs cérémonies.
             </p>
 
@@ -1119,6 +1111,11 @@
                 <img class="monogramme" src="ornements/monogramme.png" alt="" aria-hidden="true" loading="lazy">
 
                 <div class="bloc">
+                    <div class="parents-houppa">
+                        <p>Régis &amp; Sophie<br>Arous</p>
+                        <p>Yarden<br><span class="nowrap">Benarroch Martinez</span></p>
+                    </div>
+                    <p class="invitation-houppa" data-i18n="hou_inv">ont la joie de vous inviter au mariage religieux de leurs enfants</p>
                     <div class="noms-houppa-paire" aria-label="Noa et Eitan">
                         <div class="nom-houppa">
                             <p class="nom-houppa-latin">Noa</p>
@@ -1130,7 +1127,6 @@
                             <p class="prenoms-he" lang="he" dir="rtl">איתן</p>
                         </div>
                     </div>
-                    <p class="invitation-houppa" data-i18n="hou_inv">Ont la joie de vous inviter à célébrer leur mariage religieux</p>
                     <h3 class="titre-evenement" data-i18n="hou_t">Houppa</h3>
                     <img class="sep sep--star" src="ornements/div-star.png" alt="" aria-hidden="true" loading="lazy">
                     <p class="date-evenement" data-i18n="date27">Le mercredi 27 janvier 2027</p>
@@ -1242,8 +1238,7 @@
         navev: "Nuestros eventos",
         navrsvp: "Responder",
         eyebrow: "Una ocasión para compartir",
-        hint: "tienen el placer de anunciaros el enlace de sus hijos",
-        hsub: "y se sentirían muy honrados con vuestra presencia en sus ceremonias.",
+        hsub: "Tienen el placer de anunciaros su enlace y se sentirían muy honrados con vuestra presencia en sus ceremonias.",
         hdate: "25 y 27 de enero de 2027",
         hbtn: "Confirmar mi asistencia",
         cdt: "Muy pronto juntos",
@@ -1260,7 +1255,7 @@
         date27: "El miércoles 27 de enero de 2027",
         hou_h: "A las 17:30 h",
         hou_l: "<strong>en el Manoir des Vignes · Ritz Plaza</strong><u>58 rue Bernard, 93000 Bobigny, Francia</u>",
-        hou_inv: "Nos complace invitaros a celebrar nuestro enlace religioso.",
+        hou_inv: "tienen el placer de invitaros al enlace religioso de sus hijos",
         hou_v: "Un servicio de aparcacoches estará a vuestra disposición.",
         soi_m: "A la ceremonia le seguirá una recepción en el Salón Baccarat.",
         rs_t: "¿Contaremos con vosotros?",
