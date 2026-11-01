@@ -616,6 +616,17 @@
             font-weight: 500;
         }
 
+        /* Noms des parents — en tête du faire-part */
+        .parents {
+            display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: clamp(12px, 4vw, 40px); max-width: 620px;
+            margin: 0 auto clamp(18px, 3vw, 26px);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(17px, 3.4vw, 22px); line-height: 1.35;
+            color: var(--text);
+        }
+        .parents p { min-width: 0; }
+
         .gold-divider {
             display: flex;
             align-items: center;
@@ -915,47 +926,6 @@
         .footer-devise { margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 16px; color: rgba(246, 241, 233, .78); }
 
         /* =========================================
-           EN MÉMOIRE — pensée pour nos disparus
-        ========================================= */
-        .memoire {
-            padding: clamp(64px, 9vw, 96px) 20px;
-            background-color: var(--bordeaux-deep);
-            background-image: url("textures/velours.png");
-            background-size: 320px 320px;
-            border-top: 1px solid rgba(212, 175, 55, .35);
-            border-bottom: 1px solid rgba(212, 175, 55, .35);
-            color: var(--ivoire);
-            text-align: center;
-        }
-        .memoire-inner { max-width: 620px; margin: 0 auto; }
-        .memoire-flamme { display: block; width: 26px; height: auto; margin: 0 auto 18px; opacity: .9; }
-        .memoire h2 {
-            font-family: var(--serif); font-weight: 400; font-style: italic;
-            font-size: clamp(30px, 6vw, 44px); line-height: 1.2; color: var(--or-doux);
-        }
-        .memoire .sep { margin: clamp(18px, 4vw, 24px) auto; filter: brightness(1.3); }
-        .memoire-texte {
-            font-family: var(--serif); font-style: italic;
-            font-size: clamp(16px, 4vw, 19px); line-height: 1.8;
-            color: rgba(246, 241, 233, .86);
-        }
-        .memoire-noms { list-style: none; margin-top: clamp(26px, 5vw, 36px); display: grid; gap: 14px; }
-        .memoire-noms li {
-            font-family: var(--serif); font-size: clamp(20px, 5vw, 26px);
-            letter-spacing: .06em; color: #f3e3b5;
-        }
-        .memoire-noms .zl {
-            margin-left: .5em; display: inline-block;
-            font-family: "Frank Ruhl Libre", "Cormorant Garamond", serif;
-            font-size: .85em; color: var(--or);
-        }
-        .memoire-he {
-            margin-top: clamp(24px, 5vw, 32px);
-            font-family: "Frank Ruhl Libre", "Cormorant Garamond", serif;
-            font-size: clamp(17px, 4.2vw, 20px); color: rgba(233, 208, 138, .8);
-        }
-
-        /* =========================================
            RESPONSIVE
         ========================================= */
         @media (max-width: 850px) { .hero-damask { background-attachment: scroll; } }
@@ -1053,6 +1023,11 @@
                  alt="Monogramme de Noa et Eitan"
                  class="hero-logo"
                  onerror="this.onerror=null;this.src='ornements/monogramme.png'">
+
+            <div class="parents">
+                <p>Régis &amp; Sophie Arous</p>
+                <p>Yarden Benarroch Martinez</p>
+            </div>
 
             <div class="eyebrow" data-i18n="eyebrow">Un moment à partager</div>
             <br>
@@ -1171,28 +1146,6 @@
         </div>
     </section>
 
-    <!-- EN MÉMOIRE -->
-    <section class="memoire" id="memoire" aria-labelledby="memoire-title">
-        <div class="memoire-inner reveal">
-            <svg class="memoire-flamme" viewBox="0 0 24 40" aria-hidden="true">
-                <path d="M12 2c3 6 7 9 7 15a7 7 0 0 1-14 0c0-4 2-6 3-9 1 3 2 4 4 5-1-4-1-7 0-11z" fill="#e9d08a" opacity=".9"/>
-                <rect x="10.5" y="25" width="3" height="13" rx="1" fill="#d4af37" opacity=".7"/>
-            </svg>
-            <h2 id="memoire-title" data-i18n="mem_t">Une pensée pour nos disparus</h2>
-            <img class="sep sep--wave" src="ornements/div-wave.png" alt="" aria-hidden="true" loading="lazy">
-            <p class="memoire-texte" data-i18n="mem_p">
-                En ce jour de joie, nos pensées vont vers ceux qui nous ont quittés
-                et qui auraient tant aimé être à nos côtés.
-                Leur souvenir nous accompagne sous la Houppa, et pour toujours dans nos cœurs.
-            </p>
-            <ul class="memoire-noms">
-                <li>Régis &amp; Sophie Arous<span class="zl" lang="he" dir="rtl">ז״ל</span></li>
-                <li>Yarden Benarroch Martinez<span class="zl" lang="he" dir="rtl">ז״ל</span></li>
-            </ul>
-            <p class="memoire-he" lang="he" dir="rtl">יהי זכרם ברוך</p>
-        </div>
-    </section>
-
     <!-- FORMULAIRE RSVP -->
     <section class="rsvp" id="rsvp">
         <article class="carte carte--ivoire carte--rsvp reveal">
@@ -1304,8 +1257,6 @@
         hou_inv: "Nos complace invitaros a celebrar nuestro enlace religioso.",
         hou_v: "Un servicio de aparcacoches estará a vuestra disposición.",
         soi_m: "A la ceremonia le seguirá una recepción en el Salón Baccarat.",
-        mem_t: "Un recuerdo para nuestros seres queridos",
-        mem_p: "En este día de alegría, nuestros pensamientos van hacia quienes nos dejaron y que tanto habrían deseado estar a nuestro lado. Su recuerdo nos acompaña bajo la Jupá, y para siempre en nuestros corazones.",
         rs_t: "¿Contaremos con vosotros?",
         rs_p: "Os agradecemos que nos confirméis vuestra asistencia.",
         rs_mair: "La ceremonia civil <small>Lunes 25 de enero de 2027</small>",
